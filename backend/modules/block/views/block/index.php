@@ -30,7 +30,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             /*'code',*/
             /*'style',*/
-            //'img',
+            [
+                'attribute' => 'img',
+                'format' => 'html',
+                'value' => function($model){
+                    if($model->img){
+                        return Html::img(\yii\helpers\Url::base()."/".$model->img, ['width'=>'100px'])."<br>".Html::a('Изменить',['/block/add_img', 'id' => $model->id]);
+                    }
+                    else {
+                        return Html::a('Добавить картинку',['/block/add_img', 'id' => $model->id]);
+                    }
+                }
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

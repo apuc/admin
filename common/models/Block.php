@@ -31,6 +31,7 @@ class Block extends \yii\db\ActiveRecord
     {
         return [
             [['key', 'name', 'code'], 'required'],
+            [['style', 'img'], 'safe'],
             [['key', 'name', 'img'], 'string', 'max' => 255]
         ];
     }

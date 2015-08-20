@@ -1,21 +1,18 @@
 <?php
 
-namespace backend\modules\block\controllers;
+namespace backend\modules\menu\controllers;
 
-use common\classes\Debag;
 use Yii;
-use backend\modules\block\models\Block;
-use backend\modules\block\models\BlockSearch;
+use backend\modules\menu\models\Menu;
+use backend\modules\menu\models\MenuSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use backend\modules\block\models\form\AddImgBlock;
-use yii\web\UploadedFile;
 
 /**
- * BlockController implements the CRUD actions for Block model.
+ * MenuController implements the CRUD actions for Menu model.
  */
-class BlockController extends Controller
+class MenuController extends Controller
 {
     public function behaviors()
     {
@@ -24,18 +21,19 @@ class BlockController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
+                    'update_el' => ['get'],
                 ],
             ],
         ];
     }
 
     /**
-     * Lists all Block models.
+     * Lists all Menu models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new BlockSearch();
+        $searchModel = new MenuSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +43,7 @@ class BlockController extends Controller
     }
 
     /**
-     * Displays a single Block model.
+     * Displays a single Menu model.
      * @param integer $id
      * @return mixed
      */
@@ -57,17 +55,15 @@ class BlockController extends Controller
     }
 
     /**
-     * Creates a new Block model.
+     * Creates a new Menu model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Block();
+        $model = new Menu();
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $model->img = '';
-            $model->save();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -77,7 +73,7 @@ class BlockController extends Controller
     }
 
     /**
-     * Updates an existing Block model.
+     * Updates an existing Menu model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -95,30 +91,8 @@ class BlockController extends Controller
         }
     }
 
-    public function actionAdd_img(){
-        $model = new AddImgBlock();
-
-        if (Yii::$app->request->isPost) {
-            $model->file = UploadedFile::getInstance($model, 'file');
-            $block = Block::findOne(['id' => $_GET['id']]);
-
-            if ($model->file && $model->validate()) {
-                $model->file->saveAs('block_img/' . $block->id . '.' . $model->file->extension);
-
-                $block->img = 'block_img/' . $block->id . '.' . $model->file->extension;
-                $block->save();
-
-                $this->redirect('block');
-            }
-        }
-        else {
-            return $this->render('upload', ['model' => $model]);
-        }
-
-    }
-
     /**
-     * Deletes an existing Block model.
+     * Deletes an existing Menu model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -130,16 +104,29 @@ class BlockController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionUpdate_el()
+    {
+        $menu = Menu::findOne(['id' => $_GET['id']]);
+        if($_GET['parent_id'] == 'undefined'){
+            $menu->parent_id = 0;
+        }
+        else {
+            $menu->parent_id = $_GET['parent_id'];
+        }
+
+        $menu->save();
+    }
+
     /**
-     * Finds the Block model based on its primary key value.
+     * Finds the Menu model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Block the loaded model
+     * @return Menu the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Block::findOne($id)) !== null) {
+        if (($model = Menu::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -1,5 +1,7 @@
+<?php echo ""; ?>
 <html>
 <head>
-<title>Hello</title>
+    <title>Hello</title>
 </head>
-</html>
+<body>
+<h1>Hello</h1>

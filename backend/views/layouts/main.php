@@ -31,8 +31,11 @@ AppAsset::register($this);
             <li><a href="#">Главная</a></li>
             <li><a href="#">Внешний вид</a>
                 <ul>
+                    <li><?= Html::a('Меню', ['/menu']) ?></li>
                     <li><?= Html::a('Header', ['/header']) ?></li>
                     <li><?= Html::a('Footer', ['/footer']) ?></li>
+                    <li><?= Html::a('Блоки', ['/block']) ?></li>
+                    <li><?= Html::a('Медиа файлы', ['/media']) ?></li>
                 </ul>
             </li>
             <li><a href="#">Настройки</a>

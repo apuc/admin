@@ -165,3 +165,38 @@ nav ul ul ul {
     top: 0; }
 
 /*# sourceMappingURL=style.css.map */
+
+.mediaBox {
+    float: left;
+    margin: 10px;
+}
+
+.mediaForm {
+    border: 1px solid grey;
+    padding: 10px;
+}
+
+.mainSort {
+    background-color: white;
+    list-style-type: none;
+}
+.sortitem {
+    background-color: gray;
+    border: 1px solid black;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    list-style-type: none;
+}
+.empty {
+    list-style-type: none;
+    min-height: 20px;
+    border: 1px dashed black;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.sortMenuLink {
+    margin: 0 5px 0 5px;
+    color: white;
+}

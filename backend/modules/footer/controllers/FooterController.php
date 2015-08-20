@@ -11,22 +11,24 @@ namespace backend\modules\footer\controllers;
 
 use backend\modules\footer\models\FooterForm;
 use yii\base\Controller;
+use common\models\Tpl;
 
 class FooterController extends Controller
 {
     public function actionIndex()
     {
         $model = new FooterForm();
+        $footer = Tpl::find()->where(['key' => 'footer'])->one();
 
         if ($model->load(\Yii::$app->request->post())) {
-            file_put_contents('html/footer.php', $model->code);
-            file_put_contents('css/footer.css', $model->style);
-            \Yii::$app->getSession()->setFlash('access', 'Сохранено');
+            $footer->code = $model->code;
+            $footer->style = $model->style;
+            $footer->save();
             return \Yii::$app->response->redirect('footer');
         }
         else {
-            $model->code = file_get_contents('html/footer.php');
-            $model->style = file_get_contents('css/footer.css');
+            $model->code = $footer->code;
+            $model->style = $footer->style;
             return $this->render('index', ['model' => $model,]);
         }
     }

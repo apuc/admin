@@ -27,6 +27,12 @@ return [
         'block' => [
             'class' => 'backend\modules\block\Block',
         ],
+        'media' => [
+            'class' => 'backend\modules\media\Media',
+        ],
+        'menu' => [
+            'class' => 'backend\modules\menu\Menu',
+        ],
     ],
     'components' => [
         'request'      => [
@@ -39,7 +45,13 @@ return [
                 'header' => 'header/header',
                 'footer' => 'footer/footer',
                 'material' => 'material/material',
-                'color' => 'color/color'
+                'block' => 'block/block',
+                'color' => 'color/color',
+                'block/add_img' => 'block/block/add_img',
+                'media' => 'media/media',
+                'media/delete' => 'media/media/delete',
+                'menu' => 'menu/menu',
+                'update_el' => 'menu/menu/update_el'
             ],
         ],
         'user' => [
