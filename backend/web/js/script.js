@@ -18,16 +18,15 @@ $(document).ready(function () {
                     type: "GET",
                     url: 'update_el',
                     data: "id=" + id + "&parent_id=" + parentId,
-                    success: function(msg){
+                    success: function (msg) {
                         //console.log(msg);
                     }
                 });
 
 
-
                 var all = $(el).parent('#sortable');
                 console.log(all.context);
-                $(all).each(function(){
+                $(all).each(function () {
                     console.log('123');
                 });
             }
@@ -42,6 +41,14 @@ $(document).ready(function () {
 
         /*$(".sortable").sortable();
          $(".sortable").disableSelection();*/
+    });
+
+    $('.imgPrev').on('click', function () {
+        var val = $(this).next().val();
+        $('#menu-icon').val(val);
+        $('#myModal').modal('hide');
+        $("#imgPreview").html('');
+        $(this).clone().prependTo("#imgPreview");
     });
 
 });

@@ -21,7 +21,7 @@ function printMenuTree($parent_id){
         echo "<li class='sortitem' data-id='$m->id' data-parent-id='$m->parent_id'><span class='sortMenuLink'>$m->name</span>";
         echo "<ul id='sortable' class='ui-sortable'>";
         printMenuTree($m->id);
-        echo "<li class='empty'><a class='sortMenuLink' href='/secure/menu/menu/update?id=$m->id'>Редактировать</a></li></ul>";
+        echo "<li class='empty'><a class='sortMenuLink' href='/secure/menu/menu/update?id=$m->id'>Редактировать</a> | <a class='sortMenuLink' href='/secure/menu/menu/delete?id=$m->id'>Удалить</a></li></ul>";
         echo "</li>";
     }
 }

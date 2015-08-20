@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             /*'code',*/
             /*'style',*/
-            [
+           /* [
                 'attribute' => 'img',
                 'format' => 'html',
                 'value' => function($model){
@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         return Html::a('Добавить картинку',['/block/add_img', 'id' => $model->id]);
                     }
                 }
-            ],
+            ],*/
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

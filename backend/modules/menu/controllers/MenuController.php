@@ -2,6 +2,7 @@
 
 namespace backend\modules\menu\controllers;
 
+use common\models\Media;
 use Yii;
 use backend\modules\menu\models\Menu;
 use backend\modules\menu\models\MenuSearch;
@@ -20,7 +21,7 @@ class MenuController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['post'],
+                    'delete' => ['get'],
                     'update_el' => ['get'],
                 ],
             ],
@@ -62,12 +63,14 @@ class MenuController extends Controller
     public function actionCreate()
     {
         $model = new Menu();
+        $media = Media::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'media' => $media
             ]);
         }
     }
@@ -81,12 +84,14 @@ class MenuController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $media = Media::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'media' => $media
             ]);
         }
     }
