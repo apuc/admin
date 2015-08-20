@@ -33,6 +33,9 @@ return [
         'menu' => [
             'class' => 'backend\modules\menu\Menu',
         ],
+        'category' => [
+            'class' => 'backend\modules\category\Category',
+        ],
     ],
     'components' => [
         'request'      => [
@@ -51,7 +54,8 @@ return [
                 'media' => 'media/media',
                 'media/delete' => 'media/media/delete',
                 'menu' => 'menu/menu',
-                'update_el' => 'menu/menu/update_el'
+                'update_el' => 'menu/menu/update_el',
+                'category' => 'category/category'
             ],
         ],
         'user' => [
