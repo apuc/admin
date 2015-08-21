@@ -36,6 +36,9 @@ return [
         'category' => [
             'class' => 'backend\modules\category\Category',
         ],
+        'pages' => [
+            'class' => 'backend\modules\pages\Pages',
+        ],
     ],
     'components' => [
         'request'      => [
