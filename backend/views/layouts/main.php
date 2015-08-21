@@ -37,6 +37,10 @@ AppAsset::register($this);
                     <li><?= Html::a('Блоки', ['/block']) ?></li>
                     <li><?= Html::a('Медиа файлы', ['/media']) ?></li>
                 </ul>
+            </li><li><a href="#">Контент</a>
+                <ul>
+                    <li><?= Html::a('Разделы', ['/category']) ?></li>
+                </ul>
             </li>
             <li><a href="#">Настройки</a>
                 <ul>

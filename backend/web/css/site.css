@@ -200,3 +200,11 @@ nav ul ul ul {
     margin: 0 5px 0 5px;
     color: white;
 }
+
+ul.menu_category {
+    list-style-type: none;
+}
+
+ul{
+    margin-left: 10px;
+}
