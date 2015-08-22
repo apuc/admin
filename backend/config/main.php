@@ -39,6 +39,9 @@ return [
         'pages' => [
             'class' => 'backend\modules\pages\Pages',
         ],
+        'options' => [
+            'class' => 'backend\modules\options\Options',
+        ],
     ],
     'components' => [
         'request'      => [
