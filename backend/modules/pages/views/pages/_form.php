@@ -53,22 +53,27 @@ use yii\widgets\ActiveForm;
                 <h4 class="modal-title" id="myModalLabel">Название модали</h4>
             </div>
             <div class="modal-body">
+                <form id="htmlForm" action="/secure/media/media/ajax" method="post">
+                    Message: <input type="file" name="file"/>
+                    <input type="submit" value="Загрузить" />
+                </form>
+
                 <div class="mediaWrap">
                     <h3>Существующие файлы:</h3>
                     <?php
                     foreach ($media as $m) {
                         echo "
-        <div class='mediaBox'>
-            ".Html::img(\yii\helpers\Url::base()."/".$m->link, ['width'=>'150px', 'class' => 'imgPrev'])."
+                    <div class='mediaBox'>
+                        ".Html::img(\yii\helpers\Url::base()."/".$m->link, ['width'=>'150px', 'class' => 'imgPrev'])."
 
-            <input id='img_$m->id' type='hidden' value='".\yii\helpers\Url::base(true)."/".$m->link."'>
-        </div>";
+                        <input id='img_$m->id' type='hidden' value='".\yii\helpers\Url::base(true)."/".$m->link."'>
+                    </div>";
                     }
                     ?>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                <!--<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>-->
             </div>
         </div>
     </div>
