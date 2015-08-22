@@ -70,5 +70,12 @@ $(document).ready(function () {
         $("#imgPreview").html('');
         $(this).clone().prependTo("#imgPreview");
     });
+    $('.imgPrev').on('click', function () {
+        var val = $(this).next().val();
+        $('#supplies-images').val(val);
+        $('#myModal').modal('hide');
+        $("#imgPreview").html('');
+        $(this).clone().prependTo("#imgPreview");
+    });
 
 });

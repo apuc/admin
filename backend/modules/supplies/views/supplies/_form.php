@@ -4,42 +4,29 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\modules\category\models\Category */
+/* @var $model backend\modules\supplies\models\Supplies */
 /* @var $form yii\widgets\ActiveForm */
-
-
 ?>
-<?php $form = ActiveForm::begin(); ?>
-<div class="category-form">
-    <ul id="myTab" class="nav nav-tabs">
-        <li class="active"><a href="#panel1">Общее</a></li>
-        <li><a href="#panel2">Вид</a></li>
-        <li><a href="#panel3">SEO</a></li>
 
-    </ul>
+<div class="supplies-form">
 
-    <div class="tab-content">
-        <div id="panel1" class="tab-pane fade in active">
-            <h3>Общее</h3>
-            <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'parent_id')->dropDownList($parent) ?>
-            <?= $form->field($model, 'images')->textInput(['maxlength' => true])->label("Изображение (<a data-toggle='modal' data-target='#myModal' href='#'>Добавить</a>)") ?>
-            <div id = 'imgPreview'></div>
-            <?= $form->field($model, 'count_product')->textInput() ?>
-            <?= $form->field($model, 'hint')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
-        </div>
-        <div id="panel2" class="tab-pane fade">
-            <h3>Вид</h3>
-            <?= $form->field($model, 'blokc_id')->dropDownList($block) ?>
-        </div>
-        <div id="panel3" class="tab-pane fade">
-            <h3>SEO</h3>
-            <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'h1')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
-        </div>
-    </div>
+    <?php $form = ActiveForm::begin(); ?>
+
+    <?= $form->field($model, 'images')->textInput(['maxlength' => true])->label("Изображение (<a data-toggle='modal' data-target='#myModal' href='#'>Добавить</a>)") ?>
+    <div id = 'imgPreview'></div>
+    <?= $form->field($model, 'code')->textInput() ?>
+
+    <?= $form->field($model, 'type_mat')->textInput()->dropDownList($type_mat) ?>
+
+    <?= $form->field($model, 'type_blind')->textInput()->dropDownList($type_blind) ?>
+
+    <?= $form->field($model, 'type_width')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'color')->textInput()->dropDownList($color) ?>
+
+    <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'status')->checkbox() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Обновить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

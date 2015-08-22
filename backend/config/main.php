@@ -42,6 +42,9 @@ return [
         'options' => [
             'class' => 'backend\modules\options\Options',
         ],
+        'supplies' => [
+            'class' => 'backend\modules\supplies\Supplies',
+        ],
     ],
     'components' => [
         'request'      => [
