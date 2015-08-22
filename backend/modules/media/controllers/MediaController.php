@@ -15,6 +15,7 @@ use yii\web\Controller;
 use backend\modules\block\models\form\AddImgBlock;
 use yii\web\UploadedFile;
 use yii;
+use yii\helpers\Html;
 
 class MediaController extends Controller
 {
@@ -43,5 +44,29 @@ class MediaController extends Controller
         $media = Media::findOne(['id' => $_GET['id']]);
         $media->delete();
         $this->redirect('media');
+    }
+
+    public function actionAjax(){
+        $media = new Media();
+        $uploaddir = 'media_file/';
+        $uploadfile = $uploaddir.basename($_FILES['file']['name']);
+        if(!empty($_FILES)){
+            if (copy($_FILES['file']['tmp_name'], $uploadfile))
+            {
+                $media->link = $uploadfile;
+                $media->save();
+
+
+            }
+        }
+
+        $mediaAll = Media::find()->all();
+        foreach ($mediaAll as $m) {
+            echo "
+        <div class='mediaBox'>
+            ".Html::img(\yii\helpers\Url::base()."/".$m->link, ['width'=>'150px', 'class' => 'imgPrev'])."
+            <input type='hidden' value='".\yii\helpers\Url::base(true)."/".$m->link."'>
+        </div>";
+        }
     }
 }
