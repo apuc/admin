@@ -2,6 +2,7 @@
 
 namespace backend\modules\pages\controllers;
 
+use common\models\Media;
 use Yii;
 use backend\modules\pages\models\Pages;
 use backend\modules\pages\models\PagesSearch;
@@ -61,12 +62,14 @@ class PagesController extends Controller
     public function actionCreate()
     {
         $model = new Pages();
+        $media = Media::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'media' => $media
             ]);
         }
     }
@@ -80,12 +83,14 @@ class PagesController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $media = Media::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'media' => $media
             ]);
         }
     }
