@@ -78,9 +78,27 @@ $(document).ready(function () {
         $(this).clone().prependTo("#imgPreview");
     });
 
+    $(document).on('click', '.imgPrev', function () {
+        var val = $(this).next().val();
+        $('#supplies-images').val(val);
+        $('#myModal').modal('hide');
+        $("#imgPreview").html('');
+        $(this).clone().prependTo("#imgPreview");
+    });
+
     $('#htmlForm').ajaxForm({
         success: function(data) {
             $('.mediaWrap').html(data);
         }
     });
+
+    $('#supplies-color').on('change', function(){
+        var color = $('#supplies-color option:selected').text();
+        if($(this).val() == '0'){
+            $('#colorP').css({'background-color' : '#fff'});
+        }
+        else {
+            $('#colorP').css({'background-color' : color});
+        }
+    })
 });

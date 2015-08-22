@@ -25,14 +25,50 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            /*'id',
-            'images',*/
+            /*'id',*/
+            [
+                'attribute'=>'image',
+                'format' => 'html',
+                'value' => function($model){
+                    return "<img src='$model->images' width='100px'>";
+                }
+            ],
             'code',
-            'type_mat',
-            'type_blind',
+            [
+                'attribute'=>'type_mat',
+                'format' => 'text',
+                'value' => function($model){
+                    $material = \common\models\Material::find()->where(['id' => $model->type_mat])->one();
+                    return $material->name;
+                }
+            ],
+            [
+                'attribute'=>'type_blind',
+                'format' => 'text',
+                'value' => function($model){
+                    if($model->type_blind == '1'){
+                        return 'Горизантальные';
+                    }
+                    if($model->type_blind == '2'){
+                        return 'рулонные';
+                    }
+                    if($model->type_blind == '3'){
+                        return 'вертикальные';
+                    }
+
+                }
+            ],
+
             // 'type_width',
-            // 'color',
-            // 'price',
+            [
+                'attribute'=>'color',
+                'format' => 'html',
+                'value' => function($model){
+                    $color = \common\models\Color::find()->where(['id'=>$model->color])->one();
+                    return '<div style = "width:100px;height:20px;background-color: '.$color->value.'"></div>';
+                }
+            ],
+             'price',
             // 'status',
 
             ['class' => 'yii\grid\ActionColumn'],

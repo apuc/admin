@@ -112,7 +112,11 @@ class SuppliesController extends Controller
         foreach ($type_mat as $v) {
             $arr_tmat[$v->id] = $v->name;
         }
-
+        $color = Color::find()->all();
+        $arr_color[0] = 'Выберите цвет';
+        foreach($color as $v){
+            $arr_color[$v->id] = $v->value;
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -122,6 +126,7 @@ class SuppliesController extends Controller
                 'media' => $media,
                 'type_mat' => $arr_tmat,
                 'type_blind' => $type_blind,
+                'color' => $arr_color,
             ]);
         }
     }
