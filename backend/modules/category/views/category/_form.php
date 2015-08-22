@@ -30,7 +30,7 @@ use yii\widgets\ActiveForm;
         </div>
         <div id="panel2" class="tab-pane fade">
             <h3>Вид</h3>
-            <?= $form->field($model, 'blokc_id')->textInput() ?>
+            <?= $form->field($model, 'blokc_id')->dropDownList($block) ?>
         </div>
         <div id="panel3" class="tab-pane fade">
             <h3>SEO</h3>

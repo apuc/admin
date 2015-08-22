@@ -3,6 +3,7 @@
 namespace backend\modules\category\controllers;
 
 use common\classes\Debag;
+use common\models\Block;
 use common\models\Categories;
 use common\models\Media;
 use Yii;
@@ -65,6 +66,12 @@ class CategoryController extends Controller
         $model = new Category();
         $parent = Categories::find()->all();
         $media = Media::find()->all();
+        $block = Block::find()->all();
+
+        $arr1[0] = 'Нет';
+        foreach($block as $v){
+            $arr1[$v->id]=$v->name;
+        }
 
         $arr[0] = 'Нет';
         foreach($parent as $v){
@@ -77,7 +84,8 @@ class CategoryController extends Controller
             return $this->render('create', [
                 'model' => $model,
                 'parent' => $arr,
-                'media'  => $media
+                'media'  => $media,
+                'block'  => $arr1
             ]);
         }
     }
@@ -93,6 +101,13 @@ class CategoryController extends Controller
         $model = $this->findModel($id);
         $parent = Categories::find()->all();
         $media = Media::find()->all();
+        $block = Block::find()->all();
+
+        $arr1[0] = 'Нет';
+        foreach($block as $v){
+            $arr1[$v->id]=$v->name;
+        }
+
         $arr[0] = 'Нет';
         foreach($parent as $v){
             $arr[$v->id]=$v->name;
@@ -104,7 +119,8 @@ class CategoryController extends Controller
             return $this->render('update', [
                 'model' => $model,
                 'parent' => $arr,
-                'media' => $media
+                'media' => $media,
+                'block' => $arr1
             ]);
         }
     }

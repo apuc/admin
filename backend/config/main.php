@@ -62,7 +62,8 @@ return [
                 'menu' => 'menu/menu',
                 'update_el' => 'menu/menu/update_el',
                 'category' => 'category/category',
-                'pages' => 'pages/pages'
+                'pages' => 'pages/pages',
+                'options' => 'options/options'
             ],
         ],
         'user' => [
