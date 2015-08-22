@@ -40,6 +40,7 @@ AppAsset::register($this);
             </li><li><a href="#">Контент</a>
                 <ul>
                     <li><?= Html::a('Разделы', ['/category']) ?></li>
+                    <li><?= Html::a('Страницы', ['/pages']) ?></li>
                 </ul>
             </li>
             <li><a href="#">Настройки</a>

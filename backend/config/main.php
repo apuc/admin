@@ -58,7 +58,8 @@ return [
                 'media/delete' => 'media/media/delete',
                 'menu' => 'menu/menu',
                 'update_el' => 'menu/menu/update_el',
-                'category' => 'category/category'
+                'category' => 'category/category',
+                'pages' => 'pages/pages'
             ],
         ],
         'user' => [
