@@ -22,13 +22,13 @@ class MainpageController extends Controller
         $options = Options::find()->where(['key' => 'mainpage'])->one();
         $pageId = $options->value;
         $page = Pages::find()->where(['id' => $pageId])->one();
-        $content = $this->getBlocks($page);
+        //$content = $this->getBlocks($page);
 
-        $con = $this->render('index', ['content' => $content, 'page' => $page]);
+        //$con = $this->render('index', ['content' => $content, 'page' => $page]);
 
         Template::get_header($page);
 
-        echo $con;
+        $this->getBlocks($page);
 
         Template::get_footer();
     }
@@ -51,6 +51,6 @@ class MainpageController extends Controller
                 $html .= $block->code;
             }
         }
-        return $html;
+        return eval('?>' . $html . '<?php;');;
     }
 }

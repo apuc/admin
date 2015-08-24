@@ -1,0 +1,75 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: admin
+ * Date: 24.08.2015
+ * Time: 11:28
+ */
+
+namespace common\classes;
+
+
+class PrintMenu
+{
+    public $html = '';
+    public $menuModel;
+    public $menus = array();
+    public $i,$j =0;
+
+    public function generateHtml($model){
+        foreach($model as $tab){
+            $this->menus[$tab->parent_id][] = $tab;
+        }
+
+        //Debag::prn($this->menus);
+        $this->html = '<nav class="mainmenu">
+            <ul>';
+
+        $this->outTree(0, 0);
+
+        $this->html .= '</ul>
+        </nav>';
+
+        //Debag::prn($this->html);
+        return $this->html;
+    }
+
+    public function outTree($parent_id, $level) {
+        if (isset($this->menus[$parent_id])) { //Если категория с таким parent_id существует
+            foreach ($this->menus[$parent_id] as $value) { //Обходим
+                //$this->html .= '<li style="margin-left:'. $level*25 .'px;"><a href="'.$value["url"].'">'.$value["name"].'</a>';
+
+                $level = $level + 1; //Увеличиваем уровень вложености
+                $this->html .= '<li style="margin-left:'. $level*25 .'px;">';
+
+                //Рекурсивно вызываем эту же функцию, но с новым $parent_id и $level
+                //
+
+                if ($level == 1) {
+                    $this->html .= '<a href="'.$value["url"].'">'.$value["name"].'</a><nav><ul>';
+                } elseif ($level == 2) {
+                    $this->html .= '<a href="'.$value["url"].'">'.$value["name"].'</a><ul>';
+                } elseif($level == 3){
+                    $this->html .= '<a href="'.$value["url"].'"><img src="'.$value["icon"].'" alt=""></a>
+                    <a href="'.$value["url"].'">'.$value["name"].'</a>
+                    <p>'.$value["descr"].'</p>';
+                }
+
+                $this->outTree($value["id"], $level);
+
+                $level = $level - 1; //Уменьшаем уровень вложености
+               // $this->html .= $level;
+                if ($level == 0) {
+                    $this->html .= '</ul></nav>';
+                    //$this->i = 1;
+                } elseif ($level == 1) {
+                    $this->html .= '</ul>';
+                    //$this->j = 1;
+                }
+
+                $this->html .= '</li>';
+            }
+        }
+    }
+
+}
