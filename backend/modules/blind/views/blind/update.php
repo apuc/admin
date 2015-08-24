@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model backend\modules\blind\models\Blind */
 
 $this->title = 'Редактирование: ' . ' ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Blinds', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Жалюзи', 'url' => ['index']];
 /*$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];*/
 $this->params['breadcrumbs'][] = 'Редактирование';
 ?>
