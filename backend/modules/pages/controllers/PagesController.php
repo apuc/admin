@@ -2,6 +2,7 @@
 
 namespace backend\modules\pages\controllers;
 
+use common\models\Block;
 use common\models\Media;
 use Yii;
 use backend\modules\pages\models\Pages;
@@ -63,13 +64,20 @@ class PagesController extends Controller
     {
         $model = new Pages();
         $media = Media::find()->all();
+        $block = Block::find()->all();
+
+        $arr[0] = 'Нет';
+        foreach($block as $b){
+            $arr[$b->id] = $b->name;
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'media' => $media
+                'media' => $media,
+                'block' => $arr
             ]);
         }
     }
@@ -84,13 +92,20 @@ class PagesController extends Controller
     {
         $model = $this->findModel($id);
         $media = Media::find()->all();
+        $block = Block::find()->all();
+
+        $arr[0] = 'Нет';
+        foreach($block as $b){
+            $arr[$b->id] = $b->name;
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
-                'media' => $media
+                'media' => $media,
+                'block' => $arr
             ]);
         }
     }

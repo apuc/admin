@@ -17,6 +17,9 @@ use Yii;
  * @property string $title
  * @property string $h1
  * @property string $keywords
+ * @property string $code
+ * @property string $style
+ * @property string $sort
  * @property integer $blokc_id
  */
 class Categories extends \yii\db\ActiveRecord
@@ -38,6 +41,7 @@ class Categories extends \yii\db\ActiveRecord
             [['parent_id', 'name', 'count_product', 'hint', 'description', 'title', 'h1', 'keywords', 'blokc_id'], 'required'],
             [['parent_id', 'count_product', 'blokc_id'], 'integer'],
             [['description'], 'string'],
+            [['code', 'style', 'sort'], 'safe'],
             [['name', 'images', 'hint', 'title', 'h1', 'keywords'], 'string', 'max' => 255]
         ];
     }
@@ -59,6 +63,9 @@ class Categories extends \yii\db\ActiveRecord
             'h1' => 'H1',
             'keywords' => 'Keywords',
             'blokc_id' => 'Blokc ID',
+            'code' => 'Код',
+            'style' => 'Стиль',
+            'sort' => 'sort',
         ];
     }
 }

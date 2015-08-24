@@ -8,6 +8,7 @@
 
 namespace common\classes;
 
+use backend\modules\pages\Pages;
 use common\models\Block;
 use yii;
 use common\classes\Debag;
@@ -17,34 +18,58 @@ class Template
 {
 
 
-    public static function get_css($file){
+    public static function get_css($file)
+    {
         $headFoot = Tpl::find()->all();
         $blocs = Block::find()->all();
+        $pages = \backend\modules\pages\models\Pages::find()->all();
         $style = "";
-        foreach($headFoot as $hf){
-            $style .= $hf->style."\n";
+        foreach ($pages as $p) {
+            $style .= $p->style . "\n";
         }
-        foreach($blocs as $b){
-            $style .= $b->style."\n";
+        foreach ($headFoot as $hf) {
+            $style .= $hf->style . "\n";
         }
-        $file = preg_replace("/{css}/", "<style>\n".$style."</style>", $file);
+        foreach ($blocs as $b) {
+            $style .= $b->style . "\n";
+        }
+        $file = preg_replace("/{css}/", "<style>\n" . $style . "</style>", $file);
         return $file;
     }
 
-    public static function get_header(){
+    public static function get_header()
+    {
         $header = Tpl::find()->where(['key' => 'header'])->one();
         $head = self::get_css($header->code);
-        eval('?>'.$head.'<?php;');
+        eval('?>' . $head . '<?php;');
     }
 
-    public static function get_footer(){
+    public static function get_footer()
+    {
         $footer = Tpl::find()->where(['key' => 'footer'])->one();
-        eval('?>'.$footer->code.'<?php;');
+        eval('?>' . $footer->code . '<?php;');
     }
 
-    public static function get_block($key){
+    public static function get_block($key)
+    {
         $block = Block::find()->where(['key' => $key])->one();
-        eval('?>'.$block->code.'<?php;');
+        eval('?>' . $block->code . '<?php;');
+    }
+
+    public static function getBlockName($key)
+    {
+        if($key == 'ind'){
+            return "Индивидуальный блок";
+        }
+        if($key == 'sub'){
+            return "Блок подкатегорий";
+        }
+        if($key == 'des'){
+            return "Блок Описание";
+        }
+        if($key == 'yes'){
+            return "Готовый блок";
+        }
     }
 
 }

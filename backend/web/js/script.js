@@ -3,7 +3,7 @@
  */
 $(document).ready(function () {
 
-    $("#myTab a").click(function(e){
+    $("#myTab a").click(function (e) {
         e.preventDefault();
         $(this).tab('show');
     });
@@ -37,6 +37,20 @@ $(document).ready(function () {
             }
         });
         $("#sortable").disableSelection();
+
+        $("#sort").sortable({
+            cancel: '.empty',
+            cursor: 'move',
+            stop: function (event, ui) {
+                var bloks = '';
+                $('.published').each(function(){
+                    bloks = bloks + ',' + $(this).attr('data-type');
+                });
+                bloks = bloks.substring(1);
+                $('.sortBlock').val(bloks);
+            }
+        });
+        $("#sort").disableSelection();
 
         /*$("#sortable_1").sortable({
          connectWith: '#sortable_2',
@@ -87,20 +101,38 @@ $(document).ready(function () {
     });
 
     $('#htmlForm').ajaxForm({
-        success: function(data) {
+        success: function (data) {
             $('.mediaWrap').html(data);
         }
     });
 
-    $('#supplies-color').on('change', function(){
+    $('#supplies-color').on('change', function () {
         var color = $('#supplies-color option:selected').text();
-        if($(this).val() == '0'){
-            $('#colorP').css({'background-color' : '#fff'});
+        if ($(this).val() == '0') {
+            $('#colorP').css({'background-color': '#fff'});
         }
         else {
-            $('#colorP').css({'background-color' : color});
+            $('#colorP').css({'background-color': color});
         }
-    })
+    });
+
+    $('#specialBlockToggle').on('click', function () {
+        $('#specialBlock').slideToggle('slow');
+    });
+
+    $('.toPublick').on('click', function () {
+        if($(this).parent().hasClass('noPublick')){
+            $(this).parent().removeClass('noPublick');
+            $(this).parent().addClass('published');
+            $(this).text('Снять публикацию');
+        }
+        else {
+            $(this).parent().removeClass('published');
+            $(this).parent().addClass('noPublick');
+            $(this).text('Опубликовать');
+        }
+        return false;
+    });
 
     $(document).on('click', '.PrevImg', function () {
         var val = $(this).next().val();
@@ -116,7 +148,5 @@ $(document).ready(function () {
         $(this).remove();
         return false;
     });
-
-
 
 });
