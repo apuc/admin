@@ -13,15 +13,14 @@ use common\classes\Template;
 
 AppAsset::register($this);
 ?>
-<?php $this->beginPage() ?>
+
 
 <?php
 Template::get_header();
 ?>
 
-<?php
-Template::get_block('block1');
-?>
+<?= Alert::widget() ?>
+<?= $content ?>
 
 <?php
 Template::get_footer();

@@ -27,7 +27,45 @@ use yii\widgets\ActiveForm;
         </div>
         <div id="panel2" class="tab-pane fade">
             <h3>Вид</h3>
-            <?= $form->field($model, 'blokc_id')->textInput() ?>
+            <?= $form->field($model, 'blokc_id')->dropDownList($block) ?>
+            <a id="specialBlockToggle" href="#">Индивидуальный блок</a>
+            <div id="specialBlock">
+                <?= $form->field($model, 'code')->textarea(['rows' => 6])->label('Код') ?>
+                <?= $form->field($model, 'style')->textarea(['rows' => 6])->label('Стиль') ?>
+            </div>
+            <h3>Порядок блоков</h3>
+            <?= $form->field($model, 'sort')->hiddenInput(['class'=>'sortBlock'])->label('') ?>
+            <div>
+                <ul id="sort">
+                    <?php
+                    if(empty($model->sort)){ ?>
+                        <li class="noPublick" data-type="ind">Индивидуальный блок | <a class="toPublick" href="#">Опубликовать</a></li>
+                        <li class="noPublick" data-type="sub">Блок подкатегорий | <a class="toPublick" href="#">Опубликовать</a></li>
+                        <li class="noPublick" data-type="des">Блок Описание | <a class="toPublick" href="#">Опубликовать</a></li>
+                        <li class="noPublick" data-type="yes">Готовый блок | <a class="toPublick" href="#">Опубликовать</a></li>
+                    <?php }
+                    else {
+                        $sortDefault = ['ind','sub','des','yes'];
+                        $sort = explode(',', $model->sort);
+
+                        foreach ($sort as $s) {
+                            $name = \common\classes\Template::getBlockName($s);
+                            echo '<li class="published" data-type="'.$s.'">'.$name.' | <a class="toPublick" href="#">Снять публикацию</a></li>';
+                            $value_to_delete = $s ; //Элемент с этим значением нужно удалить
+                            $sortDefault = array_flip($sortDefault); //Меняем местами ключи и значения
+                            unset ($sortDefault[$value_to_delete]) ; //Удаляем элемент массива
+                            $sortDefault= array_flip($sortDefault); //Меняем местами ключи и значения
+                        }
+
+                        foreach($sortDefault as $sd){
+                            $name = \common\classes\Template::getBlockName($sd);
+                            echo '<li class="noPublick" data-type="'.$sd.'">'.$name.' | <a class="toPublick" href="#">Опубликовать</a></li>';
+                        }
+
+                    }
+                    ?>
+                </ul>
+            </div>
         </div>
         <div id="panel3" class="tab-pane fade">
             <h3>SEO</h3>

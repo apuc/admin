@@ -24,7 +24,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName'  => false,
             'rules'           => [
-
+                '' => 'mainpage/mainpage'
             ],
         ],
         'user' => [

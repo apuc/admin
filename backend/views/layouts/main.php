@@ -45,7 +45,8 @@ AppAsset::register($this);
             </li>
             <li><a href="#">Настройки</a>
                 <ul>
-                    <li><?= Html::a('Материалы', ['/material']) ?></li>
+                    <li><?= Html::a('Матерниалы', ['/supplies']) ?></li>
+                    <li><?= Html::a('Виды материалов', ['/material']) ?></li>
                     <li><?= Html::a('Цвет', ['/color']) ?></li>
                     <li><?= Html::a('Опции', ['/options']) ?></li>
                 </ul>

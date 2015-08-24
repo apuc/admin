@@ -208,3 +208,21 @@ ul.menu_category {
 ul{
     margin-left: 10px;
 }
+
+#specialBlock {
+    display: none;
+}
+
+#sort li {
+    list-style-type: none;
+    padding: 5px;
+    margin: 5px;
+}
+
+.noPublick {
+    background-color: yellow;
+}
+
+.published {
+    background-color: darkseagreen;
+}
