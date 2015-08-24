@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use mihaildev\ckeditor\CKEditor;
 
 /* @var $this yii\web\View */
 /* @var $model backend\modules\category\models\Category */
@@ -23,11 +24,35 @@ use yii\widgets\ActiveForm;
             <h3>Общее</h3>
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'parent_id')->dropDownList($parent) ?>
-            <?= $form->field($model, 'images')->textInput(['maxlength' => true])->label("Изображение (<a data-toggle='modal' data-target='#myModal' href='#'>Добавить</a>)") ?>
-            <div id = 'imgPreview'></div>
+            <div id="imgLoad">
+                <div id="imgPreview">
+                    <?php
+                    if(!empty($model->images)){
+                        echo '<div class="imgadd">';
+                        echo Html::img($model->images,['width'=>'100px']);
+                        /*echo Html::hiddenInput('pages-images',$model->images);*/
+                        //echo $form->field($model, 'images')->hiddenInput()->label("<a data-toggle='modal' data-target='#myModal' href='#'>Обзор</a><a class = 'del_img' href = '#'>Удалить</a>");
+                        echo '</div>';
+
+                    }
+                    else{
+                        echo "<div class='imgEmpty'>Изображение</div>";
+                    }
+                    ?>
+                </div>
+                <a data-toggle='modal' data-target='#myModal' href='#'>Обзор</a> |
+                <a class = 'del_img_pages' href = '#'>Удалить</a>
+            </div>
+            <?= $form->field($model, 'images')->textInput(['maxlength' => true])->hiddenInput()->label(false); ?>
             <?= $form->field($model, 'count_product')->textInput() ?>
             <?= $form->field($model, 'hint')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+            <?/*= $form->field($model, 'description')->textarea(['rows' => 6]) */?>
+            <?= $form->field($model, 'description')->widget(CKEditor::className(), [
+                'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('elfinder', [
+                    'preset' => 'standard',
+                    'inline' => false,
+                ]),
+            ]) ?>
         </div>
         <div id="panel2" class="tab-pane fade">
             <h3>Вид</h3>

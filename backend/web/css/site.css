@@ -227,3 +227,12 @@ ul{
 .published {
     background-color: darkseagreen;
 }
+
+.imgEmpty {
+    width: 150px;
+    height: 100px;
+    background: BLUE;
+    text-align: center;
+    color: #ffffff;
+    padding-top: 40px;
+}
