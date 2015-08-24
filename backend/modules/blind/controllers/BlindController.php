@@ -19,6 +19,7 @@ use backend\modules\blind\models\BlindSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\ActiveRecord;
 
 /**
  * BlindController implements the CRUD actions for Blind model.
@@ -79,12 +80,10 @@ class BlindController extends Controller
         foreach($materials as $v){
             $arr_materials[$v->id] = $v->code;
         }
-        //$categories = Categories::find()->all();
+
         $arr_cat = CategoryTree::getTreeSelect(0);
         unset($arr_cat[0]);
-        /*foreach($categories as $v){
-            $arr_cat[$v->id] = $v->name;
-        }*/
+
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $blind->name = $model->name;
             $blind->status = $model->status;
@@ -97,8 +96,8 @@ class BlindController extends Controller
                 $blindCatId->id_cat = $cat;
                 $blindCatId->save();
             }
-            if(!empty($model->blind_image)){
-                foreach($model->blind_image as $img){
+            if(!empty($_POST['blind_image'])){
+                foreach($_POST['blind_image'] as $img){
                     $blindImg = new BlindImg();
                     $blindImg->id_blind = $blind->id;
                     $blindImg->images = $img;
@@ -137,6 +136,7 @@ class BlindController extends Controller
 
         $model->name = $blind->name;
         $model->status = $blind->status;
+        $model->description = $blind->description;
 
         $cat = BlindCatid::find()->where(['id_blind' => $id])->all();
 
@@ -145,12 +145,24 @@ class BlindController extends Controller
         }
 
         $media = Media::find()->all();
-        $materials = Material::find()->all();
+
+        $supples = BlindIdmaterials::find()->where(['id_blind'=>$id])->all();
+        foreach($supples as $supl){
+            $arr_supl[$supl->id_materials] = ['selected ' => 'selected'];
+        }
+
+
+        $materials = \backend\modules\supplies\models\Supplies::find()->all();
         foreach($materials as $v){
-            $arr_materials[$v->id] = $v->name;
+            $arr_materials[$v->id] = $v->code;
         }
         $arr_cat = CategoryTree::getTreeSelect(0);
         unset($arr_cat[0]);
+        $blImg = new BlindImg();
+        $imgages = $blImg->find()->where(['id_blind'=>$id])->all();
+        foreach($imgages as $img){
+            $arr_img[$img->id] = $img->images;
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $blind->name = $model->name;
@@ -158,20 +170,25 @@ class BlindController extends Controller
             $blind->description = $model->description;
             $blind->save();
 
+            $cat = BlindCatid::deleteAll(['id_blind'=>$blind->id]);
+
             foreach($model->categories as $cat){
                 $blindCatId = new BlindCatid();
                 $blindCatId->id_blind = $blind->id;
                 $blindCatId->id_cat = $cat;
                 $blindCatId->save();
             }
-            if(!empty($model->blind_image)){
-                foreach($model->blind_image as $img){
+            $blindImg = new BlindImg();
+            $cat = $blindImg->deleteAll(['id_blind'=>$blind->id]);
+            if(!empty($_POST['blind_image'])){
+                foreach($_POST['blind_image'] as $img){
                     $blindImg = new BlindImg();
                     $blindImg->id_blind = $blind->id;
                     $blindImg->images = $img;
                     $blindImg->save();
                 }
             }
+            $cat = BlindIdmaterials::deleteAll(['id_blind'=>$blind->id]);
             if(!empty($model->materials)){
                 foreach($model->materials as $mat){
                     $blindMat = new BlindIdmaterials();
@@ -187,7 +204,9 @@ class BlindController extends Controller
                 'categories' => $arr_cat,
                 'catselect' => $arr_catid,
                 'materials' => $arr_materials,
+                'materialselect' => $arr_supl,
                 'media' => $media,
+                'img' => $arr_img,
             ]);
         }
     }

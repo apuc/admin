@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\modules\blind\models\Blind */
 
-$this->title = 'Update Blind: ' . ' ' . $model->name;
+$this->title = 'Редактирование: ' . ' ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Blinds', 'url' => ['index']];
 /*$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];*/
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Редактирование';
 ?>
 <div class="blind-update">
 
@@ -19,7 +19,9 @@ $this->params['breadcrumbs'][] = 'Update';
         'categories' => $categories,
         'catselect' => $catselect,
         'materials' => $materials,
+        'materialselect' => $materialselect,
         'media' => $media,
+        'img' => $img,
     ]) ?>
 
 </div>
