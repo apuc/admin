@@ -148,5 +148,12 @@ $(document).ready(function () {
         $(this).remove();
         return false;
     });
+    $(document).on('click','.del_img_pages',function(){
+        $('#imgPreview').html("<div class='imgEmpty'>Изображение</div>");
+        $('#pages-images').val('');
+        $('#category-images').val('');
+        $('#supplies-images').val('');
+        return false;
+    });
 
 });
