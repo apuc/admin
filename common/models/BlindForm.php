@@ -26,4 +26,16 @@ class BlindForm extends Model
             [['blind_image','materials'], 'safe']
         ];
     }
+
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'name' => 'Название',
+            'status' => 'Статус',
+            'description' => 'Описание',
+            'categories' => 'Категории',
+            'materials' => 'Материалы',
+        ];
+    }
 }

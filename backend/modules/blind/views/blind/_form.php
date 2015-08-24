@@ -23,6 +23,18 @@ use yii\widgets\ActiveForm;
             <div id="imgPreview"></div>
             <div class="blind_images">
 
+                <?php
+                if(!empty($img)) {
+                    foreach ($img as $v) {
+                        echo '<div class="imgadd">';
+                        echo Html::img($v, ['width' => '100px']);
+                        echo Html::hiddenInput('blind_image[]',$v);
+                        echo Html::a('Удалить', ['#'], ['class' => 'del_img']);
+                        echo '</div>';
+                    }
+                }
+                ?>
+
             </div>
 
             <?= $form->field($model, 'status')->checkbox() ?>
@@ -36,7 +48,7 @@ use yii\widgets\ActiveForm;
         </div>
         <div id="panel2" class="tab-pane fade">
             <h3>Материалы</h3>
-            <?=$form->field($model, 'materials')->dropDownList($materials, ['multiple'=>true]) ?>
+            <?=$form->field($model, 'materials')->dropDownList($materials, ['multiple'=>true, 'options' => $materialselect]) ?>
         </div>
 
     </div>

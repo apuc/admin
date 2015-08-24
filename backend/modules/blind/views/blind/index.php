@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel backend\modules\blind\models\BlindSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Blinds';
+$this->title = 'Жалюзи';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="blind-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Blind', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -27,7 +27,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'name',
-            'status',
+            [
+                'attribute'=>'status',
+                'format' => 'text',
+                'value' => function($model){
+                    if($model->status == 1){
+                        return 'Опубликовано';
+                    }
+                    else{
+                        return 'Не опубликовано';
+                    }
+                }
+            ],
+
             'description:ntext',
 
             ['class' => 'yii\grid\ActionColumn'],
