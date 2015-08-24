@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use mihaildev\ckeditor\CKEditor;
 
 /* @var $this yii\web\View */
 /* @var $model backend\modules\category\models\Category */
@@ -45,7 +46,13 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'images')->textInput(['maxlength' => true])->hiddenInput()->label(false); ?>
             <?= $form->field($model, 'count_product')->textInput() ?>
             <?= $form->field($model, 'hint')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+            <?/*= $form->field($model, 'description')->textarea(['rows' => 6]) */?>
+            <?= $form->field($model, 'description')->widget(CKEditor::className(), [
+                'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('elfinder', [
+                    'preset' => 'standard',
+                    'inline' => false,
+                ]),
+            ]) ?>
         </div>
         <div id="panel2" class="tab-pane fade">
             <h3>Вид</h3>
