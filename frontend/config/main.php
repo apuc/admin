@@ -18,6 +18,9 @@ return [
         'page' => [
             'class' => 'frontend\modules\page\Page',
         ],
+        'category' => [
+            'class' => 'frontend\modules\category\Category',
+        ],
     ],
     'components' => [
         'request'      => [
