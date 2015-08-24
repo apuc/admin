@@ -3,7 +3,7 @@
 use yii\db\Schema;
 use yii\db\Migration;
 
-class m150822_113606_create_blind_table extends Migration
+class m150823_085953_create_blind_table extends Migration
 {
     public function up()
     {

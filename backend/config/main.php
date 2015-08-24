@@ -45,6 +45,9 @@ return [
         'supplies' => [
             'class' => 'backend\modules\supplies\Supplies',
         ],
+        'blind' => [
+            'class' => 'backend\modules\blind\Blind',
+        ],
     ],
     'components' => [
         'request'      => [
@@ -67,7 +70,8 @@ return [
                 'category' => 'category/category',
                 'pages' => 'pages/pages',
                 'options' => 'options/options',
-                'supplies' => 'supplies/supplies'
+                'supplies' => 'supplies/supplies',
+                'blind' => 'blind/blind',
             ],
         ],
         'user' => [
