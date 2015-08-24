@@ -101,4 +101,22 @@ $(document).ready(function () {
             $('#colorP').css({'background-color' : color});
         }
     })
+
+    $(document).on('click', '.PrevImg', function () {
+        var val = $(this).next().val();
+        $('#supplies-images').val(val);
+        $('#myModal').modal('hide');
+        $("#imgPreview").append('<div class="imgadd"><img class="PrevImg" src="'+val+'" width="150px" alt="" /><input type="hidden" name="blind_image[]" value="'+val+'"><a class="del_img" href = "#">Удалить</a></div');
+        //$(this).clone().prependTo("#imgPreview");
+    });
+
+    $(document).on('click','.del_img',function(){
+        $(this).prev().prev().remove();
+        $(this).prev().remove();
+        $(this).remove();
+        return false;
+    });
+
+
+
 });

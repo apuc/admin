@@ -2,6 +2,7 @@
 
 namespace backend\modules\category\controllers;
 
+use common\classes\CategoryTree;
 use common\classes\Debag;
 use common\models\Block;
 use common\models\Categories;
@@ -68,15 +69,17 @@ class CategoryController extends Controller
         $media = Media::find()->all();
         $block = Block::find()->all();
 
+        $arr = CategoryTree::getTreeSelect(0);
+
         $arr1[0] = 'Нет';
         foreach($block as $v){
             $arr1[$v->id]=$v->name;
         }
 
-        $arr[0] = 'Нет';
+        /*$arr[0] = 'Нет';
         foreach($parent as $v){
             $arr[$v->id]=$v->name;
-        }
+        }*/
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -103,15 +106,17 @@ class CategoryController extends Controller
         $media = Media::find()->all();
         $block = Block::find()->all();
 
+        $arr = CategoryTree::getTreeSelect(0);
+
         $arr1[0] = 'Нет';
         foreach($block as $v){
             $arr1[$v->id]=$v->name;
         }
 
-        $arr[0] = 'Нет';
+        /*$arr[0] = 'Нет';
         foreach($parent as $v){
             $arr[$v->id]=$v->name;
-        }
+        }*/
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
