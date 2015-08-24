@@ -37,11 +37,17 @@ class Template
         return $file;
     }
 
-    public static function get_header()
+
+    public static function get_header($model)
     {
         $header = Tpl::find()->where(['key' => 'header'])->one();
         $head = self::get_css($header->code);
+        $head = self::get_title($model, $head);
         eval('?>' . $head . '<?php;');
+    }
+
+    public static function get_title($model, $file){
+        return preg_replace("/{title}/", $model->title , $file);
     }
 
     public static function get_footer()

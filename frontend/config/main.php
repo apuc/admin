@@ -15,6 +15,9 @@ return [
         'mainpage' => [
             'class' => 'frontend\modules\mainpage\Mainpage',
         ],
+        'page' => [
+            'class' => 'frontend\modules\page\Page',
+        ],
     ],
     'components' => [
         'request'      => [
@@ -24,7 +27,8 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName'  => false,
             'rules'           => [
-                '' => 'mainpage/mainpage'
+                '' => 'mainpage/mainpage',
+                'page' => 'page/page'
             ],
         ],
         'user' => [

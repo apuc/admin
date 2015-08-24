@@ -41,14 +41,14 @@ AppAsset::register($this);
                 <ul>
                     <li><?= Html::a('Разделы', ['/category']) ?></li>
                     <li><?= Html::a('Страницы', ['/pages']) ?></li>
+                    <li><?= Html::a('Матерниалы', ['/supplies']) ?></li>
+                    <li><?= Html::a('Виды материалов', ['/material']) ?></li>
+                    <li><?= Html::a('Цвет', ['/color']) ?></li>
                     <li><?= Html::a('Жалюзи', ['/blind']) ?></li>
                 </ul>
             </li>
             <li><a href="#">Настройки</a>
                 <ul>
-                    <li><?= Html::a('Матерниалы', ['/supplies']) ?></li>
-                    <li><?= Html::a('Виды материалов', ['/material']) ?></li>
-                    <li><?= Html::a('Цвет', ['/color']) ?></li>
                     <li><?= Html::a('Опции', ['/options']) ?></li>
                 </ul>
             </li>

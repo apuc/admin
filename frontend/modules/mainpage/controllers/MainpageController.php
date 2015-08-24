@@ -12,6 +12,7 @@ namespace frontend\modules\mainpage\controllers;
 use backend\modules\options\models\Options;
 use backend\modules\pages\models\Pages;
 use common\classes\Debag;
+use common\classes\Template;
 use common\models\Block;
 use yii\web\Controller;
 
@@ -23,7 +24,13 @@ class MainpageController extends Controller
         $page = Pages::find()->where(['id' => $pageId])->one();
         $content = $this->getBlocks($page);
 
-        return $this->render('index', ['content' => $content, 'page' => $page]);
+        $con = $this->render('index', ['content' => $content, 'page' => $page]);
+
+        Template::get_header($page);
+
+        echo $con;
+
+        Template::get_footer();
     }
 
     public function getBlocks($page){

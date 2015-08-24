@@ -16,15 +16,15 @@ AppAsset::register($this);
 
 
 <?php
-Template::get_header();
-?>
+/*Template::get_header();
+*/?>
 
 <?= Alert::widget() ?>
 <?= $content ?>
-
-<?php
-Template::get_footer();
-?>
+<!--
+--><?php
+/*Template::get_footer();
+*/?>
 <?php /*$this->endBody() */?>
 
 <?php /*$this->endPage() */?>
