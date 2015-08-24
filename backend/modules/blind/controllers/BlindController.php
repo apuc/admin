@@ -2,6 +2,7 @@
 
 namespace backend\modules\blind\controllers;
 
+use backend\modules\supplies\Supplies;
 use common\classes\CategoryTree;
 use common\classes\Debag;
 use common\models\BlindCatid;
@@ -73,9 +74,10 @@ class BlindController extends Controller
         $blind = new Blind();
         $model = new BlindForm();
         $media = Media::find()->all();
-        $materials = Material::find()->all();
+        //$materials = Supplies::find()->all();
+        $materials = \backend\modules\supplies\models\Supplies::find()->all();
         foreach($materials as $v){
-            $arr_materials[$v->id] = $v->name;
+            $arr_materials[$v->id] = $v->code;
         }
         //$categories = Categories::find()->all();
         $arr_cat = CategoryTree::getTreeSelect(0);
@@ -141,8 +143,6 @@ class BlindController extends Controller
         foreach($cat as $c){
             $arr_catid[$c->id_cat] = ['selected ' => 'selected'];
         }
-/*echo '<br /><br /><br /><br /><br />';
-        Debag::prn($arr_catid);*/
 
         $media = Media::find()->all();
         $materials = Material::find()->all();
