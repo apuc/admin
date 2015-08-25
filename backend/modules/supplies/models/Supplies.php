@@ -56,4 +56,9 @@ class Supplies extends \yii\db\ActiveRecord
             'status' => 'Статус',
         ];
     }
+
+    public static function getSupName($id){
+        $obj = self::find()->where($id)->one();
+        return $obj->code;
+    }
 }

@@ -28,3 +28,23 @@ class Supplies {
     }
 }
 ?>
+
+<div class="title">
+    <b>Вызов</b> <span>замерщика с образцами</span> бесплатный<br>
+    Бесплатное <span>3D моделирование жалюзей</span> <b>на ваших окнах</b>
+</div>
+<a href="#" class="close"></a>
+<a href="#" class="cause">Вызвать замерщика</a>
+<div class="popup_content">
+    <div class="prices">
+        Цена: <span><b>1 999</b> руб/м²</span>
+        <a href="#" class="left">
+            <span>999</span> руб/м²
+        </a>
+        <a href="#" class="right">
+            <span>2 999</span> руб/м²
+        </a>
+    </div>
+    <div class="group">
+        <div class="title">Жалюзи вертикальные тканевые</div>
+        <div class="group_items">

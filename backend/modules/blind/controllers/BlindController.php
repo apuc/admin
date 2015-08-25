@@ -9,6 +9,7 @@ use common\models\BlindCatid;
 use common\models\BlindForm;
 use common\models\BlindIdmaterials;
 use common\models\BlindImg;
+use common\models\BlindMaterials;
 use common\models\Categories;
 use common\models\Material;
 
@@ -90,6 +91,17 @@ class BlindController extends Controller
             $blind->description = $model->description;
             $blind->save();
 
+            if(isset($_POST['blindTitle'])){
+                foreach($_POST['blindTitle'] as $bt){
+                    $arrBt = explode('*', $bt);
+                    $bmt = new BlindMaterials();
+                    $bmt->id_blind = $blind->id;
+                    $bmt->id_materials = $arrBt[0];
+                    $bmt->title = $arrBt[1];
+                    $bmt->save();
+                }
+            }
+
             foreach($model->categories as $cat){
                 $blindCatId = new BlindCatid();
                 $blindCatId->id_blind = $blind->id;
@@ -140,6 +152,8 @@ class BlindController extends Controller
 
         $cat = BlindCatid::find()->where(['id_blind' => $id])->all();
 
+        $blindMaterialHeader = BlindMaterials::find()->where(['id_blind'=>$id])->all();
+
         foreach($cat as $c){
             $arr_catid[$c->id_cat] = ['selected ' => 'selected'];
         }
@@ -169,6 +183,21 @@ class BlindController extends Controller
             $blind->status = $model->status;
             $blind->description = $model->description;
             $blind->save();
+
+
+            $delBmt = new BlindMaterials();
+            $delBmt->deleteAll(['id_blind'=>$blind->id]);
+            if(isset($_POST['blindTitle'])){
+                foreach($_POST['blindTitle'] as $bt){
+                    $arrBt = explode('*', $bt);
+                    $bmt = new BlindMaterials();
+                    $bmt->id_blind = $blind->id;
+                    $bmt->id_materials = $arrBt[0];
+                    $bmt->title = $arrBt[1];
+                    $bmt->save();
+                }
+            }
+
 
             $cat = BlindCatid::deleteAll(['id_blind'=>$blind->id]);
 
@@ -207,6 +236,7 @@ class BlindController extends Controller
                 'materialselect' => $arr_supl,
                 'media' => $media,
                 'img' => $arr_img,
+                'bmt' => $blindMaterialHeader,
             ]);
         }
     }
