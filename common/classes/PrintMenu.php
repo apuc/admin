@@ -40,10 +40,10 @@ class PrintMenu
                 //$this->html .= '<li style="margin-left:'. $level*25 .'px;"><a href="'.$value["url"].'">'.$value["name"].'</a>';
 
                 $level = $level + 1; //Увеличиваем уровень вложености
-                $this->html .= '<li style="margin-left:'. $level*25 .'px;">';
+                $this->html .= '<li >';
 
                 //Рекурсивно вызываем эту же функцию, но с новым $parent_id и $level
-                //
+                //style="margin-left:'. $level*25 .'px;"
 
                 if ($level == 1) {
                     $this->html .= '<a href="'.$value["url"].'">'.$value["name"].'</a><nav><ul>';
@@ -51,7 +51,7 @@ class PrintMenu
                     $this->html .= '<a href="'.$value["url"].'">'.$value["name"].'</a><ul>';
                 } elseif($level == 3){
                     $this->html .= '<a href="'.$value["url"].'"><img src="'.$value["icon"].'" alt=""></a>
-                    <a href="'.$value["url"].'">'.$value["name"].'</a>
+                    <a href="'.$value["url"].'" class="title">'.$value["name"].'</a>
                     <p>'.$value["descr"].'</p>';
                 }
 
