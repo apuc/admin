@@ -22,6 +22,7 @@ class Template
     {
         $headFoot = Tpl::find()->all();
         $blocs = Block::find()->all();
+
         $pages = \backend\modules\pages\models\Pages::find()->all();
         $style = "";
         foreach ($pages as $p) {
