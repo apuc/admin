@@ -120,6 +120,10 @@ $(function () {
         return false;
     });
 
+    $('.selectMy').on('click', function(){
+        $('.popup,.background').fadeOut('fast');
+    });
+
     $('.list_wrapper').each(function(){
         $(this).find('.product:gt(3)').hide();
     });
