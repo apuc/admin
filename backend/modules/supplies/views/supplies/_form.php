@@ -18,8 +18,6 @@ use yii\widgets\ActiveForm;
             if(!empty($model->images)){
                 echo '<div class="imgadd">';
                 echo Html::img($model->images,['width'=>'100px']);
-                /*echo Html::hiddenInput('pages-images',$model->images);*/
-                //echo $form->field($model, 'images')->hiddenInput()->label("<a data-toggle='modal' data-target='#myModal' href='#'>Обзор</a><a class = 'del_img' href = '#'>Удалить</a>");
                 echo '</div>';
 
             }

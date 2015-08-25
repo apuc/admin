@@ -49,7 +49,19 @@ use yii\widgets\ActiveForm;
         <div id="panel2" class="tab-pane fade">
             <h3>Материалы</h3>
             <?=$form->field($model, 'materials')->dropDownList($materials, ['multiple'=>true, 'options' => $materialselect]) ?>
+            <a data-toggle='modal' data-target='#myModal2' href = "#">Добавить заголовок</a>
+
         </div>
+
+        <div id="addinp">
+            <?php
+            foreach($bmt as $b){
+                echo '<div style = "margin-top:5px;">';
+                echo $b->title.'заголовок будет вставлен перед ' .\backend\modules\supplies\models\Supplies::getSupName($b->id_materials). '<input type="hidden" name="blindTitle[]"  value="' .$b->id_materials. '*' .$b->title. '"/> | <a href="#" id="delTitle">Удалить</a> </div>';
+                echo "</div>";
+            }
+            ?>
+            </div>
 
     </div>
 
@@ -90,6 +102,26 @@ use yii\widgets\ActiveForm;
             </div>
             <div class="modal-footer">
                 <!--<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Название модали</h4>
+            </div>
+            <div class="modal-body">
+                <?php $materials[0] = 'Выберите материал'; ?>
+            <?= Html::textInput('titleB', '', ['id'=>'titleB', 'placeholder'=>'Название заголовка']) ?>
+            <?= Html::dropDownList('forM', 0, $materials,['id'=>'selmat']) ?>
+            </div>
+            <div class="modal-footer">
+                <!--<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>-->
+                <button id = "addTitle" type="button" class="btn btn-default">Добавить</button>
             </div>
         </div>
     </div>

@@ -43,7 +43,7 @@ $(document).ready(function () {
             cursor: 'move',
             stop: function (event, ui) {
                 var bloks = '';
-                $('.published').each(function(){
+                $('.published').each(function () {
                     bloks = bloks + ',' + $(this).attr('data-type');
                 });
                 bloks = bloks.substring(1);
@@ -121,7 +121,7 @@ $(document).ready(function () {
     });
 
     $('.toPublick').on('click', function () {
-        if($(this).parent().hasClass('noPublick')){
+        if ($(this).parent().hasClass('noPublick')) {
             $(this).parent().removeClass('noPublick');
             $(this).parent().addClass('published');
             $(this).text('Снять публикацию');
@@ -138,21 +138,36 @@ $(document).ready(function () {
         var val = $(this).next().val();
         $('#supplies-images').val(val);
         $('#myModal').modal('hide');
-        $("#imgPreview").append('<div class="imgadd"><img class="PrevImg" src="'+val+'" width="150px" alt="" /><input type="hidden" name="blind_image[]" value="'+val+'"><a class="del_img" href = "#">Удалить</a></div');
+        $("#imgPreview").append('<div class="imgadd"><img class="PrevImg" src="' + val + '" width="150px" alt="" /><input type="hidden" name="blind_image[]" value="' + val + '"><a class="del_img" href = "#">Удалить</a></div');
         //$(this).clone().prependTo("#imgPreview");
     });
 
-    $(document).on('click','.del_img',function(){
+    $(document).on('click', '.del_img', function () {
         $(this).prev().prev().remove();
         $(this).prev().remove();
         $(this).remove();
         return false;
     });
-    $(document).on('click','.del_img_pages',function(){
+    $(document).on('click', '.del_img_pages', function () {
         $('#imgPreview').html("<div class='imgEmpty'>Изображение</div>");
         $('#pages-images').val('');
         $('#category-images').val('');
         $('#supplies-images').val('');
+        return false;
+    });
+
+    $(document).on('click', '#addTitle', function () {
+        var title = $('#titleB').val();
+        var id = $('#selmat').val();
+        var val = $('#selmat :selected').text();
+        $('#myModal2').modal('hide');
+        $('#titleB').val('');
+        console.log(val);
+        $('#addinp').append('<div style = "margin-top:5px;">' + title + ' заголовок будет вставлен перед ' + val + '<input type="hidden" name="blindTitle[]"  value="' + id + '*' + title + '"/> | <a href="#" id="delTitle">Удалить</a> </div>');
+    });
+
+    $(document).on('click', '#delTitle', function () {
+        $(this).parent().remove();
         return false;
     });
 
