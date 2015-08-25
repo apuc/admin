@@ -48,6 +48,6 @@ class PageController extends Controller
                 $html .= $block->code;
             }
         }
-        return $html;
+        return eval('?>' . $html . '<?php;');;
     }
 }
