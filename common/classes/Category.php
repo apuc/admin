@@ -16,8 +16,9 @@ use common\models\Categories;
 class Category {
     public static function getCategories($id){
         $cat = Categories::find()->where(['parent_id'=>$id])->all();
-        
-        $html = '<div class="catalog_blocks">';
+        $cat_title = Categories::find()->where(['id'=>$id])->one();
+        $html = '<div class="title">'.$cat_title->name.'</div>';
+        $html .= '<div class="catalog_blocks">';
         foreach($cat as $c){
 
             $html .= '<div class="category">
