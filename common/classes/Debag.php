@@ -1,6 +1,7 @@
 <?php
 
 namespace common\classes;
+use common\classes\Supplies;
 class Debag
 {
     public static function prn($content)

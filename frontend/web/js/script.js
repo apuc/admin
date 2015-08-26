@@ -124,6 +124,7 @@ $(function () {
      return false;
      });*/
 
+
     $('.background').click(function () {
         $('.popup,.background').fadeOut('fast');
         return false;
@@ -175,12 +176,13 @@ $(document).ready(function () {
         return false;
     });
 
+
     $(document).on('click','.order',function () {
         var blId = $(this).attr('blind-id');
         var mtId = $(this).attr('suuples-id');
         $.ajax({
             type: "get",
-            url: 'get_sup',
+            url: 'get_order',
             data: "blId=" + blId +"mtId" + mtId,
             success: function (msg) {
                 $('.popup').html(msg);

@@ -26,7 +26,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
 
-            'name',
+            [
+                'attribute' => 'name',
+                'format' => 'html',
+                'value' => function($model){
+                    //return Html::a($model->name, ['http://admin2.web-artcraft.com/page','p'=>$model->id],[]);
+                    return "<a href='http://admin2.web-artcraft.com/page?p=$model->id'>$model->name</a>";
+                }
+            ],
             'images',
             'count_product',
             'hint',

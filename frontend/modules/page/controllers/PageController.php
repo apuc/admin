@@ -12,6 +12,7 @@ namespace frontend\modules\page\controllers;
 use backend\modules\pages\models\Pages;
 use yii\web\Controller;
 use common\classes\Template;
+use backend\modules\block\models\Block;
 
 class PageController extends Controller
 {
@@ -19,13 +20,15 @@ class PageController extends Controller
 
         //$page = Pages::find()->where(['id' => $_GET['p']])->one();
         $page = Pages::find()->where(['id' => $_GET['p']])->one();
-        $content = $this->getBlocks($page);
+        //$content = $this->getBlocks($page);
 
-        $con = $this->render('index', ['content' => $content, 'page' => $page]);
+        //$content = $this->getBlocks($page);
+
+        //$con = $this->render('index', ['content' => $content, 'page' => $page]);
 
         Template::get_header($page);
 
-        echo $con;
+        $this->getBlocks($page);
 
         Template::get_footer();
     }

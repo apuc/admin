@@ -50,13 +50,13 @@ return [
         ],
     ],
     'components' => [
-        'request'      => [
+        'request' => [
             'baseUrl' => '/secure',
         ],
-        'urlManager'   => [
+        'urlManager' => [
             'enablePrettyUrl' => true,
-            'showScriptName'  => false,
-            'rules'           => [
+            'showScriptName' => false,
+            'rules' => [
                 'header' => 'header/header',
                 'footer' => 'footer/footer',
                 'material' => 'material/material',
@@ -72,6 +72,17 @@ return [
                 'options' => 'options/options',
                 'supplies' => 'supplies/supplies',
                 'blind' => 'blind/blind',
+            ],
+        ],
+        'urlManagerFrontEnd' => [
+            'class' => 'yii\web\UrlManager',
+            'baseUrl' => '',
+            'hostInfo' => 'http://admin2.web-artcraft.com',
+            'enablePrettyUrl' => true,
+            'enableStrictParsing' => true,
+            'showScriptName' => false,
+            'rules' => [
+                'page' => 'page/page'
             ],
         ],
         'user' => [

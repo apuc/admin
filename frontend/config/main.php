@@ -31,7 +31,9 @@ return [
             'showScriptName'  => false,
             'rules'           => [
                 '' => 'mainpage/mainpage',
-                'page' => 'page/page'
+                'page' => 'page/page',
+                'category' => 'category/category',
+                'get_sup' => 'category/category/get_sup'
             ],
         ],
         'user' => [

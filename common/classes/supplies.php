@@ -27,7 +27,6 @@ class Supplies {
         $j=0;
         foreach($supplies as $v){
             $supl = \backend\modules\supplies\models\Supplies::find()->where(['id'=>$v->id_materials])->one();
-           // Debag::prn($supl);
             if(in_array($v->id_materials,$arrBlmID)){
                 if($j != 0){
                     $html .= "</div></div></div>";
