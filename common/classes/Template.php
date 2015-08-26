@@ -44,11 +44,21 @@ class Template
         $header = Tpl::find()->where(['key' => 'header'])->one();
         $head = self::get_css($header->code);
         $head = self::get_title($model, $head);
+        $head = self::get_keywords($model, $head);
+        $head = self::get_description($model, $head);
         eval('?>' . $head . '<?php;');
     }
 
     public static function get_title($model, $file){
         return preg_replace("/{title}/", $model->title , $file);
+    }
+
+    public function get_keywords($model, $file){
+        return preg_replace("/{keywords}/", "<meta name='keywords' content='$model->keywords'>" , $file);
+    }
+
+    public function get_description($model, $file){
+        return preg_replace("/{description}/", "<meta name='description' content='$model->description'>" , $file);
     }
 
     public static function get_footer()

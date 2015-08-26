@@ -85,7 +85,7 @@ class PrintBlind
                                 <div class="price">
                                     Цена от <b><span>'.$count["min_price"].'</span> р/м2</b>
                                 </div>
-                                <a href="#" class="select" data-target="'.$obj->id.'">Выбрать</a>
+                                <a href="#" class="selectMy" data-target="'.$obj->id.'">Выбрать</a>
                                 <div class="params">
                                     <span><img src="images/catalog_icon_color.png" alt=""><b>'.$count["colors"].'</b> цветов</span>
                                     <span><img src="images/catalog_icon_material.png" alt=""><b>'.$count["materials"].'</b> видов материала</span>

@@ -32,7 +32,8 @@ return [
             'rules'           => [
                 '' => 'mainpage/mainpage',
                 'page' => 'page/page',
-                'category' => 'category/category'
+                'category' => 'category/category',
+                'get_sup' => 'category/category/get_sup'
             ],
         ],
         'user' => [

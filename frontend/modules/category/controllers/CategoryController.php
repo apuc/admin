@@ -10,12 +10,27 @@ namespace frontend\modules\category\controllers;
 
 
 use common\classes\Category;
+use common\classes\Debag;
+use common\classes\Supplies;
 use yii\web\Controller;
 use backend\modules\block\models\Block;
 use common\classes\Template;
+use yii\filters\VerbFilter;
 
 class CategoryController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'get_sup' => ['get'],
+                ],
+            ],
+        ];
+    }
+
     public function actionIndex(){
 
         //$page = Pages::find()->where(['id' => $_GET['p']])->one();
@@ -50,5 +65,9 @@ class CategoryController extends Controller
             }
         }
         return eval('?>' . $html . '<?php;');;
+    }
+
+    public function actionGet_sup(){
+        echo Supplies::getSupplies($_GET['id']);
     }
 }
