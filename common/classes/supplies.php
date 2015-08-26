@@ -26,7 +26,7 @@ class Supplies {
         $k = 1;
         $j=0;
         foreach($supplies as $v){
-            $supl = \backend\modules\supplies\models\Supplies::find()->where(['id'=>$v->id_blind])->one();
+            $supl = \backend\modules\supplies\models\Supplies::find()->where(['id'=>$v->id_materials])->one();
            // Debag::prn($supl);
             if(in_array($v->id_materials,$arrBlmID)){
                 if($j != 0){
@@ -47,7 +47,7 @@ class Supplies {
             $html .= '<div class="item">
                         <a href="#"><img src="'.$supl->images.'" alt="" width="163px"/></a>
                         <span>Код: '.$supl->code.'</span>
-                        <a href="#" class="order">Заказать</a>
+                        <a href="#" class="order" blind-id="'.$id.'" suuples-id="'.$v->id_materials.'">Заказать</a>
                     </div>';
             if($k == 5){$html .= '</div>';$k = 1;}
             if(in_array($v->id_materials,$arrBlmID )){
