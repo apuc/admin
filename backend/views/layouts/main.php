@@ -50,6 +50,7 @@ AppAsset::register($this);
                 <ul>
                     <li><?= Html::a('Виды материалов', ['/material']) ?></li>
                     <li><?= Html::a('Цвет', ['/color']) ?></li>
+                    <li><?= Html::a('Email для заказов', ['/options/options/update?id=2']) ?></li>
                     <li><?= Html::a('Опции', ['/options']) ?></li>
                 </ul>
             </li>

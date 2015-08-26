@@ -8,7 +8,7 @@ use common\models\Menu;
 /* @var $searchModel backend\modules\menu\models\MenuSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Menus';
+$this->title = 'Меню';
 $this->params['breadcrumbs'][] = $this->title; ?>
 
 <?= Html::a('Создать элемент', ['create'], ['class' => 'btn btn-success']) ?>
