@@ -9,9 +9,12 @@
 namespace frontend\modules\category\controllers;
 
 
+use backend\modules\blind\models\Blind;
+use backend\modules\options\models\Options;
 use common\classes\Category;
 use common\classes\Debag;
 use common\classes\Supplies;
+use common\models\Orders;
 use yii\web\Controller;
 use backend\modules\block\models\Block;
 use common\classes\Template;
@@ -73,6 +76,20 @@ class CategoryController extends Controller
     }
 
     public function actionGet_order(){
+        $blind = Blind::find()->where(['id'=>$_GET['blId']])->one();
+        $materials = \backend\modules\supplies\models\Supplies::find()->where(['id'=>$_GET['mtId']])->one();
+        $telephone = $_GET['tel'];
+        $order = new Orders();
 
+        $order->blind = (string)$blind->name;
+        $order->materials = (string)$materials->code;
+        $order->telephone = (string)$telephone;
+        $order->dt_add = time();
+
+        $order->save();
+
+        $email = Options::find()->where(['key'=>'email_to_prod'])->one();
+
+        mail($email->value, "Заказ с вашего сайта", "С вашего сайта заказали:\nНазвание жалюзи: $blind->name\nКод материала: $materials->code\nТелефон для связ: $telephone","Content-type: text/html; charset=UTF-8\r\n");
     }
 }

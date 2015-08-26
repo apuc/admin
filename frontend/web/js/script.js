@@ -180,15 +180,33 @@ $(document).ready(function () {
     $(document).on('click','.order',function () {
         var blId = $(this).attr('blind-id');
         var mtId = $(this).attr('suuples-id');
-        $.ajax({
+        $('#productInfo').attr('blind-id', blId);
+        $('#productInfo').attr('mat-id', mtId);
+        $('#myModal3').modal('show');
+       /* $.ajax({
             type: "get",
             url: 'get_order',
             data: "blId=" + blId +"mtId" + mtId,
             success: function (msg) {
                 $('.popup').html(msg);
             }
-        });
+        });*/
         return false;
+    });
+
+    $(document).on('click','#сheck',function () {
+        var blId = $('#productInfo').attr('blind-id');
+        var mtId = $('#productInfo').attr('mat-id');
+        var tel = $('.tel').val();
+        $.ajax({
+            type: "get",
+            url: 'get_order',
+            data: "&blId=" + blId +"&mtId=" + mtId + "&tel=" + tel,
+            success: function (msg) {
+                console.log(msg);
+            }
+        });
+
     });
 });
 
