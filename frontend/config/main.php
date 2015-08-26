@@ -33,7 +33,8 @@ return [
                 '' => 'mainpage/mainpage',
                 'page' => 'page/page',
                 'category' => 'category/category',
-                'get_sup' => 'category/category/get_sup'
+                'get_sup' => 'category/category/get_sup',
+                'get_order' => 'category/category/get_order'
             ],
         ],
         'user' => [

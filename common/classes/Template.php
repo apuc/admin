@@ -53,11 +53,11 @@ class Template
         return preg_replace("/{title}/", $model->title , $file);
     }
 
-    public function get_keywords($model, $file){
+    public static  function get_keywords($model, $file){
         return preg_replace("/{keywords}/", "<meta name='keywords' content='$model->keywords'>" , $file);
     }
 
-    public function get_description($model, $file){
+    public static  function get_description($model, $file){
         return preg_replace("/{description}/", "<meta name='description' content='$model->description'>" , $file);
     }
 

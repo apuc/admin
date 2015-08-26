@@ -9,6 +9,8 @@
 namespace common\classes;
 
 
+use common\models\Categories;
+
 class PrintMenu
 {
     public $html = '';
@@ -35,14 +37,14 @@ class PrintMenu
     }
 
     public function outTree($parent_id, $level) {
-        if (isset($this->menus[$parent_id])) { //Если категория с таким parent_id существует
-            foreach ($this->menus[$parent_id] as $value) { //Обходим
+        if (isset($this->menus[$parent_id])) { //пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ parent_id пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+            foreach ($this->menus[$parent_id] as $value) { //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 //$this->html .= '<li style="margin-left:'. $level*25 .'px;"><a href="'.$value["url"].'">'.$value["name"].'</a>';
 
-                $level = $level + 1; //Увеличиваем уровень вложености
+                $level = $level + 1; //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 $this->html .= '<li >';
 
-                //Рекурсивно вызываем эту же функцию, но с новым $parent_id и $level
+                //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ $parent_id пїЅ $level
                 //style="margin-left:'. $level*25 .'px;"
 
                 if ($level == 1) {
@@ -57,7 +59,7 @@ class PrintMenu
 
                 $this->outTree($value["id"], $level);
 
-                $level = $level - 1; //Уменьшаем уровень вложености
+                $level = $level - 1; //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                // $this->html .= $level;
                 if ($level == 0) {
                     $this->html .= '</ul></nav>';
@@ -71,5 +73,4 @@ class PrintMenu
             }
         }
     }
-
 }

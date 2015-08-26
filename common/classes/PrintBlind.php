@@ -101,7 +101,7 @@ class PrintBlind
                                 <a href="#" class="large"><img class="large_page_img" src="'.$img[0]->images.'" alt=""></a>
                                 <div class="thumbs">';
 
-        for($i=1;$i<count($img);$i++){
+        for($i=0;$i<count($img);$i++){
             if(isset($img[$i])){
                 $html .= '<a href="#" class="small"><img class="small_page_img" src="'.$img[$i]->images.'" alt=""></a>';
             }

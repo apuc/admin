@@ -124,7 +124,8 @@ $(function () {
      return false;
      });*/
 
-    $('.background,.popup').click(function () {
+
+    $('.background').click(function () {
         $('.popup,.background').fadeOut('fast');
         return false;
     });
@@ -174,4 +175,49 @@ $(document).ready(function () {
         $('.popup,.background').fadeOut('fast');
         return false;
     });
+
+
+    $(document).on('click','.order',function () {
+        var blId = $(this).attr('blind-id');
+        var mtId = $(this).attr('suuples-id');
+        $('#productInfo').attr('blind-id', blId);
+        $('#productInfo').attr('mat-id', mtId);
+        $('#myModal3').modal('show');
+       /* $.ajax({
+            type: "get",
+            url: 'get_order',
+            data: "blId=" + blId +"mtId" + mtId,
+            success: function (msg) {
+                $('.popup').html(msg);
+            }
+        });*/
+        return false;
+    });
+
+
+    $(document).on('click','#сheck',function () {
+        var blId = $('#productInfo').attr('blind-id');
+        var mtId = $('#productInfo').attr('mat-id');
+        var tel = $('.tel').val();
+        $.ajax({
+            type: "get",
+            url: 'get_order',
+            data: "&blId=" + blId + "&mtId=" + mtId + "&tel=" + tel,
+            success: function (msg) {
+                console.log(msg);
+            }
+        });
+    });
+
+    $(document).on('click','.small', function(){
+
+        var smallImg = $(this).children("img").attr('src');
+        var imgBlock = $(this).parent().parent();
+
+        imgBlock.children('.large').children().attr('src',smallImg);
+
+        return false;
+
+    });
 });
+
