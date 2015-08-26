@@ -190,5 +190,15 @@ $(document).ready(function () {
         });
         return false;
     });
+
+    $(document).on('click','.small', function(){
+
+        var smallImg = $(this).children("img").attr('src');
+        var imgBlock = $(this).parent().parent();
+
+        imgBlock.children('.large').children().attr('src',smallImg);
+
+        return false;
+    });
 });
 
