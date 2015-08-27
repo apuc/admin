@@ -43,7 +43,7 @@ class Blind extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Название',
-            'status' => 'Статус',
+            'status' => 'Активность товара',
             'description' => 'Описание',
 
         ];

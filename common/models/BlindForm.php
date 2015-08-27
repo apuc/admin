@@ -32,7 +32,7 @@ class BlindForm extends Model
         return [
             'id' => 'ID',
             'name' => 'Название',
-            'status' => 'Статус',
+            'status' => 'Активность товара',
             'description' => 'Описание',
             'categories' => 'Категории',
             'materials' => 'Материалы',

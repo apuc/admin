@@ -203,7 +203,7 @@ $(document).ready(function () {
             url: 'get_order',
             data: "&blId=" + blId + "&mtId=" + mtId + "&tel=" + tel,
             success: function (msg) {
-                alert('Ваш заказ сделан. В ближайшее время с вами свяжуться');
+                alert('Ваш заказ сделан. В ближайшее время с вами свяжуться. Номер заказа ' + msg);
             }
         });
         $('#mod').css('display','none');
