@@ -215,7 +215,22 @@ $(document).ready(function () {
         imgBlock.children('.large').children().attr('src',smallImg);
 
         return false;
+    });
 
+    $(document).on('click','.loadnewpage', function(){
+        var id = $('.pages').attr('data-id');
+        var num = $('.page').length;
+
+        $.ajax({
+            type: "get",
+            url: 'get_page',
+            data: "&id=" + id + "&num=" + num,
+            success: function (msg) {
+                //console.log(msg);
+                $('.pages').append(msg);
+            }
+        });
+        return false;
     });
 });
 

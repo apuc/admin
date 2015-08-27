@@ -13,6 +13,7 @@ use backend\modules\blind\models\Blind;
 use backend\modules\options\models\Options;
 use common\classes\Category;
 use common\classes\Debag;
+use common\classes\PrintBlind;
 use common\classes\Supplies;
 use common\models\Orders;
 use yii\web\Controller;
@@ -91,5 +92,10 @@ class CategoryController extends Controller
         $email = Options::find()->where(['key'=>'email_to_prod'])->one();
 
         mail($email->value, "Заказ с вашего сайта", "С вашего сайта заказали:<br>Название жалюзи: $blind->name<br>Код материала: $materials->code<br>Телефон для связ: $telephone","Content-type: text/html; charset=UTF-8\r\n");
+    }
+
+    //аякс страницы
+    public function actionGet_page(){
+        echo PrintBlind::getPage($_GET['id'],$_GET['num']);
     }
 }
