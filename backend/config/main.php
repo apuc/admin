@@ -51,6 +51,9 @@ return [
         'orders' => [
             'class' => 'frontend\modules\orders\Orders',
         ],
+        'ord' => [
+            'class' => 'backend\modules\ord\Ord',
+        ],
     ],
     'components' => [
         'request' => [
@@ -75,7 +78,7 @@ return [
                 'options' => 'options/options',
                 'supplies' => 'supplies/supplies',
                 'blind' => 'blind/blind',
-                'orders' => 'orders/orders',
+                'orders' => 'ord/default',
             ],
         ],
         'urlManagerFrontEnd' => [

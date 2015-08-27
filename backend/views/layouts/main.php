@@ -53,6 +53,7 @@ AppAsset::register($this);
                     <li><?= Html::a('Опции', ['/options']) ?></li>
                 </ul>
             </li>
+            <li><?= Html::a('Заказы', ['/orders']) ?></li>
         </ul>
     </nav>
     <?php
