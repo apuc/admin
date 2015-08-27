@@ -37,17 +37,17 @@ class PrintBlind
         $realNum = $num+1;
         $html = '';
         //достаем все жалюзи текущей категории
-        $blinds = BlindCatid::find()->where(['id_cat' => $id])->offset($num*2)->limit(2)->all();
+        $blinds = BlindCatid::find()->where(['id_cat' => $id])->offset($num*2)->limit(2)->orderBy('id_blind DESC')->all();
         //получаем описание объекта жалюзи
         if(isset($blinds[0]) || isset($blinds[1])){
             if(isset($blinds[0])) {
                 $blindObj1 = Blind::find()->where(['id' => $blinds[0]->id_blind])->one();
                 //получаем картинки для жалюзи
-                $blindImgs1 = BlindImg::find()->where(['id_blind' => $blindObj1->id])->all();
+                $blindImgs1 = BlindImg::find()->where(['id_blind' => $blindObj1->id])->orderBy('main DESC')->all();
             }
             if(isset($blinds[1])){
                 $blindObj2 = Blind::find()->where(['id' => $blinds[1]->id_blind])->one();
-                $blindImgs2 = BlindImg::find()->where(['id_blind' => $blindObj2->id])->all();
+                $blindImgs2 = BlindImg::find()->where(['id_blind' => $blindObj2->id])->orderBy('main DESC')->all();
             }
 
             //start of page

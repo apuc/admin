@@ -243,10 +243,12 @@ ul{
 }
 
 a.del_img {
-    display: inline-block;
+    display: block;
+
 }
 
 a.osn {
     display: block;
     float: left;
 }
+
