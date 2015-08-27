@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\grid\DataColumn;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\modules\pages\models\PagesSearch */
@@ -30,20 +31,31 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'name',
                 'format' => 'html',
                 'value' => function($model){
-                    //return Html::a($model->name, ['http://admin2.web-artcraft.com/page','p'=>$model->id],[]);
-                    return "<a href='http://admin2.web-artcraft.com/page?p=$model->id'>$model->name</a>";
+                    return Html::a($model->name, ['/pages/pages/update','id'=>$model->id],[]);
+                    //return "<a href='http://admin2.web-artcraft.com/page?p=$model->id'>$model->name</a>";
                 }
             ],
-            'images',
+            /*'images',
             'count_product',
-            'hint',
+            'hint',*/
             // 'description:ntext',
             // 'title',
             // 'h1',
             // 'keywords',
             // 'blokc_id',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            /*['class' => 'yii\grid\ActionColumn'],*/
+
+            [
+                'class'  => DataColumn::className(),
+                'header' => 'Действия',
+                'format' => 'html',
+                'value' => function($model){
+                    $view = "<a href='http://admin2.web-artcraft.com/page?p=$model->id'>Смотреть</a>";
+                    return $view;
+                }
+            ]
+
         ],
     ]); ?>
 

@@ -124,7 +124,7 @@ class BlindController extends Controller
                     $blindMat->save();
                 }
             }
-            return $this->redirect(['view', 'id' => $blind->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -226,7 +226,7 @@ class BlindController extends Controller
                     $blindMat->save();
                 }
             }
-            return $this->redirect(['view', 'id' => $blind->id]);
+            return $this->redirect(['update', 'id' => $blind->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,

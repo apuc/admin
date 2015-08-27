@@ -131,6 +131,12 @@ $(document).ready(function () {
             $(this).parent().addClass('noPublick');
             $(this).text('Опубликовать');
         }
+        var bloks = '';
+        $('.published').each(function () {
+            bloks = bloks + ',' + $(this).attr('data-type');
+        });
+        bloks = bloks.substring(1);
+        $('.sortBlock').val(bloks);
         return false;
     });
 
