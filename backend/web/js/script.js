@@ -178,6 +178,7 @@ $(document).ready(function () {
         $('#pages-images').val('');
         $('#category-images').val('');
         $('#supplies-images').val('');
+        $('#menu-icon').val('');
         return false;
     });
 

@@ -18,8 +18,26 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'icon')->textInput(['maxlength' => true])->label('Иконка (<a href="#" data-toggle="modal" data-target="#myModal">Изображения</a>)') ?>
-    <div id="imgPreview"></div>
+    <div id="imgLoad">
+        <div id="imgPreview">
+            <?php
+            if(!empty($model->icon)){
+                echo '<div class="imgadd">';
+                echo Html::img($model->icon,['width'=>'100px']);
+                /*echo Html::hiddenInput('pages-images',$model->images);*/
+                //echo $form->field($model, 'images')->hiddenInput()->label("<a data-toggle='modal' data-target='#myModal' href='#'>Обзор</a><a class = 'del_img' href = '#'>Удалить</a>");
+                echo '</div>';
+
+            }
+            else{
+                echo "<div class='imgEmpty'>Изображение</div>";
+            }
+            ?>
+        </div>
+        <a data-toggle='modal' data-target='#myModal' href='#'>Обзор</a> |
+        <a class = 'del_img_pages' href = '#'>Удалить</a>
+    </div>
+    <?= $form->field($model, 'icon')->textInput(['maxlength' => true])->hiddenInput()->label(false); ?>
     <?= $form->field($model, 'descr')->textarea(['rows' => 6]) ?>
 
     <div class="form-group">
