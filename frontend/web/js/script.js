@@ -234,5 +234,21 @@ $(document).ready(function () {
         });
         return false;
     });
+
+
+    $(document).on('click','#mesage',function () {
+        var tel = $('#telephone').val();
+        $.ajax({
+            type: "get",
+            url: 'get_callme',
+            data: "&tel=" + tel,
+            success: function (msg) {
+                alert('Ваша заявка принята. Ожидайте звонка');
+            }
+        });
+         $('#telephone').val('');
+        return false;
+    });
+
 });
 

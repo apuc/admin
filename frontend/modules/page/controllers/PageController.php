@@ -10,9 +10,11 @@ namespace frontend\modules\page\controllers;
 
 
 use backend\modules\pages\models\Pages;
+use common\classes\Debag;
 use yii\web\Controller;
 use common\classes\Template;
 use backend\modules\block\models\Block;
+use backend\modules\options\models\Options;
 
 class PageController extends Controller
 {
@@ -52,5 +54,11 @@ class PageController extends Controller
             }
         }
         return eval('?>' . $html . '<?php;');;
+    }
+
+    public function actionGet_callme(){
+        $tel = $_GET['tel'];
+        $email = Options::find()->where(['key'=>'email_to_prod'])->one();
+        mail($email->value,"Заявка с вашего сайта","Заказ звонка на номер $tel","Content-type: text/html; charset=UTF-8\r\n");
     }
 }
