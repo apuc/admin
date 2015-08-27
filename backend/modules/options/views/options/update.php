@@ -6,9 +6,9 @@ use yii\helpers\Html;
 /* @var $model backend\modules\options\models\Options */
 
 $this->title = 'Редактирование опции: ' . ' ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Options', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Опции', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Редактирование';
 ?>
 <div class="options-update">
 
