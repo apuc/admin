@@ -111,8 +111,10 @@ class BlindController extends Controller
             if(!empty($_POST['blind_image'])){
                 foreach($_POST['blind_image'] as $img){
                     $blindImg = new BlindImg();
+                    $imgarr = explode('*',$img);
                     $blindImg->id_blind = $blind->id;
-                    $blindImg->images = $img;
+                    $blindImg->images = $imgarr[0];
+                    $blindImg->main = $imgarr[1];
                     $blindImg->save();
                 }
             }
@@ -174,9 +176,10 @@ class BlindController extends Controller
         unset($arr_cat[0]);
         $blImg = new BlindImg();
         $imgages = $blImg->find()->where(['id_blind'=>$id])->all();
-        foreach($imgages as $img){
+        /*foreach($imgages as $img){
+           // Debag::prn($img);
             $arr_img[$img->id] = $img->images;
-        }
+        }*/
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $blind->name = $model->name;
@@ -212,8 +215,10 @@ class BlindController extends Controller
             if(!empty($_POST['blind_image'])){
                 foreach($_POST['blind_image'] as $img){
                     $blindImg = new BlindImg();
+                    $imgarr = explode('*',$img);
                     $blindImg->id_blind = $blind->id;
-                    $blindImg->images = $img;
+                    $blindImg->images = $imgarr[0];
+                    $blindImg->main = $imgarr[1];
                     $blindImg->save();
                 }
             }
@@ -235,7 +240,7 @@ class BlindController extends Controller
                 'materials' => $arr_materials,
                 'materialselect' => $arr_supl,
                 'media' => $media,
-                'img' => $arr_img,
+                'img' => $imgages,
                 'bmt' => $blindMaterialHeader,
             ]);
         }

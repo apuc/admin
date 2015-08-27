@@ -236,3 +236,17 @@ ul{
     color: #ffffff;
     padding-top: 40px;
 }
+
+.imgadd{
+    display: inline-block;
+    width: 160px;
+}
+
+a.del_img {
+    display: inline-block;
+}
+
+a.osn {
+    display: block;
+    float: left;
+}

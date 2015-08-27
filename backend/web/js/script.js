@@ -144,14 +144,33 @@ $(document).ready(function () {
         var val = $(this).next().val();
         $('#supplies-images').val(val);
         $('#myModal').modal('hide');
-        $("#imgPreview").append('<div class="imgadd"><img class="PrevImg" src="' + val + '" width="150px" alt="" /><input type="hidden" name="blind_image[]" value="' + val + '"><a class="del_img" href = "#">Удалить</a></div');
+        $("#imgPreview").append('<div class="imgadd"><img class="PrevImg" src="' + val + '" width="150px" alt="" /><input type="hidden" id="#valimg"  name="blind_image[]" value="' + val + '*0"><a class="del_img" href = "#">Удалить</a><a href = "#" class = "osn">Сделать основным</a></div');
         //$(this).clone().prependTo("#imgPreview");
     });
 
+    $(document).on('click', '.osn', function () {
+        $('.imgadd').each(function(){
+            var v = $(this).children('input').val();
+            v = v.slice(0,-2);
+            v = v + "*0";
+            $(this).children('input').val(v);
+        });
+        var value = $(this).prev().prev().val();
+        value = value.slice(0,-2);
+        value = value + "*1";
+        $(this).prev().prev().val(value);
+        $('.osn').html('Сделать основным');
+        $(this).html('Основное');
+
+        return false;
+    });
+
     $(document).on('click', '.del_img', function () {
-        $(this).prev().prev().remove();
+        /*$(this).prev().prev().remove();
         $(this).prev().remove();
-        $(this).remove();
+        $(this).next().remove();
+        $(this).remove();*/
+        $(this).parent().remove();
         return false;
     });
     $(document).on('click', '.del_img_pages', function () {
