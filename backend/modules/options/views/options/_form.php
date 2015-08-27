@@ -12,11 +12,21 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?php
+    if(isset($update)){ ?>
+        <?= $form->field($model, 'name')->textInput(['maxlength' => true])->hiddenInput()->label('') ?>
 
-    <?= $form->field($model, 'key')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'key')->textInput(['maxlength' => true])->hiddenInput()->label('') ?>
+    <?php }
+    else { ?>
+        <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'value')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'key')->textInput(['maxlength' => true]) ?>
+    <?php } ?>
+
+
+
+    <?= $form->field($model, 'value')->textInput(['maxlength' => true])->label($model->name) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Сохранить' : 'Обновить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

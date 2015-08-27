@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\grid\DataColumn;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\modules\blind\models\BlindSearch */
@@ -42,7 +43,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'description:ntext',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class'  => DataColumn::className(),
+                'header' => 'Действия',
+                'format' => 'html',
+                'value' => function($model){
+                    $view = Html::a("<img src='".\yii\helpers\Url::base()."crud_img/view.png' width='20px' title='Просмотр'></a>", ['/blind/blind/view','id'=>$model->id]);
+                    $view .= Html::a("<img src='".\yii\helpers\Url::base()."crud_img/edit.png' width='20px' title='Редактировать'></a>", ['/blind/blind/update','id'=>$model->id]);
+                    $view .= Html::a("<img src='".\yii\helpers\Url::base()."crud_img/del.png' width='20px' title='Удалить'></a>", ['/blind/blind/delete','id'=>$model->id]);
+                    return $view;
+                }
+            ],
         ],
     ]); ?>
 

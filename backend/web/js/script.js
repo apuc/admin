@@ -196,4 +196,18 @@ $(document).ready(function () {
         return false;
     });
 
+    $('.targetBlanc').on('click', function(){
+        window.open(this.href); return false;
+    });
+
+    $('#validMy').on('click', function(){
+        $('input').each(function(){
+            var val = $(this).val();
+            console.log(val);
+            if(!val){
+                alert('123');
+            }
+        });
+    });
+
 });

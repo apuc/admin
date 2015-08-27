@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'header' => 'Действия',
                 'format' => 'html',
                 'value' => function($model){
-                    $view = "<a href='http://admin2.web-artcraft.com/page?p=$model->id'><img src='".\yii\helpers\Url::base()."crud_img/view.png' width='20px' title='Просмотр'></a>";
+                    $view = "<a class='targetBlanc' href='http://admin2.web-artcraft.com/page?p=".$model->id."'><img src='".\yii\helpers\Url::base()."crud_img/view.png' width='20px' title='Просмотр'></a>";
                     $view .= Html::a("<img src='".\yii\helpers\Url::base()."crud_img/edit.png' width='20px' title='Редактировать'></a>", ['/pages/pages/update','id'=>$model->id]);
                     $view .= Html::a("<img src='".\yii\helpers\Url::base()."crud_img/del.png' width='20px' title='Удалить'></a>", ['/pages/pages/delete','id'=>$model->id]);
                     return $view;
