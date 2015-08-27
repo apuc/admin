@@ -35,7 +35,8 @@ return [
                 'category' => 'category/category',
                 'get_sup' => 'category/category/get_sup',
                 'get_order' => 'category/category/get_order',
-                'get_page' => 'category/category/get_page'
+                'get_page' => 'category/category/get_page',
+                'get_callme' => 'page/page/get_callme',
             ],
         ],
         'user' => [
