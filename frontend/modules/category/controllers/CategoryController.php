@@ -90,6 +90,6 @@ class CategoryController extends Controller
 
         $email = Options::find()->where(['key'=>'email_to_prod'])->one();
 
-        mail($email->value, "Заказ с вашего сайта", "С вашего сайта заказали:\nНазвание жалюзи: $blind->name\nКод материала: $materials->code\nТелефон для связ: $telephone","Content-type: text/html; charset=UTF-8\r\n");
+        mail($email->value, "Заказ с вашего сайта", "С вашего сайта заказали:<br>Название жалюзи: $blind->name<br>Код материала: $materials->code<br>Телефон для связ: $telephone","Content-type: text/html; charset=UTF-8\r\n");
     }
 }
