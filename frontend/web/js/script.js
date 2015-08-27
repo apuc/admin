@@ -16,7 +16,7 @@ $(function () {
         $('.text .readmore.active').click();
         event.stopPropagation();
     });
-    $('.text .readmore').click(function () {
+    $(document).on('click','.text .readmore', function () {
         var text = $(this).closest('.text');
         if ($(this).hasClass('active')) {
             text.find('.fulltext').slideUp('fast', function () {
@@ -157,7 +157,7 @@ $(function () {
 });
 
 $(document).ready(function () {
-    $('.selectMy').on('click', function () {
+    $(document).on('click','.selectMy', function () {
         //$('.text .readmore.active').click();
         var id = $(this).attr('data-target');
         $.ajax({
