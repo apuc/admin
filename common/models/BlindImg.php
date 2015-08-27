@@ -10,6 +10,8 @@ use Yii;
  * @property integer $id
  * @property integer $id_blind
  * @property string $images
+ * @property string $main
+ *
  */
 class BlindImg extends \yii\db\ActiveRecord
 {

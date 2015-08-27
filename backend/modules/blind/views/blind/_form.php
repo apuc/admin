@@ -27,9 +27,15 @@ use yii\widgets\ActiveForm;
                 if(!empty($img)) {
                     foreach ($img as $v) {
                         echo '<div class="imgadd">';
-                        echo Html::img($v, ['width' => '100px']);
-                        echo Html::hiddenInput('blind_image[]',$v);
+                        echo Html::img($v->images, ['width' => '150px']);
+                        echo Html::hiddenInput('blind_image[]',$v->images.'*'.$v->main);
                         echo Html::a('Удалить', ['#'], ['class' => 'del_img']);
+                        if($v->main==0){
+                            echo Html::a('Сделать основным', ['#'], ['class' => 'osn']);
+
+                        }else{
+                            echo Html::a('Основное', ['#'], ['class' => 'osn']);
+                        }
                         echo '</div>';
                     }
                 }
