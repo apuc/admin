@@ -30,6 +30,7 @@ use yii\widgets\ActiveForm;
                         echo Html::img($v->images, ['width' => '150px']);
                         echo Html::hiddenInput('blind_image[]',$v->images.'*'.$v->main);
                         echo Html::a('Удалить', ['#'], ['class' => 'del_img']);
+
                         if($v->main==0){
                             echo Html::a('Сделать основным', ['#'], ['class' => 'osn']);
 
