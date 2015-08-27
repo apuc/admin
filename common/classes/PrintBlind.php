@@ -27,13 +27,14 @@ class PrintBlind
         $html .= '<div class="pages" data-id="'.$id.'">';
 
         //генерируем страницу
-        $html .= self::getPage($id,0,1);
+        $html .= self::getPage($id,0);
 
         $html .= '</div>';
         return $html;
     }
 
     public static function getPage($id,$num){
+        $realNum = $num+1;
         $html = '';
         //достаем все жалюзи текущей категории
         $blinds = BlindCatid::find()->where(['id_cat' => $id])->offset($num*2)->limit(2)->all();
@@ -48,9 +49,9 @@ class PrintBlind
         //start of page
         $html .= '<div class="page">';
 
-        if($num > 1){
+        if($realNum > 1){
             $html .= '<div class="title">
-                        <span>Страница '.$num.'  </span>
+                        <span>Страница '.$realNum.'  </span>
                         <a href="#" class="hidepage">Скрыть</a>
                     </div>';
         }

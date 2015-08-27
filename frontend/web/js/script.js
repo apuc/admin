@@ -74,7 +74,8 @@ $(function () {
 
         clearTimeout(overflowtimeout);
     });
-    $('.page .title .hidepage').click(function () {
+
+    $(document).on('click','.page .title .hidepage', function () {
         $('.text .readmore.active').click();
         var title = $(this).closest('.title');
         var span = title.find('span');
@@ -93,6 +94,7 @@ $(function () {
         }
         return false;
     });
+
     $('.tooltip').tooltipster({
         delay: 0,
         speed: 0,

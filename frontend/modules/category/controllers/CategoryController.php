@@ -31,6 +31,7 @@ class CategoryController extends Controller
                 'actions' => [
                     'get_sup' => ['get'],
                     'get_order' => ['get'],
+                    'get_page' => ['get'],
                 ],
             ],
         ];
