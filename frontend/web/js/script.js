@@ -178,22 +178,19 @@ $(document).ready(function () {
 
 
     $(document).on('click','.order',function () {
+
         var blId = $(this).attr('blind-id');
         var mtId = $(this).attr('suuples-id');
         $('#productInfo').attr('blind-id', blId);
         $('#productInfo').attr('mat-id', mtId);
-        $('#myModal3').modal('show');
-       /* $.ajax({
-            type: "get",
-            url: 'get_order',
-            data: "blId=" + blId +"mtId" + mtId,
-            success: function (msg) {
-                $('.popup').html(msg);
-            }
-        });*/
+        document.getElementById('mod').style.display='block';
+        $('#mod').css('top', $(window).scrollTop() + 50);
         return false;
     });
 
+    $(document).on('click','#closePhone',function(){
+        $('#mod').css('display','none');
+    });
 
     $(document).on('click','#сheck',function () {
         var blId = $('#productInfo').attr('blind-id');
@@ -204,9 +201,10 @@ $(document).ready(function () {
             url: 'get_order',
             data: "&blId=" + blId + "&mtId=" + mtId + "&tel=" + tel,
             success: function (msg) {
-                console.log(msg);
+                alert('Ваш заказ сделан. В ближайшее время с вами свяжуться');
             }
         });
+        $('#mod').css('display','none');
     });
 
     $(document).on('click','.small', function(){
