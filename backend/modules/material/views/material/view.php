@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model backend\modules\material\models\Material */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Materials', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Материалы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="material-view">

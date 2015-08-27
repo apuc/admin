@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\modules\block\models\Block */
 
-$this->title = 'Update Block: ' . ' ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Blocks', 'url' => ['index']];
+$this->title = 'Редактирование блока: ' . ' ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Блоки', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>

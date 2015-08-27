@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model backend\modules\block\models\Block */
 
 $this->title = 'Создать блок';
-$this->params['breadcrumbs'][] = ['label' => 'Blocks', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Блоки', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="block-create">

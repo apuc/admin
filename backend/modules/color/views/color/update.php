@@ -6,9 +6,9 @@ use yii\helpers\Html;
 /* @var $model backend\modules\color\models\Color */
 
 $this->title = 'Редактировать цвет';
-$this->params['breadcrumbs'][] = ['label' => 'Colors', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Цвет', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Редактировать';
 ?>
 <div class="color-update">
 

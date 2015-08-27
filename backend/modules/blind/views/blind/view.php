@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model backend\modules\blind\models\Blind */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Blinds', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Жалюзи', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="blind-view">

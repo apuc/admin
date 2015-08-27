@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model backend\modules\block\models\Block */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Blocks', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Блоки', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="block-view">
