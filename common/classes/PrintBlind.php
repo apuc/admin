@@ -37,7 +37,7 @@ class PrintBlind
         $realNum = $num+1;
         $html = '';
         //достаем все жалюзи текущей категории
-        $blinds = BlindCatid::find()->where(['id_cat' => $id])->offset($num*2)->limit(2)->all();
+        $blinds = BlindCatid::find()->where(['id_cat' => $id])->offset($num*2)->limit(2)->orderBy('id_blind DESC')->all();
         //получаем описание объекта жалюзи
         if(isset($blinds[0]) || isset($blinds[1])){
             if(isset($blinds[0])) {
