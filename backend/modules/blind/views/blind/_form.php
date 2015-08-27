@@ -52,10 +52,12 @@ use yii\widgets\ActiveForm;
             <a data-toggle='modal' data-target='#myModal2' href = "#">Добавить заголовок</a>
             <div id="addinp">
                 <?php
-                foreach($bmt as $b){
-                    echo '<div style = "margin-top:5px;">';
-                    echo $b->title.'заголовок будет вставлен перед ' .\backend\modules\supplies\models\Supplies::getSupName($b->id_materials). '<input type="hidden" name="blindTitle[]"  value="' .$b->id_materials. '*' .$b->title. '"/> | <a href="#" id="delTitle">Удалить</a> </div>';
-                    echo "</div>";
+                if(isset($bmt)){
+                    foreach($bmt as $b){
+                        echo '<div style = "margin-top:5px;">';
+                        echo $b->title.'заголовок будет вставлен перед ' .\backend\modules\supplies\models\Supplies::getSupName($b->id_materials). '<input type="hidden" name="blindTitle[]"  value="' .$b->id_materials. '*' .$b->title. '"/> | <a href="#" id="delTitle">Удалить</a> </div>';
+                        echo "</div>";
+                    }
                 }
                 ?>
             </div>

@@ -48,6 +48,12 @@ return [
         'blind' => [
             'class' => 'backend\modules\blind\Blind',
         ],
+        'orders' => [
+            'class' => 'frontend\modules\orders\Orders',
+        ],
+        'ord' => [
+            'class' => 'backend\modules\ord\Ord',
+        ],
     ],
     'components' => [
         'request' => [
@@ -72,6 +78,7 @@ return [
                 'options' => 'options/options',
                 'supplies' => 'supplies/supplies',
                 'blind' => 'blind/blind',
+                'orders' => 'ord/default',
             ],
         ],
         'urlManagerFrontEnd' => [
