@@ -12,6 +12,7 @@ use mihaildev\ckeditor\CKEditor;
 ?>
 <?php $form = ActiveForm::begin(); ?>
 <div class="category-form">
+    <div id="validMsg" style="margin: 10px"></div>
     <ul id="myTab" class="nav nav-tabs">
         <li class="active"><a href="#panel1">Общее</a></li>
         <li><a href="#panel2">Вид</a></li>
@@ -105,7 +106,7 @@ use mihaildev\ckeditor\CKEditor;
     </div>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Обновить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Обновить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'id'=>'validMy']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

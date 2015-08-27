@@ -10,6 +10,7 @@ use mihaildev\ckeditor\CKEditor;
 ?>
 <?php $form = ActiveForm::begin(); ?>
 <div class="pages-form">
+    <div id="validMsg" style="margin: 10px"></div>
     <ul id="myTab" class="nav nav-tabs">
         <li class="active"><a href="#panel1">Общее</a></li>
         <li><a href="#panel2">Вид</a></li>

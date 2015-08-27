@@ -182,11 +182,14 @@ $(document).ready(function () {
     });
 
     $('#validMy').on('click', function(){
+        $('#validMsg').html('');
         $('input').each(function(){
             var val = $(this).val();
-            console.log(val);
             if(!val){
-                alert('123');
+                var label = $(this).prev().text();
+                if(label != ''){
+                    $('#validMsg').append('<div style="color: Red">Поле <b>' + label + '</b> не может быть пустым</div>');
+                }
             }
         });
     });
