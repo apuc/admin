@@ -19,53 +19,51 @@ use common\models\Categories;
 class PrintBlind
 {
     public static function getPosts($id){
-        //$cat = Categories::find()->where(['parent_id'=>$id])->all();
         //получаем категорию и родительскую катоегорию
         $cat = Categories::find()->where(['id'=>$id])->one();
         $par_cat = Categories::find()->where(['id' => $cat->parent_id])->one();
 
-        //достаем все жалюзи текущей категории
-        $blinds = BlindCatid::find()->where(['id_cat' => $id])->all();
-        //Debag::prn($blinds);
+        $html = '<h1>'.$par_cat->name.' на '.$cat->name.'</h1>';
+        $html .= '<div class="pages" data-id="'.$id.'">';
 
-        $html = '<h1>'.$par_cat->name.' на '.$cat->name.'<h1>';
-        $html .= '<div class="pages">';
-        $c = 1;
-        //Проходим по всем жалюзям
-        for($i=0;$i<count($blinds);$i=$i+2){
-            //счетчик страниц
-
-            //получаем описание объекта жалюзи
-            $blindObj1 = Blind::find()->where(['id' => $blinds[$i]->id_blind])->one();
-            $blindObj2 = Blind::find()->where(['id' => $blinds[$i+1]->id_blind])->one();
-            //получаем картинки для жалюзи
-            $blindImgs1 = BlindImg::find()->where(['id_blind' => $blindObj1->id])->all();
-            $blindImgs2 = BlindImg::find()->where(['id_blind' => $blindObj2->id])->all();
-
-            //start of page
-            $html .= '<div class="page">';
-
-            if($c > 1){
-                $html .= '<div class="title">
-                            <span>Страница '.$c.'  </span>
-                            <a href="#" class="hidepage">Скрыть</a>
-                        </div>';
-            }
-
-            $html .= self::getItem($blindObj1,$blindImgs1);
-
-            if(isset($blindObj2) && !empty($blindObj2)){
-                $html .= self::getItem($blindObj2,$blindImgs2);
-            }
-            //end of page
-            $html .= '</div>';
-            $c++;
-        }
+        //генерируем страницу
+        $html .= self::getPage($id,0,1);
 
         $html .= '</div>';
         return $html;
     }
 
+    public static function getPage($id,$num){
+        $html = '';
+        //достаем все жалюзи текущей категории
+        $blinds = BlindCatid::find()->where(['id_cat' => $id])->offset($num*2)->limit(2)->all();
+        //получаем описание объекта жалюзи
+        $blindObj1 = Blind::find()->where(['id' => $blinds[0]->id_blind])->one();
+        if(isset($blinds[1])){
+            $blindObj2 = Blind::find()->where(['id' => $blinds[1]->id_blind])->one();
+            $blindImgs2 = BlindImg::find()->where(['id_blind' => $blindObj2->id])->all();
+        }
+        //получаем картинки для жалюзи
+        $blindImgs1 = BlindImg::find()->where(['id_blind' => $blindObj1->id])->all();
+        //start of page
+        $html .= '<div class="page">';
+
+        if($num > 1){
+            $html .= '<div class="title">
+                        <span>Страница '.$num.'  </span>
+                        <a href="#" class="hidepage">Скрыть</a>
+                    </div>';
+        }
+
+        $html .= self::getItem($blindObj1,$blindImgs1);
+
+        if(isset($blindObj2) && !empty($blindObj2)){
+            $html .= self::getItem($blindObj2,$blindImgs2);
+        }
+        //end of page
+        $html .= '</div>';
+        return $html;
+    }
 
     public static function getItem($obj,$img){
         //Debag::prn($obj->id);
