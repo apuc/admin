@@ -34,7 +34,8 @@ return [
                 'page' => 'page/page',
                 'category' => 'category/category',
                 'get_sup' => 'category/category/get_sup',
-                'get_order' => 'category/category/get_order'
+                'get_order' => 'category/category/get_order',
+                'get_page' => 'category/category/get_page'
             ],
         ],
         'user' => [
