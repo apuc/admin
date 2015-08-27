@@ -37,10 +37,10 @@ class Pages extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'count_product', 'hint', 'description', 'title', 'h1', 'keywords', 'blokc_id'], 'required'],
+            [['name', 'description', 'title', 'h1', 'keywords', 'blokc_id'], 'required'],
             [['count_product', 'blokc_id'], 'integer'],
             [['description'], 'string'],
-            [['code', 'style', 'sort'], 'safe'],
+            [['code', 'style', 'sort', 'count_product', 'hint'], 'safe'],
             [['name', 'images', 'hint', 'title', 'h1', 'keywords'], 'string', 'max' => 255]
         ];
     }

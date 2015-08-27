@@ -42,8 +42,8 @@ use mihaildev\ckeditor\CKEditor;
             </div>
             <?= $form->field($model, 'images')->textInput(['maxlength' => true])->hiddenInput()->label(false); ?>
 
-            <?= $form->field($model, 'count_product')->textInput() ?>
-            <?= $form->field($model, 'hint')->textInput(['maxlength' => true]) ?>
+            <?/*= $form->field($model, 'count_product')->textInput() */?><!--
+            --><?/*= $form->field($model, 'hint')->textInput(['maxlength' => true]) */?>
 
             <?= $form->field($model, 'description')->widget(CKEditor::className(), [
                 'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('elfinder', [

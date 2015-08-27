@@ -18,7 +18,6 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'http://netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css',
         'css/site.css',
     ];
     public $js = [
