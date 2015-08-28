@@ -12,6 +12,7 @@ use common\models\BlindImg;
 use common\models\BlindMaterials;
 use common\models\Categories;
 use common\models\Material;
+use yii\filters\AccessControl;
 
 use common\models\Media;
 use Yii;
@@ -34,6 +35,15 @@ class BlindController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['get'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];

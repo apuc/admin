@@ -56,6 +56,9 @@ use mihaildev\ckeditor\CKEditor;
         <div id="panel2" class="tab-pane fade">
             <h3>Вид</h3>
             <?= $form->field($model, 'blokc_id')->dropDownList($block) ?>
+            <?= Html::button('Добавить блок', ['class' => 'btn btn-success', 'id' => 'addCustBlock']) ?>
+            <br>
+            <hr>
             <a id="specialBlockToggle" href="#">Индивидуальный блок</a>
             <div id="specialBlock">
                 <?= $form->field($model, 'code')->textarea(['rows' => 6])->label('Код') ?>
@@ -68,17 +71,27 @@ use mihaildev\ckeditor\CKEditor;
                     <?php
                     if(empty($model->sort)){ ?>
                         <li class="noPublick" data-type="ind">Индивидуальный блок | <a class="toPublick" href="#">Опубликовать</a></li>
-                        <li class="noPublick" data-type="sub">Блок подкатегорий | <a class="toPublick" href="#">Опубликовать</a></li>
+                        <!--<li class="noPublick" data-type="sub">Блок подкатегорий | <a class="toPublick" href="#">Опубликовать</a></li>-->
                         <li class="noPublick" data-type="des">Блок Описание | <a class="toPublick" href="#">Опубликовать</a></li>
-                        <li class="noPublick" data-type="yes">Готовый блок | <a class="toPublick" href="#">Опубликовать</a></li>
+                        <!--<li class="noPublick" data-type="yes">Готовый блок | <a class="toPublick" href="#">Опубликовать</a></li>-->
                     <?php }
                     else {
-                        $sortDefault = ['ind','sub','des','yes'];
+                        $sortDefault = ['ind','des'];
                         $sort = explode(',', $model->sort);
 
                         foreach ($sort as $s) {
-                            $name = \common\classes\Template::getBlockName($s);
-                            echo '<li class="published" data-type="'.$s.'">'.$name.' | <a class="toPublick" href="#">Снять публикацию</a></li>';
+                            if($s[0] == 'y'){
+                                $blockId = explode('_', $s);
+                                $blockId = $blockId[1];
+                                $block = \common\models\Block::find()->where(['id'=>$blockId])->one();
+                                $name = $block->name;
+                                echo '<li class="published" data-type="'.$s.'">'.$name.' | <a class="delCustBlock" href="#">Удалить</a></li>';
+                            }
+                            else {
+                                $name = \common\classes\Template::getBlockName($s);
+                                echo '<li class="published" data-type="'.$s.'">'.$name.' | <a class="toPublick" href="#">Снять публикацию</a></li>';
+                            }
+
                             $value_to_delete = $s ; //Элемент с этим значением нужно удалить
                             $sortDefault = array_flip($sortDefault); //Меняем местами ключи и значения
                             unset ($sortDefault[$value_to_delete]) ; //Удаляем элемент массива

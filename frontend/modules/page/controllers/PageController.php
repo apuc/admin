@@ -48,8 +48,10 @@ class PageController extends Controller
             if($p == 'des'){
                 $html .= "<div class='description'>$page->description</div>";
             }
-            if($p == 'yes'){
-                $block = Block::find()->where(['id' => $page->blokc_id])->one();
+            if($p[0] == 'y'){
+                $blockId = explode('_', $p);
+                $blockId = $blockId[1];
+                $block = Block::find()->where(['id' => $blockId])->one();
                 $html .= $block->code;
             }
         }
