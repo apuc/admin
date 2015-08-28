@@ -54,6 +54,9 @@ return [
         'ord' => [
             'class' => 'backend\modules\ord\Ord',
         ],
+        'user' => [
+            'class' => 'backend\modules\user\User',
+        ],
     ],
     'components' => [
         'request' => [
