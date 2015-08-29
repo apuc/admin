@@ -144,8 +144,19 @@ class BlockController extends Controller
     public function actionAdd_ind_block(){
         $block = new Block();
         $block->name = $_GET['name'];
-        $block->code = $_GET['code'];
-        $block->style = $_GET['style'];
+        if($block->code == ''){
+            $block->code = 0;
+        }
+        else {
+            $block->code = $_GET['code'];
+        }
+
+        if($block->style == ''){
+            $block->style = 0;
+        }
+        else {
+            $block->style = $_GET['style'];
+        }
         $block->type = 'ind';
         $block->key = 'ind_';
         $block->save();

@@ -89,6 +89,13 @@ use mihaildev\ckeditor\CKEditor;
                                 $name = $block->name;
                                 echo '<li class="published" data-type="'.$s.'">'.$name.' | <a class="delCustBlock" href="#">Удалить</a></li>';
                             }
+                            elseif($s[0] == 'i'){
+                                $blockId = explode('_', $s);
+                                $blockId = $blockId[1];
+                                $block = \common\models\Block::find()->where(['id'=>$blockId])->one();
+                                $name = $block->name;
+                                echo '<li class="published" data-type="'.$s.'">Индивидуальный блок ('.$name.') | <a href="block/block/update?id='.$blockId.'">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>';
+                            }
                             else {
                                 $name = \common\classes\Template::getBlockName($s);
                                 echo '<li class="published" data-type="'.$s.'">'.$name.' | <a class="delCustBlock" href="#">Удалить</a></li>';

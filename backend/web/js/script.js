@@ -239,20 +239,26 @@ $(document).ready(function () {
         var name = $('#indBlockName').val();
         var code = $('#indBlockCode').val();
         var style = $('#indBlockStyle').val();
-        $.ajax({
-            type: "GET",
-            url: '/secure/add_ind_block',
-            data: "name=" + name + "&code=" + code + "&style=" +style ,
-            success: function (msg) {
-                $('#sort').append('<li class="published" data-type="ind_'+msg+'">Индивидуальный блок ('+ name +') | <a href="/secure/block/block/update?id='+msg+'">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>');
-                var bloks = '';
-                $('.published').each(function () {
-                    bloks = bloks + ',' + $(this).attr('data-type');
-                });
-                bloks = bloks.substring(1);
-                $('.sortBlock').val(bloks);
-            }
-        });
+        if(name != ''){
+            $.ajax({
+                type: "GET",
+                url: '/secure/add_ind_block',
+                data: "name=" + name + "&code=" + code + "&style=" +style ,
+                success: function (msg) {
+                    $('#sort').append('<li class="published" data-type="ind_'+msg+'">Индивидуальный блок ('+ name +') | <a href="/secure/block/block/update?id='+msg+'">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>');
+                    var bloks = '';
+                    $('.published').each(function () {
+                        bloks = bloks + ',' + $(this).attr('data-type');
+                    });
+                    bloks = bloks.substring(1);
+                    $('.sortBlock').val(bloks);
+                }
+            });
+        }
+        else {
+            alert('Поле имя не заполненно');
+        }
+
         /*$('#sort').append('<li class="published" data-type="ind">Индивидуальный блок | <a class="delCustBlock" href="#">Удалить</a></li>');
         var bloks = '';
         $('.published').each(function () {
