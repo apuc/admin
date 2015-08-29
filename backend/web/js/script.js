@@ -149,14 +149,14 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '.osn', function () {
-        $('.imgadd').each(function(){
+        $('.imgadd').each(function () {
             var v = $(this).children('input').val();
-            v = v.slice(0,-2);
+            v = v.slice(0, -2);
             v = v + "*0";
             $(this).children('input').val(v);
         });
         var value = $(this).prev().prev().val();
-        value = value.slice(0,-2);
+        value = value.slice(0, -2);
         value = value + "*1";
         $(this).prev().prev().val(value);
         $('.osn').html('Сделать основным');
@@ -167,9 +167,9 @@ $(document).ready(function () {
 
     $(document).on('click', '.del_img', function () {
         /*$(this).prev().prev().remove();
-        $(this).prev().remove();
-        $(this).next().remove();
-        $(this).remove();*/
+         $(this).prev().remove();
+         $(this).next().remove();
+         $(this).remove();*/
         $(this).parent().remove();
         return false;
     });
@@ -184,12 +184,29 @@ $(document).ready(function () {
 
     $(document).on('click', '#addTitle', function () {
         var title = $('#titleB').val();
-        var id = $('#selmat').val();
-        var val = $('#selmat :selected').text();
         $('#myModal2').modal('hide');
         $('#titleB').val('');
-        console.log(val);
-        $('#addinp').append('<div style = "margin-top:5px;">' + title + ' заголовок будет вставлен перед ' + val + '<input type="hidden" name="blindTitle[]"  value="' + id + '*' + title + '"/> | <a href="#" id="delTitle">Удалить</a> </div>');
+        var idPag = $('#curentPageIdTitle').attr('page-id');
+       // $('#t_'+idPag).append('<tr class="itemPage" page-id="'+idPag+'" materials-id="'+title+'" item-type="zagolovok"><td colspan="7">'+title+'</td><td><a class="delSuplies" href="#">Удалить</a></td></tr>');
+        $('#t_'+idPag).prepend('<tr class="itemPage" page-id="'+idPag+'" materials-id="'+title+'" item-type="zagolovok"><td colspan="7">'+title+'</td><td><a class="delSuplies" href="#">Удалить</a></td></tr>');
+        var pageId = idPag;
+        $('#input_' + pageId).val(pageId);
+        $('.itemPage').each(function () {
+            var pId = $(this).attr('page-id');
+            if (pageId == pId) {
+                var mId = $(this).attr('materials-id');
+                var iTp = $(this).attr('item-type');
+                var valInp = $('#input_' + pageId).val();
+                $('#input_' + pageId).val(valInp + '*' + mId + '_' + iTp);
+            }
+        });
+
+    });
+
+    $(document).on('click','.attachZag', function(){
+        var id = $(this).attr('page-id');
+        $('#curentPageIdTitle').attr('page-id', id);
+        return false;
     });
 
     $(document).on('click', '#delTitle', function () {
@@ -197,21 +214,131 @@ $(document).ready(function () {
         return false;
     });
 
-    $('.targetBlanc').on('click', function(){
-        window.open(this.href); return false;
+    $('.targetBlanc').on('click', function () {
+        window.open(this.href);
+        return false;
     });
 
-    $('#validMy').on('click', function(){
+    $('#validMy').on('click', function () {
         $('#validMsg').html('');
-        $('input').each(function(){
+        $('input').each(function () {
             var val = $(this).val();
-            if(!val){
+            if (!val) {
                 var label = $(this).prev().text();
-                if(label != ''){
+                if (label != '') {
                     $('#validMsg').append('<div style="color: Red">Поле <b>' + label + '</b> не может быть пустым</div>');
                 }
             }
         });
+    });
+
+    $(document).on('click', '#addPage', function () {
+        var val = $('#blindform-pagename').val();
+        if (val != '') {
+            var linkName = val.replace(/\s+/g, '_');
+            $('#myTab1 li').each(function () {
+                $(this).removeClass('active');
+            });
+            $('.tabPanel').each(function () {
+                //$(this).removeClass('in');
+                $(this).removeClass('activeMy');
+            });
+
+            $('#myTab1').append('<li class="active"><a href="#panel' + linkName + '">' + val + '</a><span page-id="'+linkName+'" class="delPages">x</span></li>');
+            $('#divTabContent').append('<div id="panel' + linkName + '" class="tabPanel activeMy"><h3>' + val + '</h3><table class="table table-bordered" id="t_' + linkName + '"></table><a page-id="' + linkName + '"data-toggle="modal" data-target="#myModal3" href="#" class="attachMaterial">Прикрепить материал</a> | <a class="attachZag" data-toggle="modal" data-target="#myModal2" href = "#" page-id="' + linkName + '">Добавить заголовок</a><div id="publishMaterials' + linkName + '"></div><input id="input_' + linkName + '" type="hidden" name="infoPage[]" value="' + val + '"></div>');
+            $('#blindform-pagename').val('');
+        }
+        return false;
+    });
+
+    $(document).on('click','.delPages', function(){
+        var id = $(this).attr('page-id');
+        $(this).parent().remove();
+        $(this).remove();
+        $('#panel'+id).remove();
+        var k = 0;
+        $('#myTab1 li').each(function () {
+            if(k == 0){
+                $(this).addClass('active');
+                var tabId = $(this).children('a').attr('href');
+                $(tabId).addClass('activeMy');
+            }
+            k++;
+        });
+        $.ajax({
+            type: "GET",
+            url: 'del_page_blind',
+            data: "id=" + id,
+            success: function (msg) {
+                //console.log(msg);
+            }
+        });
+        return false;
+    });
+
+    $(document).on('click', '.pageLink li', function () {
+        $('#myTab1 li').each(function () {
+            $(this).removeClass('active');
+        });
+        $('.tabPanel').each(function () {
+            $(this).removeClass('activeMy');
+        });
+        $(this).addClass('active');
+        var tabId = $(this).children('a').attr('href');
+        $(tabId).addClass('activeMy');
+    });
+
+
+    $(document).on('click', '.addSuplies', function () {
+        var idMat = $(this).attr('id-materials');
+        var pageId = $('#curentPageId').attr('page-id');
+        $('#input_' + pageId).val(pageId);
+        $(this).removeClass('addSuplies');
+        $(this).addClass('delSuplies');
+        $(this).parent().parent().addClass('itemPage');
+        $(this).text('Открепить');
+        $(this).parent().parent().attr('page-id', pageId);
+        $(this).parent().parent().attr('materials-id', idMat);
+        $(this).parent().parent().attr('item-type', 'materials');
+        $(this).parent().parent().clone().prependTo('#t_' + pageId);
+        $(this).parent().parent().removeClass('itemPage');
+        $(this).removeClass('delSuplies');
+        $(this).addClass('addSuplies');
+        $(this).text('Прикрепить');
+        // $('#publishMaterials'+pageId).append('<div class="itemPage" page-id="'+pageId+'" materials-id="'+idMat+'" item-type="materials"></div>');
+        $('.itemPage').each(function () {
+            var pId = $(this).attr('page-id');
+            if (pageId == pId) {
+                var mId = $(this).attr('materials-id');
+                var iTp = $(this).attr('item-type');
+                var valInp = $('#input_' + pageId).val();
+                $('#input_' + pageId).val(valInp + '*' + mId + '_' + iTp);
+            }
+        });
+
+        return false
+    });
+
+    $(document).on('click', '.delSuplies', function () {
+        $(this).parent().parent().remove();
+        var pageId = $(this).parent().parent().attr('page-id');
+        $('#input_' + pageId).val(pageId);
+        $('.itemPage').each(function () {
+            var pId = $(this).attr('page-id');
+            if (pageId == pId) {
+                var mId = $(this).attr('materials-id');
+                var iTp = $(this).attr('item-type');
+                var valInp = $('#input_' + pageId).val();
+                $('#input_' + pageId).val(valInp + '*' + mId + '_' + iTp);
+            }
+        });
+
+    });
+
+    $(document).on('click', '.attachMaterial', function () {
+        var id = $(this).attr('page-id');
+        $('#curentPageId').attr('page-id', id);
+        return false;
     });
 
 });

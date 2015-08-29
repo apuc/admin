@@ -14,6 +14,10 @@ use common\models\Categories;
 use common\models\Material;
 
 use common\models\Media;
+use common\models\PageBlinds;
+use common\models\PageForTitle;
+use common\models\PageItem;
+use common\models\PageToBlind;
 use Yii;
 use backend\modules\blind\models\Blind;
 use backend\modules\blind\models\BlindSearch;
@@ -76,7 +80,7 @@ class BlindController extends Controller
         $blind = new Blind();
         $model = new BlindForm();
         $media = Media::find()->all();
-        //$materials = Supplies::find()->all();
+
         $materials = \backend\modules\supplies\models\Supplies::find()->all();
         foreach($materials as $v){
             $arr_materials[$v->id] = $v->code;
@@ -85,11 +89,46 @@ class BlindController extends Controller
         $arr_cat = CategoryTree::getTreeSelect(0);
         unset($arr_cat[0]);
 
+        $addMaterials = \common\classes\Supplies::getAddSupplies();
+
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $blind->name = $model->name;
             $blind->status = $model->status;
             $blind->description = $model->description;
             $blind->save();
+
+            if(isset($_POST['infoPage'])){
+                foreach($_POST['infoPage'] as $v){
+                    $input = explode('*',$v);
+                    $pb = new PageBlinds();
+                    $pb->name = $input[0];
+                    $pb->save();
+                    unset($input[0]);
+                    $ptb = new PageToBlind();
+                    $ptb->id_pages = $pb->id;
+                    $ptb->id_blind = $blind->id;
+                    $ptb->save();
+                    foreach($input as $in){
+                        $pageItem = new PageItem();
+                        $item = explode('_',$in);
+                        if($item[1] == 'materials'){
+                            $pageItem->id_page = $pb->id;
+                            $pageItem->id_item = $item[0];
+                            $pageItem->item_type = 'materials';
+                        }
+                        else{
+                            $pageTitle = new PageForTitle();
+                            $pageTitle->title = $item[0];
+                            $pageTitle->save();
+                            $pageItem->id_page = $pb->id;
+                            $pageItem->id_item = $pageTitle->id;
+                            $pageItem->item_type = 'zagolovok';
+                        }
+                        $pageItem->save();
+                    }
+                }
+            }
+
 
             if(isset($_POST['blindTitle'])){
                 foreach($_POST['blindTitle'] as $bt){
@@ -133,6 +172,7 @@ class BlindController extends Controller
                 'categories' => $arr_cat,
                 'materials' => $arr_materials,
                 'media' => $media,
+                'addMat' =>$addMaterials
             ]);
         }
     }
@@ -176,11 +216,8 @@ class BlindController extends Controller
         unset($arr_cat[0]);
         $blImg = new BlindImg();
         $imgages = $blImg->find()->where(['id_blind'=>$id])->all();
-        /*foreach($imgages as $img){
-           // Debag::prn($img);
-            $arr_img[$img->id] = $img->images;
-        }*/
 
+        $addMaterials = \common\classes\Supplies::getAddSupplies();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $blind->name = $model->name;
             $blind->status = $model->status;
@@ -231,6 +268,51 @@ class BlindController extends Controller
                     $blindMat->save();
                 }
             }
+
+
+
+            if(isset($_POST['infoPage'])){
+                foreach($_POST['infoPage'] as $v){
+                    $input = explode('*',$v);
+
+
+
+                    $pb = PageBlinds::find()->where(['name'=>$input[0]])->one();
+                    //$pb->name = $input[0];
+                    //$pb->save();
+                    unset($input[0]);
+                    //$ptb = new PageToBlind();
+                    //$ptb->id_pages = $pb->id;
+                    //$ptb->id_blind = $blind->id;
+                    //$ptb->save();
+                    $cat = PageItem::deleteAll(['id_page'=>$pb->id]);
+                    foreach($input as $in){
+
+                        $pageItem = new PageItem();
+                        $item = explode('_',$in);
+                        if($item[1] == 'materials'){
+                            $pageItem->id_page = $pb->id;
+                            $pageItem->id_item = $item[0];
+                            $pageItem->item_type = 'materials';
+                        }
+                        else{
+                            $pageTitle = PageForTitle::find()->where(['title'=>$item[0]])->one();
+                            if(empty($pageTitle->id)){
+                                $pageTitle = new PageForTitle();
+                                $pageTitle->title = $item[0];
+                                $pageTitle->save();
+                            }
+                            /*$pageTitle = new PageForTitle();
+                            $pageTitle->title = $item[0];
+                            $pageTitle->save();*/
+                            $pageItem->id_page = $pb->id;
+                            $pageItem->id_item = $pageTitle->id;
+                            $pageItem->item_type = 'zagolovok';
+                        }
+                        $pageItem->save();
+                    }
+                }
+            }
             return $this->redirect(['update', 'id' => $blind->id]);
         } else {
             return $this->render('update', [
@@ -242,6 +324,9 @@ class BlindController extends Controller
                 'media' => $media,
                 'img' => $imgages,
                 'bmt' => $blindMaterialHeader,
+                'blind' =>$blind,
+                'addMat' =>$addMaterials
+
             ]);
         }
     }
@@ -273,5 +358,10 @@ class BlindController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionDel_page_blind(){
+        $id = PageBlinds::find()->where(['name'=>$_GET[id]])->one();
+        $del = PageToBlind::deleteAll(['id_pages'=>$id->id]);
     }
 }

@@ -19,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'categories' => $categories,
         'materials' => $materials,
         'media' => $media,
+        'addMat' =>$addMat,
     ]) ?>
 
 </div>

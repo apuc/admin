@@ -23,6 +23,8 @@ $this->params['breadcrumbs'][] = 'Редактирование';
         'media' => $media,
         'img' => $img,
         'bmt' => $bmt,
+        'blind' =>$blind,
+        'addMat' =>$addMat,
     ]) ?>
 
 </div>

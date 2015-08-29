@@ -252,3 +252,59 @@ a.osn {
     float: left;
 }
 
+#createdByPages{
+    display: block;
+}
+
+.tabPanel{
+    display: none;
+}
+
+.activeMy{
+    display: block;
+}
+
+.pageLink li{
+    float:left;
+    float: left;
+    list-style-type: none;
+    margin-right: 15px;
+}
+
+.pageLink li a{
+    text-decoration: none;
+}
+
+.pageLink li.active{
+    background: #ccc;
+    padding: 2px 15px;
+}
+
+.pageLink li{
+    padding: 2px 15px;
+    position: relative;
+}
+
+.pageLink li:hover{
+    background: #ccc;
+    padding: 2px 15px;
+}
+#myTab1{
+    height: 10px;
+}
+
+.matModal{
+    width: 900px;
+}
+
+.delPages {
+    cursor: pointer;
+    position: absolute;
+    top: -3px;
+    right: -5px;
+    font-weight: bold;
+    background: #3997D4;
+    border-radius: 25px;
+    padding: 0px 4px;
+    line-height: 16px;
+}

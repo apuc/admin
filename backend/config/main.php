@@ -79,6 +79,7 @@ return [
                 'supplies' => 'supplies/supplies',
                 'blind' => 'blind/blind',
                 'orders' => 'ord/default',
+                'del_page_blind'=>'blind/blind/del_page_blind',
             ],
         ],
         'urlManagerFrontEnd' => [

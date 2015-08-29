@@ -15,6 +15,7 @@ class BlindForm extends Model
     public $description;
     public $blind_image;
     public $materials;
+    public $pagename;
     /**
      * @inheritdoc
      */

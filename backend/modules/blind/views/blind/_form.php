@@ -44,7 +44,7 @@ use yii\widgets\ActiveForm;
 
             </div>
 
-            <?= $form->field($model, 'status')->checkbox() ?>
+            <?= $form->field($model, 'status')->checkbox(); ?>
 
             <?=$form->field($model, 'categories')->dropDownList($categories, ['multiple'=>true, 'options' => $catselect]) ?>
             <?/*= Html::dropDownList('category',) */?>
@@ -55,19 +55,79 @@ use yii\widgets\ActiveForm;
         </div>
         <div id="panel2" class="tab-pane fade">
             <h3>Материалы</h3>
-            <?=$form->field($model, 'materials')->dropDownList($materials, ['multiple'=>true, 'options' => $materialselect]) ?>
-            <a data-toggle='modal' data-target='#myModal2' href = "#">Добавить заголовок</a>
-            <div id="addinp">
-                <?php
-                if(isset($bmt)){
-                    foreach($bmt as $b){
-                        echo '<div style = "margin-top:5px;">';
-                        echo $b->title.'заголовок будет вставлен перед ' .\backend\modules\supplies\models\Supplies::getSupName($b->id_materials). '<input type="hidden" name="blindTitle[]"  value="' .$b->id_materials. '*' .$b->title. '"/> | <a href="#" id="delTitle">Удалить</a> </div>';
-                        echo "</div>";
+
+            <?=$form->field($model,'pagename')->textInput(['maxlength' => true])?><a href="#" id="addPage">Добавить страницу</a>
+
+           <?php
+                $pages = \common\models\PageToBlind::find()->where(['id_blind'=>$blind->id])->all();
+
+                $ul = '';
+                $k = 0;
+                foreach($pages as $p){
+                    if($k == 0){
+                        $title = \common\models\PageBlinds::getNameTitle($p->id_pages);
+                        $inp = $title;
+                        $ul .= '<li class="active"><a href="#panel'.$title.'">'.$title.'</a><span page-id="'.$title.'" class="delPages">x</span></li>';
+
+                        $page = \common\models\PageItem::find()->where(['id_page'=>$p->id_pages])->all();
+                        $html = '<div id="panel'.$title.'" class="tabPanel activeMy"><h3>'.$title.'</h3>';
+                        $html .= '<table id="t_'.$title.'" class="table table-bordered">';
+                        foreach($page as $pg){
+                            if($pg->item_type == 'materials') {
+                                $html .= \common\classes\Supplies::getOneAddSupplies($pg->id_item,$title);
+                                $inp .= '*'.$pg->id_item.'_materials';
+                            }
+                            else{
+                                $zag = \common\models\PageForTitle::getName($pg->id_item);
+                                $html .= '<tr class="itemPage" page-id="'.$title.'" materials-id="'.$zag.'" item-type="zagolovok"><td colspan="7">'.$zag.'</td><td><a class="delSuplies" href="#">Удалить</a></td></tr>';
+                                $inp .= '*'.$zag.'_zagolovok';
+                            }
+                        }
+                        $html .= '</table>
+                            <a page-id="'.$title.'"data-toggle="modal" data-target="#myModal3" href="#" class="attachMaterial">Прикрепить материал</a> | <a class="attachZag" data-toggle="modal" data-target="#myModal2" href = "#" page-id="'.$title.'">Добавить заголовок</a>
+                           <input id="input_'.$title.'" type="hidden" name="infoPage[]" value="'.$inp.'">
+                        </div>';
+
                     }
+                    else{
+                        $title = \common\models\PageBlinds::getNameTitle($p->id_pages);
+                        $inp = $title;
+                        $ul .= '<li><a href="#panel'.$title.'">'.$title.'</a><span page-id="'.$title.'" class="delPages">x</span></li>';
+
+
+                        $page = \common\models\PageItem::find()->where(['id_page'=>$p->id_pages])->all();
+                        $html .= '<div id="panel'.$title.'" class="tabPanel"><h3>'.$title.'</h3>';
+                        $html .= '<table id="t_'.$title.'" class="table table-bordered">';
+                        foreach($page as $pg){
+                            if($pg->item_type == 'materials') {
+                                $html .= \common\classes\Supplies::getOneAddSupplies($pg->id_item,$title);
+                                $inp .= '*'.$pg->id_item.'_materials';
+                            }
+                            else{
+                                $zag = \common\models\PageForTitle::getName($pg->id_item);
+                                $html .= '<tr class="itemPage" page-id="'.$title.'" materials-id="'.$zag.'" item-type="zagolovok"><td colspan="7">'.$zag.'</td><td><a class="delSuplies" href="#">Удалить</a></td></tr>';
+                                $inp .= '*'.$zag.'_zagolovok';
+                            }
+                        }
+                        $html .= '</table>
+                            <a page-id="'.$title.'"data-toggle="modal" data-target="#myModal3" href="#" class="attachMaterial">Прикрепить материал</a> | <a class="attachZag" data-toggle="modal" data-target="#myModal2" href = "#" page-id="'.$title.'">Добавить заголовок</a>
+                             <input id="input_'.$title.'" type="hidden" name="infoPage[]" value="'.$inp.'">
+                        </div>';
+                    }
+                    $k++;
                 }
-                ?>
-            </div>
+           ?>
+
+
+            <div id="createdByPages">
+                <ul id="myTab1" class="pageLink"><?=$ul;?></ul>
+                <div class="pageTab" id="divTabContent"><?=$html;?></div>
+            </div
+
+
+
+
+
         </div>
 
 
@@ -126,11 +186,32 @@ use yii\widgets\ActiveForm;
             <div class="modal-body">
                 <?php $materials[0] = 'Выберите материал'; ?>
             <?= Html::textInput('titleB', '', ['id'=>'titleB', 'placeholder'=>'Название заголовка']) ?>
-            <?= Html::dropDownList('forM', 0, $materials,['id'=>'selmat']) ?>
+                <div page-id="0" id="curentPageIdTitle"></div>
+            <?/*= Html::dropDownList('forM', 0, $materials,['id'=>'selmat']) */?>
             </div>
             <div class="modal-footer">
                 <!--<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>-->
                 <button id = "addTitle" type="button" class="btn btn-default">Добавить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3" aria-hidden="true">
+    <div class="modal-dialog matModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Прикрепить материал</h4>
+            </div>
+            <div class="modal-body">
+                <div page-id="0" id="curentPageId"></div>
+               <?php echo $addMat;?>
+            </div>
+            <div class="modal-footer">
+                <!--<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>-->
+               <!-- <button id = "addTitle" type="button" class="btn btn-default">Добавить</button>-->
             </div>
         </div>
     </div>
