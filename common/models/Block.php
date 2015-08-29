@@ -13,6 +13,7 @@ use Yii;
  * @property string $code
  * @property string $style
  * @property string $img
+ * @property string $type
  */
 class Block extends \yii\db\ActiveRecord
 {
@@ -31,7 +32,7 @@ class Block extends \yii\db\ActiveRecord
     {
         return [
             [['key', 'name', 'code'], 'required'],
-            [['style', 'img'], 'safe'],
+            [['style', 'img', 'type'], 'safe'],
             [['key', 'name', 'img'], 'string', 'max' => 255]
         ];
     }
@@ -48,6 +49,7 @@ class Block extends \yii\db\ActiveRecord
             'code' => 'Код блока',
             'style' => 'Стили блока',
             'img' => 'Картинка',
+            'type' => 'Тип',
         ];
     }
 }

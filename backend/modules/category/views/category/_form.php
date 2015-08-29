@@ -65,6 +65,7 @@ use mihaildev\ckeditor\CKEditor;
             <div id="specialBlock">
                 <?= $form->field($model, 'code')->textarea(['rows' => 6])->label('Код') ?>
                 <?= $form->field($model, 'style')->textarea(['rows' => 6])->label('Стиль') ?>
+                <?= Html::button('Добавить индивидуальный блок', ['class' => 'btn btn-success', 'id' => 'addIndBlock']) ?>
             </div>
             <h3>Порядок блоков</h3>
             <?= $form->field($model, 'sort')->hiddenInput(['class'=>'sortBlock'])->label('') ?>
@@ -72,13 +73,13 @@ use mihaildev\ckeditor\CKEditor;
                 <ul id="sort">
                     <?php
                     if(empty($model->sort)){ ?>
-                        <li class="noPublick" data-type="ind">Индивидуальный блок | <a class="toPublick" href="#">Опубликовать</a></li>
+                        <!--<li class="noPublick" data-type="ind">Индивидуальный блок | <a class="toPublick" href="#">Опубликовать</a></li>-->
                         <!--<li class="noPublick" data-type="sub">Блок подкатегорий | <a class="toPublick" href="#">Опубликовать</a></li>-->
-                        <li class="noPublick" data-type="des">Блок Описание | <a class="toPublick" href="#">Опубликовать</a></li>
+                        <!--<li class="noPublick" data-type="des">Блок Описание | <a class="toPublick" href="#">Опубликовать</a></li>-->
                         <!--<li class="noPublick" data-type="yes">Готовый блок | <a class="toPublick" href="#">Опубликовать</a></li>-->
                     <?php }
                     else {
-                        $sortDefault = ['ind','des'];
+                        $sortDefault = [];
                         $sort = explode(',', $model->sort);
 
                         foreach ($sort as $s) {
@@ -91,7 +92,7 @@ use mihaildev\ckeditor\CKEditor;
                             }
                             else {
                                 $name = \common\classes\Template::getBlockName($s);
-                                echo '<li class="published" data-type="'.$s.'">'.$name.' | <a class="toPublick" href="#">Снять публикацию</a></li>';
+                                echo '<li class="published" data-type="'.$s.'">'.$name.' | <a class="delCustBlock" href="#">Удалить</a></li>';
                             }
 
                             $value_to_delete = $s ; //Элемент с этим значением нужно удалить

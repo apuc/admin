@@ -82,6 +82,8 @@ return [
                 'supplies' => 'supplies/supplies',
                 'blind' => 'blind/blind',
                 'orders' => 'ord/default',
+                'add_ind_block' => 'block/block/add_ind_block',
+                '' => 'pages/pages'
             ],
         ],
         'urlManagerFrontEnd' => [

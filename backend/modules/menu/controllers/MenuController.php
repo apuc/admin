@@ -9,6 +9,7 @@ use backend\modules\menu\models\MenuSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * MenuController implements the CRUD actions for Menu model.
@@ -23,6 +24,15 @@ class MenuController extends Controller
                 'actions' => [
                     'delete' => ['get'],
                     'update_el' => ['get'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];

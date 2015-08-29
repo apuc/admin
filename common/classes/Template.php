@@ -46,6 +46,8 @@ class Template
         $head = self::get_title($model, $head);
         $head = self::get_keywords($model, $head);
         $head = self::get_description($model, $head);
+        $head = self::get_description_text($model, $head);
+        $head = self::get_h1($model, $head);
         eval('?>' . $head . '<?php;');
     }
 
@@ -59,6 +61,14 @@ class Template
 
     public static  function get_description($model, $file){
         return preg_replace("/{description}/", "<meta name='description' content='$model->description'>" , $file);
+    }
+
+    public static  function get_description_text($model, $file){
+        return preg_replace("/{description_text}/", $model->description, $file);
+    }
+
+    public static function get_h1($model, $file){
+        return preg_replace("/{h1}/", $model->h1 , $file);
     }
 
     public static function get_footer()

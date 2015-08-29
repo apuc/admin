@@ -12,9 +12,26 @@ namespace backend\modules\footer\controllers;
 use backend\modules\footer\models\FooterForm;
 use yii\base\Controller;
 use common\models\Tpl;
+use yii\filters\AccessControl;
 
 class FooterController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
+
+
     public function actionIndex()
     {
         $model = new FooterForm();

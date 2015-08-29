@@ -52,9 +52,11 @@ AppAsset::register($this);
                     <li><?= Html::a('Цвет', ['/color']) ?></li>
                     <li><?= Html::a('Email для заказов', ['/options/options/update?id=2']) ?></li>
                     <li><?= Html::a('Опции', ['/options']) ?></li>
+                    <li><?= Html::a('Профиль', ['/user/user/update?id=2']) ?></li>
                 </ul>
             </li>
             <li><?= Html::a('Заказы', ['/orders']) ?></li>
+            <li><?= Html::a('Выход', ['/site/logout']) ?></li>
         </ul>
     </nav>
     <?php
