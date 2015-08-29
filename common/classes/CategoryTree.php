@@ -25,9 +25,9 @@ class CategoryTree
                 }
             }
 
-            echo '<tr><td></td><td>' . $tire . $c->name . '</td><td><a href = "/secure/category/category/delete?id=' . $c->id . '"><img src="/securecrud_img/del.png" width="20" title="Удалить" alt="del.png"></a>';
+            echo '<tr><td></td><td>' . $tire ."   ". $c->name . '</td><td><a href = "/secure/category/category/delete?id=' . $c->id . '"><img src="/securecrud_img/del.png" width="20" title="Удалить" alt="del.png"></a>';
             echo '<a href = "/secure/category/category/update?id=' . $c->id . '"><img src="/securecrud_img/edit.png" width="20" title="Редактировать" alt="edit.png"></a>';
-            echo '<a class="targetBlanc" href = "/secure/category/category/view?id=' . $c->id . '"><img src="/securecrud_img/view.png" width="20" title="Просмотр" alt="view.png"></a></td></tr>';
+            echo '<a class="targetBlanc" href = "/category?c=' . $c->id . '"><img src="/securecrud_img/view.png" width="20" title="Просмотр" alt="view.png"></a></td></tr>';
             $level++;
             self::getTree($c->id, $level);
             $level--;
