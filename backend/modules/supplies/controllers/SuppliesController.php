@@ -12,6 +12,7 @@ use backend\modules\supplies\models\SuppliesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * SuppliesController implements the CRUD actions for Supplies model.
@@ -25,6 +26,15 @@ class SuppliesController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['get'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];

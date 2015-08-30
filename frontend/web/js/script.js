@@ -203,7 +203,7 @@ $(document).ready(function () {
             url: 'get_order',
             data: "&blId=" + blId + "&mtId=" + mtId + "&tel=" + tel,
             success: function (msg) {
-                alert('Ваш заказ сделан. В ближайшее время с вами свяжуться');
+                alert('Ваш заказ сделан. В ближайшее время с вами свяжуться. Номер заказа ' + msg);
             }
         });
         $('#mod').css('display','none');
@@ -249,6 +249,25 @@ $(document).ready(function () {
          $('#telephone').val('');
         return false;
     });
+
+    $(document).on('click','.pageChange', function () {
+        //$('.text .readmore.active').click();
+        var idPage = $(this).attr('id-page');
+        var id = $(this).attr('id-blind');
+        $.ajax({
+            type: "get",
+            url: 'get_sup',
+            data: "id=" + id + "&page_id=" + idPage,
+            success: function (msg) {
+                $('.popup').html(msg);
+            }
+        });
+        /*$('.popup').css('top', $(window).scrollTop());
+        $('.popup,.background').fadeIn('fast');*/
+
+        return false;
+    });
+
 
 });
 

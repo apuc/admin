@@ -4,6 +4,7 @@ use common\models\BlindIdmaterials;
 use common\models\BlindMaterials;
 use common\models\Color;
 use common\models\Material;
+use common\models\PageBlinds;
 use common\models\PageForTitle;
 use common\models\PageItem;
 use common\models\PageToBlind;
@@ -12,10 +13,28 @@ class Supplies {
     public static function getSupplies($id,$idPage=0){
        if($idPage == 0){
            $page = PageToBlind::find()->where(['id_blind'=>$id])->one();
-           $idPage = $page->id_page;
+           $idPage = $page->id_pages;
        }
-
-
+        $allPagess = PageToBlind::find()->where(['id_blind'=>$id])->all();
+        /*Debag::prn($allPagess);*/
+        $i = 0;
+        $count = count($allPagess);
+        foreach($allPagess as $ap){
+            if($ap->id_pages == $idPage){
+                $next = $allPagess[$i+1]->id_pages;
+                if($i == 0){
+                    $end = end($allPagess);
+                    $end = $end->id_pages;
+                }
+                else{
+                    if($i == $count-1){
+                        $next = $allPagess[0]->id_pages;
+                    }
+                    $end = $allPagess[$i-1]->id_pages;
+                }
+            }
+            $i++;
+        }
 
         $html = '
                 <div class="title">
@@ -25,11 +44,14 @@ class Supplies {
                     <a href="#" class="close"></a>
                     <a href="#" class="cause">Вызвать замерщика</a>
                 <div class="popup_content">
-                    <div class="prices">
-                        Цена: <span><b>1 999</b> руб/м²</span>
-                        <a href="#" class="left"><span>999</span> руб/м²</a>
-                        <a href="#" class="right"><span>2 999</span> руб/м²</a>
-                    </div>';
+                    <div class="prices">';
+
+                     $html .= PageBlinds::getNameTitle($idPage);
+                        if($count>1){
+                            $html .= '<a href="#" id-page="'.$end.'" id-blind="'.$id.'" class="left pageChange">'.PageBlinds::getNameTitle($end).'</a>
+                        <a href="#" id-page="'.$next.'" id-blind="'.$id.'" class="right pageChange">'.PageBlinds::getNameTitle($next).'</a>';
+                        }
+                    $html .= '</div>';
         //$supplies = BlindIdmaterials::find()->where(['id_blind'=>$id])->all();
         $supplies = PageItem::find()->where(['id_page'=>$idPage])->all();
         /*$blm = BlindMaterials::find()->where(['id_blind'=>$id])->all();
@@ -40,7 +62,7 @@ class Supplies {
         $j=0;
         foreach($supplies as $v){
             //$supl = \backend\modules\supplies\models\Supplies::find()->where(['id'=>$v->id_materials])->one();
-            if($supplies->item_type == 'zagolovok'){
+            if($v->item_type == 'zagolovok'){
                 $zag = PageForTitle::getName($v->id_item);
                 if($j != 0){
                     $html .= "</div></div></div>";
@@ -61,10 +83,10 @@ class Supplies {
             $html .= '<div class="item">
                         <a href="#"><img src="'.$supl->images.'" alt="" width="163px"/></a>
                         <span>Код: '.$supl->code.'</span>
-                        <a href="#" class="order" blind-id="'.$id.'" suuples-id="'.$v->id_materials.'">Заказать</a>
+                        <a href="#" class="order" blind-id="'.$id.'" suuples-id="'.$v->id_item.'">Заказать</a>
                     </div>';
             if($k == 5){$html .= '</div>';$k = 1;}
-            if($supplies->item_type == 'zagolovok'){
+            if($v->item_type == 'zagolovok'){
                 $html .= '';
 
                 //echo self::getTitle($id,$v->id_materials).'<br>';

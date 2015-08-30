@@ -1,18 +1,20 @@
 <?php
 
-namespace backend\modules\options\controllers;
+namespace backend\modules\user\controllers;
 
+use common\classes\Debag;
 use Yii;
-use backend\modules\options\models\Options;
-use backend\modules\options\models\OptionsSearch;
+use backend\modules\user\models\User;
+use backend\modules\user\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+
 /**
- * OptionsController implements the CRUD actions for Options model.
+ * UserController implements the CRUD actions for User model.
  */
-class OptionsController extends Controller
+class UserController extends Controller
 {
     public function behaviors()
     {
@@ -20,10 +22,10 @@ class OptionsController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['get'],
+                    'delete' => ['post'],
                 ],
             ],
-            'access' => [
+            /*'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
@@ -31,17 +33,17 @@ class OptionsController extends Controller
                         'roles' => ['@'],
                     ],
                 ],
-            ],
+            ],*/
         ];
     }
 
     /**
-     * Lists all Options models.
+     * Lists all User models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new OptionsSearch();
+        $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -51,7 +53,7 @@ class OptionsController extends Controller
     }
 
     /**
-     * Displays a single Options model.
+     * Displays a single User model.
      * @param integer $id
      * @return mixed
      */
@@ -63,16 +65,25 @@ class OptionsController extends Controller
     }
 
     /**
-     * Creates a new Options model.
+     * Creates a new User model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Options();
+        $model = new User();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->setPassword($model->password_hash);
+            $model->created_at = time();
+            $model->updated_at = time();
+            $model->status = 10;
+            $model->generatePasswordResetToken();
+            $model->generateAuthKey();
+            $model->save();
+
+
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -81,7 +92,7 @@ class OptionsController extends Controller
     }
 
     /**
-     * Updates an existing Options model.
+     * Updates an existing User model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -89,8 +100,18 @@ class OptionsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $pass = $model->password_hash;
+        $model->password_hash = '';
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if(!empty($model->password_hash)){
+                $model->setPassword($model->password_hash);
+            }
+            else {
+                $model->password_hash = $pass;
+            }
+            $model->updated_at = time();
+            $model->save();
             return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -100,7 +121,7 @@ class OptionsController extends Controller
     }
 
     /**
-     * Deletes an existing Options model.
+     * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -113,15 +134,15 @@ class OptionsController extends Controller
     }
 
     /**
-     * Finds the Options model based on its primary key value.
+     * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Options the loaded model
+     * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Options::findOne($id)) !== null) {
+        if (($model = User::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

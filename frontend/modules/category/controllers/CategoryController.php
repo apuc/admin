@@ -65,8 +65,10 @@ class CategoryController extends Controller
             if($p == 'des'){
                 $html .= "<div class='description'>$page->description</div>";
             }
-            if($p == 'yes'){
-                $block = Block::find()->where(['id' => $page->blokc_id])->one();
+            if($p[0] == 'y'){
+                $blockId = explode('_', $p);
+                $blockId = $blockId[1];
+                $block = Block::find()->where(['id' => $blockId])->one();
                 $html .= $block->code;
             }
         }
@@ -74,7 +76,13 @@ class CategoryController extends Controller
     }
 
     public function actionGet_sup(){
-        echo Supplies::getSupplies($_GET['id']);
+        //echo '123';
+        if(isset($_GET['page_id'])){
+            echo Supplies::getSupplies($_GET['id'],$_GET['page_id']);
+        }
+        else{
+            echo Supplies::getSupplies($_GET['id']);
+        }
     }
 
     public function actionGet_order(){
@@ -90,9 +98,11 @@ class CategoryController extends Controller
 
         $order->save();
 
+        echo $order->id;
+
         $email = Options::find()->where(['key'=>'email_to_prod'])->one();
 
-        mail($email->value, "Заказ с вашего сайта", "С вашего сайта заказали:<br>Название жалюзи: $blind->name<br>Код материала: $materials->code<br>Телефон для связ: $telephone","Content-type: text/html; charset=UTF-8\r\n");
+        mail($email->value, "Заказ с вашего сайта", "С вашего сайта заказали:<br>Номер заказа: $blind->id<br>Название жалюзи: $blind->name<br>Код материала: $materials->code<br>Телефон для связ: $telephone","Content-type: text/html; charset=UTF-8\r\n");
     }
 
     //аякс страницы

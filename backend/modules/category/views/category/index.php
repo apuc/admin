@@ -18,10 +18,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Создать категорию', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
+    <table class="table table-striped table-bordered"><thead>
+        <tr><th>#</th><th><span>Название</span></th><th>Действия</th></tr>
+        </thead><tbody>
     <?php
     \common\classes\CategoryTree::getTree(0);
     ?>
-
+        </tbody></table>
 
 </div>

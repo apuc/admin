@@ -16,9 +16,25 @@ use backend\modules\block\models\form\AddImgBlock;
 use yii\web\UploadedFile;
 use yii;
 use yii\helpers\Html;
+use yii\filters\AccessControl;
 
 class MediaController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
+
     public function actionIndex(){
         $model = new AddImgBlock();
 

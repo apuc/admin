@@ -54,6 +54,9 @@ return [
         'ord' => [
             'class' => 'backend\modules\ord\Ord',
         ],
+        'user' => [
+            'class' => 'backend\modules\user\User',
+        ],
     ],
     'components' => [
         'request' => [
@@ -80,6 +83,8 @@ return [
                 'blind' => 'blind/blind',
                 'orders' => 'ord/default',
                 'del_page_blind'=>'blind/blind/del_page_blind',
+                'add_ind_block' => 'block/block/add_ind_block',
+                '' => 'pages/pages'
             ],
         ],
         'urlManagerFrontEnd' => [

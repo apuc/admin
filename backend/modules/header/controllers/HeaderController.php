@@ -14,9 +14,24 @@ use yii\base\Controller;
 use yii\helpers\Url;
 use yii;
 use common\models\Tpl;
+use yii\filters\AccessControl;
 
 class HeaderController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
     public function actionIndex()
     {
         $model = new HeaderForm();

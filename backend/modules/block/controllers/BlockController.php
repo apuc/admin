@@ -11,6 +11,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use backend\modules\block\models\form\AddImgBlock;
 use yii\web\UploadedFile;
+use yii\filters\AccessControl;
 
 /**
  * BlockController implements the CRUD actions for Block model.
@@ -24,6 +25,16 @@ class BlockController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['get'],
+                    'add_ind_block' => ['get'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];
@@ -128,6 +139,28 @@ class BlockController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionAdd_ind_block(){
+        $block = new Block();
+        $block->name = $_GET['name'];
+        if($block->code == ''){
+            $block->code = 0;
+        }
+        else {
+            $block->code = $_GET['code'];
+        }
+
+        if($block->style == ''){
+            $block->style = 0;
+        }
+        else {
+            $block->style = $_GET['style'];
+        }
+        $block->type = 'ind';
+        $block->key = 'ind_';
+        $block->save();
+        echo $block->id;
     }
 
     /**

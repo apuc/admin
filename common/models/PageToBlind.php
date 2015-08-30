@@ -43,4 +43,8 @@ class PageToBlind extends \yii\db\ActiveRecord
             'id_pages' => 'Id Pages',
         ];
     }
+
+    /*public static function getTitlePage($id){
+        $title = PageToBlind::find()->where['']
+    }*/
 }

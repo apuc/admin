@@ -12,6 +12,7 @@ use common\models\BlindImg;
 use common\models\BlindMaterials;
 use common\models\Categories;
 use common\models\Material;
+use yii\filters\AccessControl;
 
 use common\models\Media;
 use common\models\PageBlinds;
@@ -38,6 +39,15 @@ class BlindController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['get'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];
@@ -195,7 +205,7 @@ class BlindController extends Controller
         $cat = BlindCatid::find()->where(['id_blind' => $id])->all();
 
         $blindMaterialHeader = BlindMaterials::find()->where(['id_blind'=>$id])->all();
-
+//Debag::prn($_POST);
         foreach($cat as $c){
             $arr_catid[$c->id_cat] = ['selected ' => 'selected'];
         }
@@ -275,19 +285,23 @@ class BlindController extends Controller
                 foreach($_POST['infoPage'] as $v){
                     $input = explode('*',$v);
 
-
-
                     $pb = PageBlinds::find()->where(['name'=>$input[0]])->one();
+                    if(empty($pb->id)){
+                        $pb = new PageBlinds();
+                        $pb->name = $input[0];
+                        $pb->save();
+                    }
                     //$pb->name = $input[0];
                     //$pb->save();
                     unset($input[0]);
-                    //$ptb = new PageToBlind();
-                    //$ptb->id_pages = $pb->id;
-                    //$ptb->id_blind = $blind->id;
-                    //$ptb->save();
+                    $del = PageToBlind::deleteAll(['id_pages'=>$pb->id]);
+                    $ptb = new PageToBlind();
+                    $ptb->id_pages = $pb->id;
+                    $ptb->id_blind = $blind->id;
+                    $ptb->save();
                     $cat = PageItem::deleteAll(['id_page'=>$pb->id]);
                     foreach($input as $in){
-
+                   //Debag::prn($in);
                         $pageItem = new PageItem();
                         $item = explode('_',$in);
                         if($item[1] == 'materials'){

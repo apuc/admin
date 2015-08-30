@@ -7,6 +7,7 @@
     <table class="table table-bordered">
     <?php
     echo '<tr>';
+        echo '<th>Номер заказа</th>';
         echo '<th>Название</th>';
         echo '<th>Код материала</th>';
         echo '<th>Телефон</th>';
@@ -14,6 +15,7 @@
     echo '</tr>';
         foreach($orders as $v){
             echo '<tr>';
+                echo '<td>'.$v->id.'</td>';
                 echo '<td>'.$v->blind.'</td>';
                 echo '<td>'.$v->materials.'</td>';
                 echo '<td>'.$v->telephone.'</td>';
