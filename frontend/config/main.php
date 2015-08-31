@@ -36,6 +36,7 @@ return [
                 'get_sup' => 'category/category/get_sup',
                 'get_order' => 'category/category/get_order',
                 'get_page' => 'category/category/get_page',
+                'get_count_items' => 'category/category/get_count_items',
                 'get_callme' => 'page/page/get_callme',
             ],
         ],
