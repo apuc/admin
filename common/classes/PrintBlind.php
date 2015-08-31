@@ -43,31 +43,33 @@ class PrintBlind
         $blinds = BlindCatid::find()->where(['id_cat' => $id])->offset($num*$count)->limit($count)->orderBy('id_blind DESC')->all();
         //получаем описание объекта жалюзи
 
-        //start of page
-        $html .= '<div class="page">';
+        if(isset($blinds) && !empty($blinds)){
+            //start of page
+            $html .= '<div class="page">';
 
-        if($realNum > 1){
-            $html .= '<div class="title">
+            if($realNum > 1){
+                $html .= '<div class="title">
                         <span>Страница '.$realNum.'  </span>
                         <a href="#" class="hidepage">Скрыть</a>
                     </div>';
-        }
-
-        foreach($blinds as $blind){
-            if(isset($blind)){
-                $blindObj = Blind::find()->where(['id' => $blind->id_blind])->one();
-                //получаем картинки для жалюзи
-                $blindImgs = BlindImg::find()->where(['id_blind' => $blindObj->id])->orderBy('main DESC')->all();
             }
 
-            if(isset($blindObj) && !empty($blindObj)){
-                $html .= self::getItem($blindObj,$blindImgs);
+            foreach($blinds as $blind){
+                if(isset($blind)){
+                    $blindObj = Blind::find()->where(['id' => $blind->id_blind])->one();
+                    //получаем картинки для жалюзи
+                    $blindImgs = BlindImg::find()->where(['id_blind' => $blindObj->id])->orderBy('main DESC')->all();
+                }
+
+                if(isset($blindObj) && !empty($blindObj)){
+                    $html .= self::getItem($blindObj,$blindImgs);
+                }
+
             }
 
+            //end of page
+            $html .= '</div>';
         }
-
-        //end of page
-        $html .= '</div>';
 
         return $html;
     }
