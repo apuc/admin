@@ -56,6 +56,7 @@ AppAsset::register($this);
                 </ul>
             </li>
             <li><?= Html::a('Заказы', ['/orders']) ?></li>
+            <li><?= Html::a('Заявки', ['/request']) ?></li>
             <li><?= Html::a('Выход', ['/site/logout']) ?></li>
         </ul>
     </nav>

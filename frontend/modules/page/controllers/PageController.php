@@ -11,6 +11,7 @@ namespace frontend\modules\page\controllers;
 
 use backend\modules\pages\models\Pages;
 use common\classes\Debag;
+use common\models\Request;
 use yii\web\Controller;
 use common\classes\Template;
 use backend\modules\block\models\Block;
@@ -63,6 +64,14 @@ class PageController extends Controller
 
     public function actionGet_callme(){
         $tel = $_GET['tel'];
+
+        $request = new Request();
+        $request->telephone = (string)$tel;
+        $request->dt_add = (string)time();
+
+        $request->save();
+
+
         $email = Options::find()->where(['key'=>'email_to_prod'])->one();
         mail($email->value,"Заявка с вашего сайта","Заказ звонка на номер $tel","Content-type: text/html; charset=UTF-8\r\n");
     }
