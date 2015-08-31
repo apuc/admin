@@ -120,7 +120,7 @@ $(document).ready(function () {
         $('#specialBlock').slideToggle('slow');
     });
 
-    $(document).on('click','.toPublick', function () {
+    $(document).on('click', '.toPublick', function () {
         if ($(this).parent().hasClass('noPublick')) {
             $(this).parent().removeClass('noPublick');
             $(this).parent().addClass('published');
@@ -187,8 +187,8 @@ $(document).ready(function () {
         $('#myModal2').modal('hide');
         $('#titleB').val('');
         var idPag = $('#curentPageIdTitle').attr('page-id');
-       // $('#t_'+idPag).append('<tr class="itemPage" page-id="'+idPag+'" materials-id="'+title+'" item-type="zagolovok"><td colspan="7">'+title+'</td><td><a class="delSuplies" href="#">Удалить</a></td></tr>');
-        $('#t_'+idPag).prepend('<tr class="itemPage" page-id="'+idPag+'" materials-id="'+title+'" item-type="zagolovok"><td colspan="7">'+title+'</td><td><a class="delSuplies" href="#">Удалить</a></td></tr>');
+        // $('#t_'+idPag).append('<tr class="itemPage" page-id="'+idPag+'" materials-id="'+title+'" item-type="zagolovok"><td colspan="7">'+title+'</td><td><a class="delSuplies" href="#">Удалить</a></td></tr>');
+        $('#t_' + idPag).prepend('<tr class="itemPage" page-id="' + idPag + '" materials-id="' + title + '" item-type="zagolovok"><td colspan="7">' + title + '</td><td><a class="delSuplies" href="#">Удалить</a></td></tr>');
         var pageId = idPag;
         $('#input_' + pageId).val(pageId);
         $('.itemPage').each(function () {
@@ -203,7 +203,7 @@ $(document).ready(function () {
 
     });
 
-    $(document).on('click','.attachZag', function(){
+    $(document).on('click', '.attachZag', function () {
         var id = $(this).attr('page-id');
         $('#curentPageIdTitle').attr('page-id', id);
         return false;
@@ -244,21 +244,21 @@ $(document).ready(function () {
                 $(this).removeClass('activeMy');
             });
 
-            $('#myTab1').append('<li class="active"><a href="#panel' + linkName + '">' + val + '</a><span page-id="'+linkName+'" class="delPages">x</span></li>');
+            $('#myTab1').append('<li class="active"><a href="#panel' + linkName + '">' + val + '</a><span page-id="' + linkName + '" class="delPages">x</span></li>');
             $('#divTabContent').append('<div id="panel' + linkName + '" class="tabPanel activeMy"><h3>' + val + '</h3><table class="table table-bordered" id="t_' + linkName + '"></table><a page-id="' + linkName + '"data-toggle="modal" data-target="#myModal3" href="#" class="attachMaterial">Прикрепить материал</a> | <a class="attachZag" data-toggle="modal" data-target="#myModal2" href = "#" page-id="' + linkName + '">Добавить заголовок</a><div id="publishMaterials' + linkName + '"></div><input id="input_' + linkName + '" type="hidden" name="infoPage[]" value="' + val + '"></div>');
             $('#blindform-pagename').val('');
         }
         return false;
     });
 
-    $(document).on('click','.delPages', function(){
+    $(document).on('click', '.delPages', function () {
         var id = $(this).attr('page-id');
         $(this).parent().remove();
         $(this).remove();
-        $('#panel'+id).remove();
+        $('#panel' + id).remove();
         var k = 0;
         $('#myTab1 li').each(function () {
-            if(k == 0){
+            if (k == 0) {
                 $(this).addClass('active');
                 var tabId = $(this).children('a').attr('href');
                 $(tabId).addClass('activeMy');
@@ -342,12 +342,12 @@ $(document).ready(function () {
     });
 
 
-    $('#addCustBlock').on('click', function(){
-        if($('#pages-blokc_id').length > 0){
+    $('#addCustBlock').on('click', function () {
+        if ($('#pages-blokc_id').length > 0) {
             var blockId = $('#pages-blokc_id').val();
             var blockName = $('#pages-blokc_id :selected').text();
         }
-        else{
+        else {
             var blockId = $('#category-blokc_id').val();
             var blockName = $('#category-blokc_id :selected').text();
         }
@@ -363,17 +363,17 @@ $(document).ready(function () {
         return false;
     });
 
-    $('#addIndBlock').on('click', function(){
+    $('#addIndBlock').on('click', function () {
         var name = $('#indBlockName').val();
         var code = $('#indBlockCode').val();
         var style = $('#indBlockStyle').val();
-        if(name != ''){
+        if (name != '') {
             $.ajax({
                 type: "POST",
                 url: '/secure/add_ind_block',
-                data: "name=" + name + "&code=" + code + "&style=" +style ,
+                data: "name=" + name + "&code=" + code + "&style=" + style,
                 success: function (msg) {
-                    $('#sort').append('<li class="published" data-type="ind_'+msg+'">Индивидуальный блок ('+ name +') | <a target="_blank" href="/secure/block/block/update?id='+msg+'">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>');
+                    $('#sort').append('<li class="published" data-type="ind_' + msg + '">Индивидуальный блок (' + name + ') | <a target="_blank" href="/secure/block/block/update?id=' + msg + '">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>');
                     var bloks = '';
                     $('.published').each(function () {
                         bloks = bloks + ',' + $(this).attr('data-type');
@@ -388,29 +388,29 @@ $(document).ready(function () {
         }
 
         /*$('#sort').append('<li class="published" data-type="ind">Индивидуальный блок | <a class="delCustBlock" href="#">Удалить</a></li>');
-        var bloks = '';
-        $('.published').each(function () {
-            bloks = bloks + ',' + $(this).attr('data-type');
-        });
-        bloks = bloks.substring(1);
-        $('.sortBlock').val(bloks);*/
+         var bloks = '';
+         $('.published').each(function () {
+         bloks = bloks + ',' + $(this).attr('data-type');
+         });
+         bloks = bloks.substring(1);
+         $('.sortBlock').val(bloks);*/
         return false;
     });
 
     /*$('#addCustBlock').on('click', function(){
-        var blockId = $('#pages-blokc_id').val();
-        var blockName = $('#pages-blokc_id :selected').text();
-        $('#sort').append('<li class="published" data-type="yes_' + blockId + '">' + blockName + ' | <a class="delCustBlock" href="#">Удалить</a></li>');
-        var bloks = '';
-        $('.published').each(function () {
-            bloks = bloks + ',' + $(this).attr('data-type');
-        });
-        bloks = bloks.substring(1);
-        $('.sortBlock').val(bloks);
-        return false;
-    });*/
+     var blockId = $('#pages-blokc_id').val();
+     var blockName = $('#pages-blokc_id :selected').text();
+     $('#sort').append('<li class="published" data-type="yes_' + blockId + '">' + blockName + ' | <a class="delCustBlock" href="#">Удалить</a></li>');
+     var bloks = '';
+     $('.published').each(function () {
+     bloks = bloks + ',' + $(this).attr('data-type');
+     });
+     bloks = bloks.substring(1);
+     $('.sortBlock').val(bloks);
+     return false;
+     });*/
 
-    $(document).on('click', '.delCustBlock', function(){
+    $(document).on('click', '.delCustBlock', function () {
         $(this).parent().remove();
         var bloks = '';
         $('.published').each(function () {
@@ -419,6 +419,114 @@ $(document).ready(function () {
         bloks = bloks.substring(1);
         $('.sortBlock').val(bloks);
         return false;
+    });
+
+    $('.codeInput').bind('focusout', function () {
+        var val = $(this).val();
+        var id = $(this).attr('id');
+        $.ajax({
+            type: "GET",
+            url: 'change_sup',
+            data: "code_val=" + val + "&id=" + id,
+            success: function (msg) {
+                console.log(msg);
+            }
+        });
+    });
+
+    $('.priceInput').bind('focusout', function () {
+        var val = $(this).val();
+        var id = $(this).attr('id');
+        $.ajax({
+            type: "GET",
+            url: 'change_sup',
+            data: "price_val=" + val + "&id=" + id,
+            success: function (msg) {
+                console.log(msg);
+            }
+        });
+    });
+
+    $('.widthInput').bind('focusout', function () {
+        var val = $(this).val();
+        var id = $(this).attr('id');
+        $.ajax({
+            type: "GET",
+            url: 'change_sup',
+            data: "width_val=" + val + "&id=" + id,
+            success: function (msg) {
+                //console.log(msg);
+            }
+        });
+    });
+
+    $('.matSelect').on('change', function(){
+        var val = $(this).val();
+        var id = $(this).attr('id');
+        $.ajax({
+            type: "GET",
+            url: 'change_sup',
+            data: "mat_val=" + val + "&id=" + id,
+            success: function (msg) {
+                console.log(msg);
+            }
+        });
+    });
+
+    $('.blindSelect').on('change', function(){
+        var val = $(this).val();
+        var id = $(this).attr('id');
+        $.ajax({
+            type: "GET",
+            url: 'change_sup',
+            data: "blind_val=" + val + "&id=" + id,
+            success: function (msg) {
+                console.log(msg);
+            }
+        });
+    });
+
+    $('.selectColor').on('click', function(){
+       $(this).next().slideToggle('slow');
+    });
+
+    $('.selectOnecolor').on('click', function(){
+       var id = $(this).attr('data-id');
+       var idSup = $(this).attr('data-sup-id');
+        var color = $(this).attr('color');
+        $(this).parent().prev().css({'background':color})
+        $(this).parent().slideToggle('slow');
+        $.ajax({
+            type: "GET",
+            url: 'change_sup',
+            data: "color_val=" + id + "&id=" + idSup,
+            success: function (msg) {
+                console.log(msg);
+            }
+        });
+    });
+
+    $('.openModalSup').on('click', function(){
+       var id = $(this).attr('data-sup-id');
+        $('#selectImgId').attr('data-id', id);
+    });
+
+    $('.imgPrev').on('click', function () {
+        var val = $(this).next().val();
+        var id = $('#selectImgId').attr('data-id');
+        $('#supImg_' + id).attr('src',val);
+        $('#myModal').modal('hide');
+        $("#imgPreview").html('');
+        if($('.supImg').length > 0){
+            $.ajax({
+                type: "GET",
+                url: 'change_sup',
+                data: "img_val=" + val + "&id=" + id,
+                success: function (msg) {
+                    console.log(msg);
+                }
+            });
+        }
     });
 
 });

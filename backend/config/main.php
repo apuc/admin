@@ -89,6 +89,7 @@ return [
                 'add_ind_block' => 'block/block/add_ind_block',
                 '' => 'pages/pages',
                 'request' => 'request/default',
+                'change_sup' => 'supplies/supplies/change_sup',
             ],
         ],
         'urlManagerFrontEnd' => [

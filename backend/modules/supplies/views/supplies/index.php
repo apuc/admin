@@ -29,25 +29,37 @@ $this->params['breadcrumbs'][] = $this->title;
             /*'id',*/
             [
                 'attribute'=>'image',
-                'format' => 'html',
+                'format' => 'raw',
                 'value' => function($model){
-                    return "<img src='$model->images' width='100px'>";
+                    return "<a href='#' class='openModalSup' data-sup-id='$model->id' data-toggle='modal' data-target='#myModal'><img class='supImg' id='supImg_$model->id' src='$model->images' width='100px'></a>";
                 }
             ],
-            'code',
+            [
+                'attribute'=>'code',
+                'format' => 'raw',
+                'value' => function($model){
+                    return Html::textInput('code_' . $model->id, $model->code, ['id' => 'code_' . $model->id, 'class' => 'codeInput']);
+                    //return "<input type='text' value='$model->code' name='code'>";
+                }
+            ],
             [
                 'attribute'=>'type_mat',
-                'format' => 'text',
+                'format' => 'raw',
                 'value' => function($model){
-                    $material = \common\models\Material::find()->where(['id' => $model->type_mat])->one();
-                    return $material->name;
+                    $mat = \backend\modules\material\models\Material::find()->all();
+                    foreach($mat as $m){
+                        $arr[$m->id] = $m->name;
+                    }
+                    return Html::dropDownList('mat_' . $model->id, $model->type_mat, $arr, ['id' => 'mat_' . $model->id, 'class' => 'matSelect']);
+                    //$material = \common\models\Material::find()->where(['id' => $model->type_mat])->one();
+                    //return $material->name;
                 }
             ],
             [
                 'attribute'=>'type_blind',
-                'format' => 'text',
+                'format' => 'raw',
                 'value' => function($model){
-                    if($model->type_blind == '1'){
+                    /*if($model->type_blind == '1'){
                         return 'Горизантальные';
                     }
                     if($model->type_blind == '2'){
@@ -55,21 +67,46 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                     if($model->type_blind == '3'){
                         return 'вертикальные';
-                    }
+                    }*/
+
+                    $arr = ['1' => 'Горизантальные', '2' => 'рулонные', '3' => 'вертикальные'];
+                    return Html::dropDownList('blind_' . $model->id, $model->type_blind, $arr, ['id' => 'blind_' . $model->id, 'class' => 'blindSelect']);
 
                 }
             ],
 
-            // 'type_width',
+            [
+                'attribute'=>'type_width',
+                'format' => 'raw',
+                'value' => function($model){
+                    return Html::textInput('width_' . $model->id, $model->type_width, ['id' => 'width_' . $model->id, 'class' => 'widthInput']);
+                    //return "<input type='text' value='$model->code' name='code'>";
+                }
+            ],
             [
                 'attribute'=>'color',
-                'format' => 'html',
+                'format' => 'raw',
                 'value' => function($model){
+                    $allColor = \common\models\Color::find()->all();
                     $color = \common\models\Color::find()->where(['id'=>$model->color])->one();
-                    return '<div style = "width:100px;height:20px;background-color: '.$color->value.'"></div>';
+                    $html = Html::hiddenInput('color_' . $model->id, $model->color, ['id' => 'color_' . $model->id, 'class' => 'colorInput']);
+                    $html .= '<div class="selectColor" style = "width:100px;height:20px;background-color: '.$color->value.'"></div>';
+                    $html .= "<div class='allColor'>";
+                    foreach($allColor as $c){
+                        $html .= "<div class='selectOnecolor' color='$c->value' data-sup-id='$model->id' data-id='$c->id' style='background-color:$c->value;width: 100px;height: 20px;margin: 5px'></div>";
+                    }
+                    $html .= "</div>";
+                    return $html;
                 }
             ],
-             'price',
+            [
+                'attribute'=>'price',
+                'format' => 'raw',
+                'value' => function($model){
+                    return Html::textInput('price_' . $model->id, $model->price, ['id' => 'price_' . $model->id, 'class' => 'priceInput']);
+                    //return "<input type='text' value='$model->code' name='code'>";
+                }
+            ],
             // 'status',
 
             [
@@ -85,5 +122,39 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Название модали</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="htmlForm" action="/secure/media/media/ajax" method="post">
+                        Message: <input type="file" name="file"/>
+                        <input type="submit" value="Загрузить" />
+                    </form>
 
+                    <div class="mediaWrap">
+                        <div data-id="0" id="selectImgId"></div>
+                        <h3>Существующие файлы:</h3>
+                        <?php
+                        foreach ($media as $m) {
+                            echo "
+                    <div class='mediaBox'>
+                        ".Html::img(\yii\helpers\Url::base()."/".$m->link, ['width'=>'150px', 'class' => 'imgPrev'])."
+
+                        <input id='img_$m->id' type='hidden' value='".\yii\helpers\Url::base(true)."/".$m->link."'>
+                    </div>";
+                        }
+                        ?>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

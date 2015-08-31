@@ -48,10 +48,12 @@ class SuppliesController extends Controller
     {
         $searchModel = new SuppliesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $media = Media::find()->all();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'media' => $media,
         ]);
     }
 
@@ -167,6 +169,49 @@ class SuppliesController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    public function actionChange_sup(){
+        if(isset($_GET['code_val'])){
+            $id = explode('_', $_GET['id']);
+            $sup = Supplies::find()->where(['id' => $id[1]])->one();
+            $sup->code = $_GET['code_val'];
+            $sup->save();
+        }
+        if(isset($_GET['mat_val'])){
+            $id = explode('_', $_GET['id']);
+            $sup = Supplies::find()->where(['id' => $id[1]])->one();
+            $sup->type_mat = $_GET['mat_val'];
+            $sup->save();
+        }
+        if(isset($_GET['blind_val'])){
+            $id = explode('_', $_GET['id']);
+            $sup = Supplies::find()->where(['id' => $id[1]])->one();
+            $sup->type_blind = $_GET['blind_val'];
+            $sup->save();
+        }
+        if(isset($_GET['price_val'])){
+            $id = explode('_', $_GET['id']);
+            $sup = Supplies::find()->where(['id' => $id[1]])->one();
+            $sup->price = $_GET['price_val'];
+            $sup->save();
+        }
+        if(isset($_GET['width_val'])){
+            $id = explode('_', $_GET['id']);
+            $sup = Supplies::find()->where(['id' => $id[1]])->one();
+            $sup->type_width = $_GET['width_val'];
+            $sup->save();
+        }
+        if(isset($_GET['color_val'])){
+            $sup = Supplies::find()->where(['id' => $_GET['id']])->one();
+            $sup->color = $_GET['color_val'];
+            $sup->save();
+        }
+        if(isset($_GET['img_val'])){
+            $sup = Supplies::find()->where(['id' => $_GET['id']])->one();
+            $sup->images = $_GET['img_val'];
+            $sup->save();
         }
     }
 }

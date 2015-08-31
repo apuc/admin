@@ -308,3 +308,11 @@ a.osn {
     padding: 0px 4px;
     line-height: 16px;
 }
+
+.allColor {
+    display: none;
+}
+
+.selectColor, .selectOnecolor {
+    cursor: pointer;
+}
