@@ -223,6 +223,8 @@ $(document).ready(function () {
         var id = $('.pages').attr('data-id');
         var num = $('.page').length;
 
+        startLoadingAnimation();
+
         $.ajax({
             type: "get",
             url: 'get_page',
@@ -230,6 +232,19 @@ $(document).ready(function () {
             success: function (msg) {
                 //console.log(msg);
                 $('.pages').append(msg);
+                stopLoadingAnimation();
+            }
+        });
+
+        $.ajax({
+            type: "get",
+            url: 'get_count_items',
+            data: "&id=" + id + "&num=" + num,
+            success: function (msg) {
+                console.log(msg);
+                if(msg == 1){
+                    $(".loadnewpage").remove();
+                }
             }
         });
         return false;
@@ -268,6 +283,20 @@ $(document).ready(function () {
         return false;
     });
 
-
 });
+
+//анимация загрузки
+function startLoadingAnimation() // - функция запуска анимации
+{
+    // найдем элемент с изображением загрузки и уберем невидимость:
+    var imgObj = $(".loadnewpage");
+    imgObj.html('<img style="width: 25px;" class="load-animation" src="http://admin/secure/media_file/ajax-loader.gif">');
+
+}
+
+function stopLoadingAnimation() // - функция останавливающая анимацию
+{
+    $(".loadnewpage").html('Показать еще');
+
+}
 

@@ -32,6 +32,7 @@ class CategoryController extends Controller
                     'get_sup' => ['get'],
                     'get_order' => ['get'],
                     'get_page' => ['get'],
+                    'get_count_items' => ['get'],
                 ],
             ],
         ];
@@ -111,5 +112,10 @@ class CategoryController extends Controller
     //аякс страницы
     public function actionGet_page(){
         echo PrintBlind::getPage($_GET['id'],$_GET['num']);
+    }
+
+    //аякс остаток страниц
+    public function actionGet_count_items(){
+        echo PrintBlind::getCountItems($_GET['id'],$_GET['num']);
     }
 }
