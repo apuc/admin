@@ -9,6 +9,7 @@ use common\models\Media;
 use Yii;
 use backend\modules\supplies\models\Supplies;
 use backend\modules\supplies\models\SuppliesSearch;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -141,6 +142,21 @@ class SuppliesController extends Controller
                 'color' => $arr_color,
             ]);
         }
+    }
+
+    public function actionAdd(){
+        $sup = new Supplies();
+        $sup->images = Url::base()."/media_file/no_photo.png";
+        $sup->code = 1;
+        $sup->color = 1;
+        $sup->price = "цена";
+        $sup->type_blind = 1;
+        $sup->type_mat = 1;
+        $sup->type_width = "ширина";
+        $sup->status = 1;
+        $sup->save();
+        //Debag::prn(mysql_error());
+        return $this->redirect(['index']);
     }
 
     /**

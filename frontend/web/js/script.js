@@ -241,7 +241,7 @@ $(document).ready(function () {
             url: 'get_count_items',
             data: "&id=" + id + "&num=" + num,
             success: function (msg) {
-                console.log(msg);
+                //console.log(msg);
                 if(msg == 1){
                     $(".loadnewpage").remove();
                 }
@@ -290,7 +290,7 @@ function startLoadingAnimation() // - функция запуска анимац
 {
     // найдем элемент с изображением загрузки и уберем невидимость:
     var imgObj = $(".loadnewpage");
-    imgObj.html('<img style="width: 25px;" class="load-animation" src="http://admin/secure/media_file/ajax-loader.gif">');
+    imgObj.html('<img style="width: 25px;" class="load-animation" src="/secure/media_file/ajax-loader.gif">');
 
 }
 
