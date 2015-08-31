@@ -47,7 +47,7 @@ class MainpageController extends Controller
 
             }
             if($p == 'des'){
-                $html .= "<div class='description'>$page->description</div>";
+                /*$html .= "<div class='description'>$page->description</div>";*/
             }
             if($p[0] == 'y'){
                 $blockId = explode('_', $p);

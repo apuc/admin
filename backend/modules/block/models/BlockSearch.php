@@ -41,7 +41,7 @@ class BlockSearch extends Block
      */
     public function search($params)
     {
-        $query = Block::find();
+        $query = Block::find()->where(['type'=> '']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

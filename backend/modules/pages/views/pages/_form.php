@@ -68,37 +68,36 @@ use mihaildev\ckeditor\CKEditor;
             </div>
             <h3>Порядок блоков</h3>
             <?= $form->field($model, 'sort')->hiddenInput(['class'=>'sortBlock'])->label('') ?>
+            <?= $form->field($model, 'sort_all')->hiddenInput(['class'=>'sortBlockAll'])->label('') ?>
             <div>
                 <ul id="sort">
                     <?php
-                    if(empty($model->sort)){ ?>
-                        <!--<li class="noPublick" data-type="ind">Индивидуальный блок | <a class="toPublick" href="#">Опубликовать</a></li>-->
-                        <!--<li class="noPublick" data-type="sub">Блок подкатегорий | <a class="toPublick" href="#">Опубликовать</a></li>-->
-                        <!--<li class="noPublick" data-type="des">Блок Описание | <a class="toPublick" href="#">Опубликовать</a></li>-->
-                        <!--<li class="noPublick" data-type="yes">Готовый блок | <a class="toPublick" href="#">Опубликовать</a></li>-->
-                    <?php }
-                    else {
-                        $sortDefault = [];
-                        $sort = explode(',', $model->sort);
+                    $sortDefault = explode(',', $model->sort_all);
+                    if(!in_array('des', $sortDefault)){
+                        $sortDefault[] = 'des';
+                    }
+                    //\common\classes\Debag::prn($sortDefault);
+                    $sort = explode(',', $model->sort);
 
+                    if(!empty($model->sort)){
                         foreach ($sort as $s) {
                             if($s[0] == 'y'){
                                 $blockId = explode('_', $s);
                                 $blockId = $blockId[1];
                                 $block = \common\models\Block::find()->where(['id'=>$blockId])->one();
                                 $name = $block->name;
-                                echo '<li class="published" data-type="'.$s.'">'.$name.' | <a class="delCustBlock" href="#">Удалить</a></li>';
+                                echo '<li class="published sortAll" data-type="'.$s.'">'.$name.' | <a class="toPublick" href="#">Скрыть</a> | <a class="delCustBlock" href="#">Удалить</a></li>';
                             }
                             elseif($s[0] == 'i'){
                                 $blockId = explode('_', $s);
                                 $blockId = $blockId[1];
                                 $block = \common\models\Block::find()->where(['id'=>$blockId])->one();
                                 $name = $block->name;
-                                echo '<li class="published" data-type="'.$s.'">Индивидуальный блок ('.$name.') | <a target="_blank" href="/secure/block/block/update?id='.$blockId.'">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>';
+                                echo '<li class="published sortAll" data-type="'.$s.'">Индивидуальный блок ('.$name.') | <a class="toPublick" href="#">Скрыть</a> | <a target="_blank" href="/secure/block/block/update?id='.$blockId.'">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>';
                             }
                             else {
                                 $name = \common\classes\Template::getBlockName($s);
-                                echo '<li class="published" data-type="'.$s.'">'.$name.' | <a class="delCustBlock" href="#">Удалить</a></li>';
+                                echo '<li class="published sortAll" data-type="'.$s.'">'.$name.' | <a class="toPublick" href="#">Скрыть</a></li>';
                             }
 
                             $value_to_delete = $s ; //Элемент с этим значением нужно удалить
@@ -106,12 +105,27 @@ use mihaildev\ckeditor\CKEditor;
                             unset ($sortDefault[$value_to_delete]) ; //Удаляем элемент массива
                             $sortDefault= array_flip($sortDefault); //Меняем местами ключи и значения
                         }
+                    }
 
-                        foreach($sortDefault as $sd){
-                            $name = \common\classes\Template::getBlockName($sd);
-                            echo '<li class="noPublick" data-type="'.$sd.'">'.$name.' | <a class="toPublick" href="#">Опубликовать</a></li>';
+
+                    foreach($sortDefault as $sd){
+                        if($sd[0] == 'y'){
+                            $name = explode('_', $sd);
+                            $name = \common\models\Block::find()->where(['id'=>$name[1]])->one();
+                            $name = $name->name;
+                            echo '<li class="noPublick sortAll" data-type="'.$sd.'">'.$name.' | <a class="toPublick" href="#">Опубликовать</a> | <a class="delCustBlock" href="#">Удалить</a></li>';
                         }
-
+                        elseif($sd[0] == 'i'){
+                            $blockId = explode('_', $sd);
+                            $blockId = $blockId[1];
+                            $block = \common\models\Block::find()->where(['id'=>$blockId])->one();
+                            $name = $block->name;
+                            echo '<li class="noPublick sortAll" data-type="'.$sd.'">Индивидуальный блок ('.$name.') | <a class="toPublick" href="#">Опубликовать</a> | <a target="_blank" href="/secure/block/block/update?id='.$blockId.'">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>';
+                        }
+                        else {
+                            $name = \common\classes\Template::getBlockName($sd);
+                            echo '<li class="noPublick sortAll" data-type="'.$sd.'">'.$name.' | <a class="toPublick" href="#">Опубликовать</a></li>';
+                        }
                     }
                     ?>
                 </ul>
