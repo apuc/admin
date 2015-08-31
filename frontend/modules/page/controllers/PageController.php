@@ -39,8 +39,11 @@ class PageController extends Controller
         $sort = explode(',', $page->sort);
         $html = '';
         foreach($sort as $p){
-            if($p == 'ind'){
-                $html .= $page->code;
+            if($p[0] == 'i'){
+                $blockId = explode('_', $p);
+                $blockId = $blockId[1];
+                $block = Block::find()->where(['id' => $blockId])->one();
+                $html .= $block->code;
             }
             if($p == 'sub'){
 

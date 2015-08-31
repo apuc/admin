@@ -25,7 +25,7 @@ class BlockController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['get'],
-                    'add_ind_block' => ['get'],
+                    /*'add_ind_block' => ['post'],*/
                 ],
             ],
             'access' => [
@@ -143,19 +143,19 @@ class BlockController extends Controller
 
     public function actionAdd_ind_block(){
         $block = new Block();
-        $block->name = $_GET['name'];
-        if($block->code == ''){
+        $block->name = $_POST['name'];
+        if($_POST['code'] == ''){
             $block->code = 0;
         }
         else {
-            $block->code = $_GET['code'];
+            $block->code = $_POST['code'];
         }
 
-        if($block->style == ''){
+        if($_POST['style'] == ''){
             $block->style = 0;
         }
         else {
-            $block->style = $_GET['style'];
+            $block->style = $_POST['style'];
         }
         $block->type = 'ind';
         $block->key = 'ind_';

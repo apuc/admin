@@ -135,7 +135,7 @@ class PrintBlind
 
         $colors = count(array_unique($colors));
         $materials = count(array_unique($materials));
-        $prices = 1;
+        $prices = min($prices);
 
 
         $count['colors'] = $colors;

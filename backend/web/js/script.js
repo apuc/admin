@@ -369,11 +369,11 @@ $(document).ready(function () {
         var style = $('#indBlockStyle').val();
         if(name != ''){
             $.ajax({
-                type: "GET",
+                type: "POST",
                 url: '/secure/add_ind_block',
                 data: "name=" + name + "&code=" + code + "&style=" +style ,
                 success: function (msg) {
-                    $('#sort').append('<li class="published" data-type="ind_'+msg+'">Индивидуальный блок ('+ name +') | <a href="/secure/block/block/update?id='+msg+'">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>');
+                    $('#sort').append('<li class="published" data-type="ind_'+msg+'">Индивидуальный блок ('+ name +') | <a target="_blank" href="/secure/block/block/update?id='+msg+'">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>');
                     var bloks = '';
                     $('.published').each(function () {
                         bloks = bloks + ',' + $(this).attr('data-type');

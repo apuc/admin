@@ -63,8 +63,9 @@ use mihaildev\ckeditor\CKEditor;
             <hr>
             <a id="specialBlockToggle" href="#">Индивидуальный блок</a>
             <div id="specialBlock">
-                <?= $form->field($model, 'code')->textarea(['rows' => 6])->label('Код') ?>
-                <?= $form->field($model, 'style')->textarea(['rows' => 6])->label('Стиль') ?>
+                <?= Html::textInput('indBlockName', '', ['id'=>'indBlockName', 'class'=>'form-control', 'placeholder'=>'Имя индивидуального блока']) ?>
+                <?= $form->field($model, 'code')->textarea(['rows' => 6, 'id' => 'indBlockCode'])->label('Код') ?>
+                <?= $form->field($model, 'style')->textarea(['rows' => 6, 'id' => 'indBlockStyle'])->label('Стиль') ?>
                 <?= Html::button('Добавить индивидуальный блок', ['class' => 'btn btn-success', 'id' => 'addIndBlock']) ?>
             </div>
             <h3>Порядок блоков</h3>
@@ -89,6 +90,13 @@ use mihaildev\ckeditor\CKEditor;
                                 $block = \common\models\Block::find()->where(['id'=>$blockId])->one();
                                 $name = $block->name;
                                 echo '<li class="published" data-type="'.$s.'">'.$name.' | <a class="delCustBlock" href="#">Удалить</a></li>';
+                            }
+                            elseif($s[0] == 'i'){
+                                $blockId = explode('_', $s);
+                                $blockId = $blockId[1];
+                                $block = \common\models\Block::find()->where(['id'=>$blockId])->one();
+                                $name = $block->name;
+                                echo '<li class="published" data-type="'.$s.'">Индивидуальный блок ('.$name.') | <a href="/secure/block/block/update?id='.$blockId.'">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>';
                             }
                             else {
                                 $name = \common\classes\Template::getBlockName($s);
