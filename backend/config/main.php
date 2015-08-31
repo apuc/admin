@@ -57,6 +57,9 @@ return [
         'user' => [
             'class' => 'backend\modules\user\User',
         ],
+        'request' => [
+            'class' => 'backend\modules\request\Request',
+        ],
     ],
     'components' => [
         'request' => [
@@ -84,7 +87,8 @@ return [
                 'orders' => 'ord/default',
                 'del_page_blind'=>'blind/blind/del_page_blind',
                 'add_ind_block' => 'block/block/add_ind_block',
-                '' => 'pages/pages'
+                '' => 'pages/pages',
+                'request' => 'request/default',
             ],
         ],
         'urlManagerFrontEnd' => [
