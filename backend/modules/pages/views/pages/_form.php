@@ -94,7 +94,7 @@ use mihaildev\ckeditor\CKEditor;
                                 $blockId = $blockId[1];
                                 $block = \common\models\Block::find()->where(['id'=>$blockId])->one();
                                 $name = $block->name;
-                                echo '<li class="published" data-type="'.$s.'">Индивидуальный блок ('.$name.') | <a href="/secure/block/block/update?id='.$blockId.'">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>';
+                                echo '<li class="published" data-type="'.$s.'">Индивидуальный блок ('.$name.') | <a target="_blank" href="/secure/block/block/update?id='.$blockId.'">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>';
                             }
                             else {
                                 $name = \common\classes\Template::getBlockName($s);

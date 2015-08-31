@@ -48,7 +48,6 @@ class BlockController extends Controller
     {
         $searchModel = new BlockSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
