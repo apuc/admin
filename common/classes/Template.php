@@ -48,6 +48,7 @@ class Template
         $head = self::get_keywords($model, $head);
         $head = self::get_description($model, $head);
         $head = self::get_descr($model, $head);
+        //echo "<textarea>$head</textarea>";
         eval('?>' . $head . '<?php;');
     }
 
@@ -76,8 +77,9 @@ class Template
         $t = '';
         foreach($arr as $a){
             if($a == 'des'){
-                /*$test = explode('<div style="page-break-after: always"><span style="display:none">&nbsp;</span></div>', $model->description);
-                Debag::prn($test);*/
+                $test = explode('<div style="page-break-after: always"><span style="display:none">&nbsp;</span></div>', $model->description);
+                //Debag::prn($test);
+                //$text = "<p>".$test[0]."</p><p>".$test[1]."</p>";
                 $t =  preg_replace("/{descr}/", "<div class='content article'><div class='container'><h1>$model->h1</h1>$model->description<a href='#' class='readmore'>Читать полностью</a></div></div>" , $file);
             }
         }

@@ -341,7 +341,7 @@ $(document).ready(function () {
                 $('#input_' + pageId).val(valInp + '*' + mId + '_' + iTp);
             }
         });
-
+        return false;
     });
 
     $(document).on('click', '.attachMaterial', function () {
@@ -686,6 +686,7 @@ $(document).ready(function () {
     });
 
     $(document).on('click','#addArticleMaterials',function(){
+        //alert('123');
         var val = $('.articleMaterials').val().replace(/\n/g, ",");
 
         var pageId = $('#curentPageIdListMat').attr('page-id');
