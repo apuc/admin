@@ -230,9 +230,9 @@ class SuppliesController extends Controller
             $sup->images = $_GET['img_val'];
             $sup->save();
         }
-        if(isset($_GET['id_mat'])){
-            $pageItem = PageItem::find()->where(['id_item'=>$_GET['id_mat'],'id_blind'=>$_GET['id_page']])->one();
-            $pageItem = PageItem::deleteAll(['id'=>$pageItem->id]);
+        if(isset($_GET['id_mat']) && $_GET['id_page']){
+           // $pageItem = PageItem::find()->where(['id_item'=>$_GET['id_mat'],'id_blind'=>$_GET['id_page']])->all();
+            $pageItem = PageItem::deleteAll(['id_item'=>$_GET['id_mat'],'id_blind'=>$_GET['id_page']]);
         }
     }
 }
