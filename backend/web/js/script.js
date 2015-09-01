@@ -124,7 +124,7 @@ $(document).ready(function () {
         if ($(this).parent().hasClass('noPublick')) {
             $(this).parent().removeClass('noPublick');
             $(this).parent().addClass('published');
-            $(this).text('Снять публикацию');
+            $(this).text('Скрыть');
         }
         else {
             $(this).parent().removeClass('published');
@@ -137,6 +137,13 @@ $(document).ready(function () {
         });
         bloks = bloks.substring(1);
         $('.sortBlock').val(bloks);
+
+        var bloksAll = '';
+        $('.sortAll').each(function () {
+            bloksAll = bloksAll + ',' + $(this).attr('data-type');
+        });
+        bloksAll = bloksAll.substring(1);
+        $('.sortBlockAll').val(bloksAll);
         return false;
     });
 
@@ -355,13 +362,20 @@ $(document).ready(function () {
         }
 
 
-        $('#sort').append('<li class="published" data-type="yes_' + blockId + '">' + blockName + ' | <a class="delCustBlock" href="#">Удалить</a></li>');
+        $('#sort').append('<li class="published sortAll" data-type="yes_' + blockId + '">' + blockName + ' | <a class="toPublick" href="#">Скрыть</a> | <a class="delCustBlock" href="#">Удалить</a></li>');
         var bloks = '';
         $('.published').each(function () {
             bloks = bloks + ',' + $(this).attr('data-type');
         });
         bloks = bloks.substring(1);
         $('.sortBlock').val(bloks);
+
+        var bloksAll = '';
+        $('.sortAll').each(function () {
+            bloksAll = bloksAll + ',' + $(this).attr('data-type');
+        });
+        bloksAll = bloksAll.substring(1);
+        $('.sortBlockAll').val(bloksAll);
         return false;
     });
 
@@ -375,13 +389,20 @@ $(document).ready(function () {
                 url: '/secure/add_ind_block',
                 data: "name=" + name + "&code=" + code + "&style=" + style,
                 success: function (msg) {
-                    $('#sort').append('<li class="published" data-type="ind_' + msg + '">Индивидуальный блок (' + name + ') | <a target="_blank" href="/secure/block/block/update?id=' + msg + '">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>');
+                    $('#sort').append('<li class="published" data-type="ind_' + msg + '">Индивидуальный блок (' + name + ') | <a data-page-id="' + msg + '" href="#">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>');
                     var bloks = '';
                     $('.published').each(function () {
                         bloks = bloks + ',' + $(this).attr('data-type');
                     });
                     bloks = bloks.substring(1);
                     $('.sortBlock').val(bloks);
+
+                    var bloksAll = '';
+                    $('.sortAll').each(function () {
+                        bloksAll = bloksAll + ',' + $(this).attr('data-type');
+                    });
+                    bloksAll = bloksAll.substring(1);
+                    $('.sortBlockAll').val(bloksAll);
                 }
             });
         }
@@ -420,6 +441,13 @@ $(document).ready(function () {
         });
         bloks = bloks.substring(1);
         $('.sortBlock').val(bloks);
+
+        var bloksAll = '';
+        $('.sortAll').each(function () {
+            bloksAll = bloksAll + ',' + $(this).attr('data-type');
+        });
+        bloksAll = bloksAll.substring(1);
+        $('.sortBlockAll').val(bloksAll);
         return false;
     });
 

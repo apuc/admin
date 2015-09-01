@@ -46,8 +46,8 @@ class Template
         $head = self::get_title($model, $head);
         $head = self::get_keywords($model, $head);
         $head = self::get_description($model, $head);
-        $head = self::get_description_text($model, $head);
-        $head = self::get_h1($model, $head);
+        $head = self::get_descr($model, $head);
+
         eval('?>' . $head . '<?php;');
     }
 
@@ -69,6 +69,19 @@ class Template
 
     public static function get_h1($model, $file){
         return preg_replace("/{h1}/", $model->h1 , $file);
+    }
+
+    public static function get_descr($model, $file){
+        $arr = explode(',', $model->sort);
+        foreach($arr as $a){
+            if($a == 'des'){
+                $t =  preg_replace("/{descr}/", "<div class='content article'><div class='container'><h1>$model->h1</h1>$model->description<a href='#' class='readmore'>Читать полностью</a></div></div>" , $file);
+            }
+            else {
+                $t = preg_replace("/{descr}/", '' , $file);
+            }
+        }
+        return $t;
     }
 
     public static function get_footer()
