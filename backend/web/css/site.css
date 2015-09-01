@@ -316,3 +316,11 @@ a.osn {
 .selectColor, .selectOnecolor {
     cursor: pointer;
 }
+
+.blindToSupliesOne li, .blindToSuplies li{
+    list-style-type: none;
+}
+
+.blindToSuplies{
+    display: none;
+}

@@ -44,6 +44,7 @@ class PageItem extends \yii\db\ActiveRecord
             'id_page' => 'Id Page',
             'id_item' => 'Id Item',
             'item_type' => 'Item Type',
+            'id_blind'=> 'id Blind'
         ];
     }
 }

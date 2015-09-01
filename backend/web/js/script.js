@@ -251,8 +251,9 @@ $(document).ready(function () {
                 $(this).removeClass('activeMy');
             });
 
-            $('#myTab1').append('<li class="active"><a href="#panel' + linkName + '">' + val + '</a><span page-id="' + linkName + '" class="delPages">x</span></li>');
-            $('#divTabContent').append('<div id="panel' + linkName + '" class="tabPanel activeMy"><h3>' + val + '</h3><table class="table table-bordered" id="t_' + linkName + '"></table><a page-id="' + linkName + '"data-toggle="modal" data-target="#myModal3" href="#" class="attachMaterial">Прикрепить материал</a> | <a class="attachZag" data-toggle="modal" data-target="#myModal2" href = "#" page-id="' + linkName + '">Добавить заголовок</a><div id="publishMaterials' + linkName + '"></div><input id="input_' + linkName + '" type="hidden" name="infoPage[]" value="' + val + '"></div>');
+           // $('#myTab1').append('<li class="active"><a href="#panel' + linkName + '">' + val + '</a><span page-id="' + linkName + '" class="delPages">x</span></li>');
+            $('#myTab1').append('<li class="active"><a href="#panel' + linkName + '"><input id-page="' + linkName + '" type="text" class="insetName" value="' + val + '" /></a><span page-id="' + linkName + '" class="delPages">x</span></li>');
+            $('#divTabContent').append('<div id="panel' + linkName + '" class="tabPanel activeMy"><h3>' + val + '</h3><table class="table table-bordered" id="t_' + linkName + '"></table><a page-id="' + linkName + '"data-toggle="modal" data-target="#myModal3" href="#" class="attachMaterial">Прикрепить материал</a> | <a class="attachZag" data-toggle="modal" data-target="#myModal2" href = "#" page-id="' + linkName + '">Добавить заголовок</a><div id="publishMaterials' + linkName + '"></div><input id="input_' + linkName + '" type="hidden" name="infoPage[]" value="' + linkName + '"></div>');
             $('#blindform-pagename').val('');
         }
         return false;
@@ -293,6 +294,7 @@ $(document).ready(function () {
         $(this).addClass('active');
         var tabId = $(this).children('a').attr('href');
         $(tabId).addClass('activeMy');
+        return false;
     });
 
 
@@ -556,6 +558,70 @@ $(document).ready(function () {
             });
         }
     });
+
+    $('.undock').on('click', function(){
+        var idMat = $(this).attr('id-mat');
+        var idPage = $(this).attr('id-page');
+        $(this).parent().remove();
+        $.ajax({
+            type: "GET",
+            url: 'change_sup',
+            data: "id_mat=" + idMat + "&id_page=" + idPage,
+            success: function (msg) {
+                console.log(msg);
+            }
+        });
+        return false;
+    });
+
+
+     $('#insetName').on('click', function(){
+        return false;
+    });
+
+    $('.allBlindToSuplies').on('click', function(){
+        $(this).prev().slideToggle('slow');
+        $(this).text('Скрыть');
+        return false;
+    });
+
+    /*$('#insetName').bind('focusout', function(){
+        alert('123');
+        var val = $(this).val();
+        var pageId = $(this).attr('id-page');
+        $('#input_' + pageId).val(val);
+        $('.itemPage').each(function () {
+            var pId = $(this).attr('page-id');
+            if (pageId == pId) {
+                var mId = $(this).attr('materials-id');
+                var iTp = $(this).attr('item-type');
+                var valInp = $('#input_' + pageId).val();
+                $('#input_' + pageId).val(valInp + '*' + mId + '_' + iTp);
+            }
+        });
+        return false;
+    });/*/
+
+   /* $('.insetName').live('focusout', function(){
+        alert('Вы нажали на элемент "foo"');
+    });*/
+    $(document).on('focusout','.insetName',function(){
+        var val = $(this).val();
+        val = val.replace(/\s+/g, '_');
+        var pageId = $(this).attr('id-page');
+        $('#input_' + pageId).val(val);
+        $('.itemPage').each(function () {
+            var pId = $(this).attr('page-id');
+            if (pageId == pId) {
+                var mId = $(this).attr('materials-id');
+                var iTp = $(this).attr('item-type');
+                var valInp = $('#input_' + pageId).val();
+                $('#input_' + pageId).val(valInp + '*' + mId + '_' + iTp);
+            }
+        });
+        return false;;
+    });
+
 
 });
 

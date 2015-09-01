@@ -36,6 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute'=>'code',
+                'class' => DataColumn::className(),
                 'format' => 'raw',
                 'value' => function($model){
                     return Html::textInput('code_' . $model->id, $model->code, ['id' => 'code_' . $model->id, 'class' => 'codeInput']);
@@ -107,6 +108,37 @@ $this->params['breadcrumbs'][] = $this->title;
                     //return "<input type='text' value='$model->code' name='code'>";
                 }
             ],
+
+            [
+                'class' => DataColumn::className(),
+                'header'=> 'Прикреплен',
+                'format' =>'raw',
+                'value' => function($model){
+                    $pageItem = \common\models\PageItem::find()->where(['id_item'=>$model->id,'item_type'=>'materials'])->all();
+                    foreach($pageItem as $p){
+                        $arr[] = $p->id_blind;
+                    }
+                    $arr = array_unique($arr);
+                    $html = '';
+                    $html .= '<div class="blindToSupliesOne">';
+                    $k = 0;
+
+                    foreach($arr as $p){
+                        if($p){
+                            $title = \backend\modules\blind\models\Blind::find()->where(['id'=>$p])->one();
+                            if($k == 2){
+                                $html .= '</div><div class="blindToSuplies">';
+                            }
+
+                            $html .= '<li>' . $title->name . '<a href="#" class="undock" id-mat="' . $model->id . '" id-page="' . $p . '"> -</a></li>';
+                            $k++;
+                        }
+                    }
+                   $html .= '</div>';
+                    if($k > 2){$html .= '<a href="#" class="allBlindToSuplies">Показать все</a>';}
+                    return $html;
+                }
+            ],
             // 'status',
 
             [
@@ -114,9 +146,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'header' => 'Действия',
                 'format' => 'html',
                 'value' => function($model){
-                    $view = Html::a("<img src='".\yii\helpers\Url::base()."crud_img/view.png' width='20px' title='Просмотр'></a>", ['/supplies/supplies/view','id'=>$model->id]);
-                    $view .= Html::a("<img src='".\yii\helpers\Url::base()."crud_img/edit.png' width='20px' title='Редактировать'></a>", ['/supplies/supplies/update','id'=>$model->id]);
-                    $view .= Html::a("<img src='".\yii\helpers\Url::base()."crud_img/del.png' width='20px' title='Удалить'></a>", ['/supplies/supplies/delete','id'=>$model->id]);
+                   /* $view = Html::a("<img src='".\yii\helpers\Url::base()."crud_img/view.png' width='20px' title='Просмотр'></a>", ['/supplies/supplies/view','id'=>$model->id]);
+                    $view .= Html::a("<img src='".\yii\helpers\Url::base()."crud_img/edit.png' width='20px' title='Редактировать'></a>", ['/supplies/supplies/update','id'=>$model->id]);*/
+                    $view = Html::a("<img src='".\yii\helpers\Url::base()."crud_img/del.png' width='20px' title='Удалить'></a>", ['/supplies/supplies/delete','id'=>$model->id]);
                     return $view;
                 }
             ],
