@@ -92,6 +92,7 @@ use mihaildev\ckeditor\CKEditor;
                             }
                         }
                         $html .= '</table>
+                        <a page-id="'.$title.'"data-toggle="modal" data-target="#myModal4" href="#" class="attachMaterialList">Прикрепить материалы списком</a> |
                             <a page-id="'.$title.'"data-toggle="modal" data-target="#myModal3" href="#" class="attachMaterial">Прикрепить материал</a> | <a class="attachZag" data-toggle="modal" data-target="#myModal2" href = "#" page-id="'.$title.'">Добавить заголовок</a>
                            <input id="input_'.$title.'" type="hidden" name="infoPage[]" value="'.$inp.'">
                         </div>';
@@ -119,7 +120,7 @@ use mihaildev\ckeditor\CKEditor;
                             }
                         }
                         $html .= '</table>
-                            <a page-id="'.$title.'"data-toggle="modal" data-target="#myModal3" href="#" class="attachMaterial">Прикрепить материал</a> | <a class="attachZag" data-toggle="modal" data-target="#myModal2" href = "#" page-id="'.$title.'">Добавить заголовок</a>
+                            <a page-id="'.$title.'"data-toggle="modal" data-target="#myModal4" href="#" class="attachMaterialList">Прикрепить материалы списком</a> | <a page-id="'.$title.'"data-toggle="modal" data-target="#myModal3" href="#" class="attachMaterial">Прикрепить материал</a> | <a class="attachZag" data-toggle="modal" data-target="#myModal2" href = "#" page-id="'.$title.'">Добавить заголовок</a>
                              <input id="input_'.$title.'" type="hidden" name="infoPage[]" value="'.$inp.'">
                         </div>';
                     }
@@ -221,6 +222,25 @@ use mihaildev\ckeditor\CKEditor;
             <div class="modal-footer">
                 <!--<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>-->
                <!-- <button id = "addTitle" type="button" class="btn btn-default">Добавить</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" aria-hidden="true">
+    <div class="modal-dialog matModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Прикрепить материал списком</h4>
+            </div>
+            <div class="modal-body">
+                <div page-id="0" id="curentPageIdListMat"></div>
+                <textarea class = "articleMaterials" rows="10" cols="120"></textarea>
+            </div>
+            <div class="modal-footer">
+                <!--<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>-->
+                <button id = "addArticleMaterials" type="button" class="btn btn-default">Добавить</button>
             </div>
         </div>
     </div>

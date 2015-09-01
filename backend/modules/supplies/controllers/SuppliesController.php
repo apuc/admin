@@ -235,4 +235,7 @@ class SuppliesController extends Controller
             $pageItem = PageItem::deleteAll(['id_item'=>$_GET['id_mat'],'id_blind'=>$_GET['id_page']]);
         }
     }
+
+
+
 }
