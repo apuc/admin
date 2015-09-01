@@ -156,11 +156,17 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class'  => DataColumn::className(),
                 'header' => 'Действия',
-                'format' => 'html',
+                'format' => 'raw',
                 'value' => function($model){
                    /* $view = Html::a("<img src='".\yii\helpers\Url::base()."crud_img/view.png' width='20px' title='Просмотр'></a>", ['/supplies/supplies/view','id'=>$model->id]);
                     $view .= Html::a("<img src='".\yii\helpers\Url::base()."crud_img/edit.png' width='20px' title='Редактировать'></a>", ['/supplies/supplies/update','id'=>$model->id]);*/
-                    $view = Html::a("<img src='".\yii\helpers\Url::base()."crud_img/del.png' width='20px' title='Удалить'></a>", ['/supplies/supplies/delete','id'=>$model->id]);
+                    $view = Html::a("<img src='".\yii\helpers\Url::base()."crud_img/del.png' width='20px' title='Удалить'>", [
+                        '/supplies/supplies/delete',
+                        'id'=>$model->id,
+                    ],
+                    [
+                        'data'=> ['confirm' => 'Удалить материал?']
+                    ]);
                     return $view;
                 }
             ],

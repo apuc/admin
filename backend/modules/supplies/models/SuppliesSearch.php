@@ -18,8 +18,8 @@ class SuppliesSearch extends Supplies
     public function rules()
     {
         return [
-            [['id', 'code', 'type_mat', 'type_blind', 'color', 'status'], 'integer'],
-            [['images', 'type_width', 'price'], 'safe'],
+            [['id','type_mat', 'type_blind', 'color', 'status'], 'integer'],
+            [['images', 'code', 'type_width', 'price'], 'safe'],
         ];
     }
 
@@ -57,7 +57,6 @@ class SuppliesSearch extends Supplies
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'code' => $this->code,
             'type_mat' => $this->type_mat,
             'type_blind' => $this->type_blind,
             'color' => $this->color,
@@ -66,7 +65,8 @@ class SuppliesSearch extends Supplies
 
         $query->andFilterWhere(['like', 'images', $this->images])
             ->andFilterWhere(['like', 'type_width', $this->type_width])
-            ->andFilterWhere(['like', 'price', $this->price]);
+            ->andFilterWhere(['like', 'price', $this->price])
+            ->andFilterWhere(['like', 'code', $this->code]);
 
         return $dataProvider;
     }
