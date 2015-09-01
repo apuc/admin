@@ -39,7 +39,7 @@ $(document).ready(function () {
         $("#sortable").disableSelection();
 
         $("#sort").sortable({
-            cancel: '.empty',
+            cancel: '.empty, .indBlockContainer',
             cursor: 'move',
             stop: function (event, ui) {
                 var bloks = '';
@@ -387,7 +387,7 @@ $(document).ready(function () {
                 url: '/secure/add_ind_block',
                 data: "name=" + name + "&code=" + code + "&style=" + style,
                 success: function (msg) {
-                    $('#sort').append('<li class="published" data-type="ind_' + msg + '">Индивидуальный блок (' + name + ') | <a data-page-id="' + msg + '" href="#">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>');
+                    $('#sort').append('<li class="published" data-type="ind_' + msg + '">Индивидуальный блок (' + name + ') | <a class="editIndBlock" data-block-id="' + msg + '" href="#">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>');
                     var bloks = '';
                     $('.published').each(function () {
                         bloks = bloks + ',' + $(this).attr('data-type');
@@ -557,5 +557,56 @@ $(document).ready(function () {
         }
     });
 
+    //редактирование индивидуальных блоков
+    $(document).on('click','.editIndBlock', function(){
+        var block_id = $(this).attr('data-block-id');
+        var block = $(this).parent();
+
+        $.ajax({
+            url: '/secure/create_block_form',
+            type: 'POST',
+            data: {blockId: block_id},
+        })
+        .done(function(e) {
+           // console.log(e);
+            if($('.indBlockContainer').length > 0){
+                $('.indBlockContainer').remove();
+            }
+            block.append(e);
+        })
+        .fail(function() {
+            console.log("error");
+        })
+
+        return false;
+    })
+    //сохраняем изменения в индивидуальном блоке
+    $(document).on('click','.saveBtn', function(){
+        var style = $(this).prev().val();
+        var code = $(this).prev().prev().val();
+        var id = $(this).attr('data-block-id');
+
+        $.ajax({
+            url: '/secure/save_block_form',
+            type: 'POST',
+            data: {
+                blockId: id,
+                blockStyle: style,
+                blockCode: code},
+        })
+        .done(function() {
+            // console.log(e);
+            $('.indBlockContainer').remove();
+        })
+        .fail(function() {
+            console.log("error");
+        })
+    })
+
+    $(document).on('click','.cancelBtn', function(){
+        if($('.indBlockContainer').length > 0){
+            $('.indBlockContainer').remove();
+        }
+    });
 });
 
