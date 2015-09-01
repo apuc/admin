@@ -41,7 +41,7 @@ class SuppliesSearch extends Supplies
      */
     public function search($params)
     {
-        $query = Supplies::find();
+        $query = Supplies::find()->orderBy('id DESC');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

@@ -403,6 +403,11 @@ $(document).ready(function () {
                     });
                     bloksAll = bloksAll.substring(1);
                     $('.sortBlockAll').val(bloksAll);
+
+                    $('#indBlockName').val('');
+                    $('#indBlockCode').val('');
+                    $('#indBlockStyle').val('');
+                    alert('Блок добавлен.');
                 }
             });
         }

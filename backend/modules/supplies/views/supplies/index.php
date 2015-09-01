@@ -19,7 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Создать материал', ['add'], ['class' => 'btn btn-success']) ?>
     </p>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -54,7 +53,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::dropDownList('mat_' . $model->id, $model->type_mat, $arr, ['id' => 'mat_' . $model->id, 'class' => 'matSelect']);
                     //$material = \common\models\Material::find()->where(['id' => $model->type_mat])->one();
                     //return $material->name;
-                }
+                },
+                'filter' => Html::activeDropDownList(new \backend\modules\supplies\models\SuppliesSearch(), 'type_mat', \yii\helpers\ArrayHelper::map(\backend\modules\material\models\Material::find()->asArray()->all(), 'id', 'name'),['class'=>'form-control','prompt' => 'Выберите тип материала','options' => [$_GET['SuppliesSearch']['type_mat'] => ['selected '=>'selected']]]),
             ],
             [
                 'attribute'=>'type_blind',
@@ -70,10 +70,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         return 'вертикальные';
                     }*/
 
-                    $arr = ['1' => 'Горизантальные', '2' => 'рулонные', '3' => 'вертикальные'];
+                    $arr = ['0' => 'Выберите элемент', '1' => 'Горизантальные', '2' => 'рулонные', '3' => 'вертикальные'];
                     return Html::dropDownList('blind_' . $model->id, $model->type_blind, $arr, ['id' => 'blind_' . $model->id, 'class' => 'blindSelect']);
 
-                }
+                },
+                'filter' => Html::dropDownList('SuppliesSearch[type_blind]',$_GET['SuppliesSearch']['type_blind'],[''=>'Выберите','1' => 'Горизантальные', '2' => 'рулонные', '3' => 'вертикальные'], ['id'=>'suppliessearch-type_blind']),
             ],
 
             [
@@ -98,7 +99,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                     $html .= "</div>";
                     return $html;
-                }
+                },
+                'filter' => Html::activeDropDownList(new \backend\modules\supplies\models\SuppliesSearch(), 'color', \yii\helpers\ArrayHelper::map(\backend\modules\color\models\Color::find()->asArray()->all(), 'id', 'value'),['class'=>'form-control','prompt' => 'Выберите цвет','options' => [$_GET['SuppliesSearch']['color'] => ['selected '=>'selected']]]),
+
             ],
             [
                 'attribute'=>'price',
@@ -118,25 +121,31 @@ $this->params['breadcrumbs'][] = $this->title;
                     foreach($pageItem as $p){
                         $arr[] = $p->id_blind;
                     }
-                    $arr = array_unique($arr);
-                    $html = '';
-                    $html .= '<div class="blindToSupliesOne">';
-                    $k = 0;
+                    if(!empty($arr)){
+                        $arr = array_unique($arr);
+                        $html = '';
+                        $html .= '<div class="blindToSupliesOne">';
+                        $k = 0;
 
-                    foreach($arr as $p){
-                        if($p){
-                            $title = \backend\modules\blind\models\Blind::find()->where(['id'=>$p])->one();
-                            if($k == 2){
-                                $html .= '</div><div class="blindToSuplies">';
+                        foreach($arr as $p){
+                            if($p){
+                                $title = \backend\modules\blind\models\Blind::find()->where(['id'=>$p])->one();
+                                if($k == 2){
+                                    $html .= '</div><div class="blindToSuplies">';
+                                }
+
+                                $html .= '<li>' . $title->name . '<a href="#" class="undock" id-mat="' . $model->id . '" id-page="' . $p . '"> -</a></li>';
+                                $k++;
                             }
-
-                            $html .= '<li>' . $title->name . '<a href="#" class="undock" id-mat="' . $model->id . '" id-page="' . $p . '"> -</a></li>';
-                            $k++;
                         }
+                        $html .= '</div>';
+                        if($k > 2){$html .= '<a href="#" class="allBlindToSuplies">Показать все</a>';}
+                        return $html;
                     }
-                   $html .= '</div>';
-                    if($k > 2){$html .= '<a href="#" class="allBlindToSuplies">Показать все</a>';}
-                    return $html;
+                    else {
+                      return '';
+                    }
+
                 }
             ],
             // 'status',

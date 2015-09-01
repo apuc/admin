@@ -34,7 +34,8 @@ class Template
         foreach ($blocs as $b) {
             $style .= $b->style . "\n";
         }
-        $file = preg_replace("/{css}/", "<style>\n" . $style . "</style>", $file);
+        //$file = preg_replace("/{css}/", "<style>\n" . $style . "</style>", $file);
+        file_put_contents('css/style.css',$style);
         return $file;
     }
 
@@ -47,7 +48,6 @@ class Template
         $head = self::get_keywords($model, $head);
         $head = self::get_description($model, $head);
         $head = self::get_descr($model, $head);
-
         eval('?>' . $head . '<?php;');
     }
 
@@ -73,13 +73,16 @@ class Template
 
     public static function get_descr($model, $file){
         $arr = explode(',', $model->sort);
+        $t = '';
         foreach($arr as $a){
             if($a == 'des'){
+                /*$test = explode('<div style="page-break-after: always"><span style="display:none">&nbsp;</span></div>', $model->description);
+                Debag::prn($test);*/
                 $t =  preg_replace("/{descr}/", "<div class='content article'><div class='container'><h1>$model->h1</h1>$model->description<a href='#' class='readmore'>Читать полностью</a></div></div>" , $file);
             }
-            else {
-                $t = preg_replace("/{descr}/", '' , $file);
-            }
+        }
+        if($t == ''){
+            $t = preg_replace("/{descr}/", '' , $file);
         }
         return $t;
     }

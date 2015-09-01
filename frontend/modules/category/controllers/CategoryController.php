@@ -66,9 +66,6 @@ class CategoryController extends Controller
             if($p == 'sub'){
 
             }
-            if($p == 'des'){
-                /*$html .= "<div class='description'>$page->description</div>";*/
-            }
             if($p[0] == 'y'){
                 $blockId = explode('_', $p);
                 $blockId = $blockId[1];
