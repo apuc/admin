@@ -9,7 +9,7 @@ use Yii;
  *
  * @property integer $id
  * @property string $images
- * @property integer $code
+ * @property string $code
  * @property integer $type_mat
  * @property integer $type_blind
  * @property string $type_width
@@ -34,7 +34,7 @@ class Supplies extends \yii\db\ActiveRecord
     {
         return [
             [['images', 'code', 'type_mat', 'type_blind', 'type_width', 'color', 'price', 'status'], 'required'],
-            [['code', 'type_mat', 'type_blind', 'color', 'status'], 'integer'],
+            [['type_mat', 'type_blind', 'color', 'status'], 'integer'],
             [['images', 'type_width', 'price'], 'string', 'max' => 255]
         ];
     }
