@@ -34,7 +34,8 @@ class Template
         foreach ($blocs as $b) {
             $style .= $b->style . "\n";
         }
-        $file = preg_replace("/{css}/", "<style>\n" . $style . "</style>", $file);
+        //$file = preg_replace("/{css}/", "<style>\n" . $style . "</style>", $file);
+        file_put_contents('css/style.css',$style);
         return $file;
     }
 
