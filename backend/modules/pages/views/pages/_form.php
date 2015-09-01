@@ -96,7 +96,7 @@ use mihaildev\ckeditor\CKEditor;
                                 $blockId = $blockId[1];
                                 $block = \common\models\Block::find()->where(['id'=>$blockId])->one();
                                 $name = $block->name;
-                                echo '<li class="published sortAll" data-type="'.$s.'">Индивидуальный блок ('.$name.') | <a class="toPublick" href="#">Скрыть</a> | <a data-block-id="'.$blockId.'" href="#">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>';
+                                echo '<li class="published sortAll" data-type="'.$s.'">Индивидуальный блок ('.$name.') | <a class="toPublick" href="#">Скрыть</a> | <a class="editIndBlock" data-block-id="'.$blockId.'" href="#">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>';
                             }
                             else {
                                 $name = \common\classes\Template::getBlockName($s);
@@ -123,7 +123,7 @@ use mihaildev\ckeditor\CKEditor;
                             $blockId = $blockId[1];
                             $block = \common\models\Block::find()->where(['id'=>$blockId])->one();
                             $name = $block->name;
-                            echo '<li class="noPublick sortAll" data-type="'.$sd.'">Индивидуальный блок ('.$name.') | <a class="toPublick" href="#">Опубликовать</a> | <a href="#" data-block-id="'.$blockId.'">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>';
+                            echo '<li class="noPublick sortAll" data-type="'.$sd.'">Индивидуальный блок ('.$name.') | <a class="toPublick" href="#">Опубликовать</a> | <a class="editIndBlock" href="#" data-block-id="'.$blockId.'">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>';
                         }
                         else {
                             $name = \common\classes\Template::getBlockName($sd);
