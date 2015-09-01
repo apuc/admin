@@ -73,10 +73,12 @@ use mihaildev\ckeditor\CKEditor;
                     if($k == 0){
                         $title = \common\models\PageBlinds::getNameTitle($p->id_pages);
                         $inp = $title;
-                        $ul .= '<li class="active"><a href="#panel'.$title.'">'.$title.'</a><span page-id="'.$title.'" class="delPages">x</span></li>';
+                        $title = str_replace(' ','_',$title);
+                        //$ul .= '<li class="active"><a href="#panel'.$title.'">'.$title.'</a><span page-id="'.$title.'" class="delPages">x</span></li>';
+                        $ul .= '<li class="active"><a href="#panel'.$title.'"><input id-page="'.$title.'" type="text" class="insetName" value="'.$inp.'"/></a><span page-id="'.$title.'" class="delPages">x</span></li>';
 
                         $page = \common\models\PageItem::find()->where(['id_page'=>$p->id_pages])->all();
-                        $html = '<div id="panel'.$title.'" class="tabPanel activeMy"><h3>'.$title.'</h3>';
+                        $html = '<div id="panel'.$title.'" class="tabPanel activeMy"><h3>'.$inp.'</h3>';
                         $html .= '<table id="t_'.$title.'" class="table table-bordered">';
                         foreach($page as $pg){
                             if($pg->item_type == 'materials') {
@@ -98,11 +100,12 @@ use mihaildev\ckeditor\CKEditor;
                     else{
                         $title = \common\models\PageBlinds::getNameTitle($p->id_pages);
                         $inp = $title;
-                        $ul .= '<li><a href="#panel'.$title.'">'.$title.'</a><span page-id="'.$title.'" class="delPages">x</span></li>';
+                        $title = str_replace(' ','_',$title);
+                        $ul .= '<li><a href="#panel'.$title.'"><input id-page="'.$title.'" type="text" class="insetName" value="'.$inp.'"/></a><span page-id="'.$title.'" class="delPages">x</span></li>';
 
 
                         $page = \common\models\PageItem::find()->where(['id_page'=>$p->id_pages])->all();
-                        $html .= '<div id="panel'.$title.'" class="tabPanel"><h3>'.$title.'</h3>';
+                        $html .= '<div id="panel'.$title.'" class="tabPanel"><h3>'.$inp.'</h3>';
                         $html .= '<table id="t_'.$title.'" class="table table-bordered">';
                         foreach($page as $pg){
                             if($pg->item_type == 'materials') {
