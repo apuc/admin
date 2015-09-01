@@ -72,14 +72,17 @@ use mihaildev\ckeditor\CKEditor;
             <div>
                 <ul id="sort">
                     <?php
-                    $sortDefault = explode(',', $model->sort_all);
+                    if($model->sort_all != ''){
+                        $sortDefault = explode(',', $model->sort_all);
+                    }
+                    else {
+                        $sortDefault = [];
+                    }
                     if(!in_array('des', $sortDefault)){
                         $sortDefault[] = 'des';
                     }
-                    //\common\classes\Debag::prn($sortDefault);
                     $sort = explode(',', $model->sort);
-
-                    if(!empty($model->sort)){
+                    if($model->sort != ''){
                         foreach ($sort as $s) {
                             if($s[0] == 'y'){
                                 $blockId = explode('_', $s);
@@ -93,7 +96,7 @@ use mihaildev\ckeditor\CKEditor;
                                 $blockId = $blockId[1];
                                 $block = \common\models\Block::find()->where(['id'=>$blockId])->one();
                                 $name = $block->name;
-                                echo '<li class="published sortAll" data-type="'.$s.'">Индивидуальный блок ('.$name.') | <a class="toPublick" href="#">Скрыть</a> | <a target="_blank" href="/secure/block/block/update?id='.$blockId.'">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>';
+                                echo '<li class="published sortAll" data-type="'.$s.'">Индивидуальный блок ('.$name.') | <a class="toPublick" href="#">Скрыть</a> | <a data-block-id="'.$blockId.'" href="#">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>';
                             }
                             else {
                                 $name = \common\classes\Template::getBlockName($s);
@@ -120,7 +123,7 @@ use mihaildev\ckeditor\CKEditor;
                             $blockId = $blockId[1];
                             $block = \common\models\Block::find()->where(['id'=>$blockId])->one();
                             $name = $block->name;
-                            echo '<li class="noPublick sortAll" data-type="'.$sd.'">Индивидуальный блок ('.$name.') | <a class="toPublick" href="#">Опубликовать</a> | <a target="_blank" href="/secure/block/block/update?id='.$blockId.'">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>';
+                            echo '<li class="noPublick sortAll" data-type="'.$sd.'">Индивидуальный блок ('.$name.') | <a class="toPublick" href="#">Опубликовать</a> | <a href="#" data-block-id="'.$blockId.'">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>';
                         }
                         else {
                             $name = \common\classes\Template::getBlockName($sd);
