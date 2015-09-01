@@ -102,12 +102,11 @@ class BlindController extends Controller
         $addMaterials = \common\classes\Supplies::getAddSupplies();
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            Debag::prn($_POST['infoPage']);
+
             $blind->name = $model->name;
             $blind->status = $model->status;
             $blind->description = $model->description;
             $blind->save();
-
             if(isset($_POST['infoPage'])){
                 foreach($_POST['infoPage'] as $v){
                     $input = explode('*',$v);
@@ -284,15 +283,22 @@ class BlindController extends Controller
 
 
 //Debag::prn($_POST['infoPage']);
+            $zag = PageToBlind::find()->where(['id_blind'=>$blind->id])->all();
+            foreach($zag as $v){
+                PageBlinds::deleteAll(['id'=>$v->id_pages]);
+            }
+            PageToBlind::deleteAll(['id_blind'=>$blind->id]);
+
             if(isset($_POST['infoPage'])){
+
                 foreach($_POST['infoPage'] as $v){
                     $input = explode('*',$v);
-
-                    $pb = PageBlinds::find()->where(['name'=>$input[0]])->one();
+                    $s = str_replace('_',' ',$input[0]);
+                    $pb = PageBlinds::find()->where(['name'=>$s])->one();
 
                     if(empty($pb->id)){
                         $pb = new PageBlinds();
-                        $pb->name = $input[0];
+                        $pb->name = $s;
                         $pb->save();
                     }
                     //$pb->name = $input[0];
