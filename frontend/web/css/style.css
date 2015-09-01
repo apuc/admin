@@ -1,5 +1,5 @@
 
-rth
+
 
 
 
@@ -2562,7 +2562,47 @@ footer .contacts img {
     -ms-transform: scale(1.1, 1.1);
     transform: scale(1.1, 1.1);
 }
-0
+#mod{
+	display: none;
+	position:absolute;
+	top:0;
+	width:30%;
+	height:100px;
+	background-color:#fff;
+	z-index:99999;
+	left: 35%;
+	padding:20px;
+	border:1px solid black;
+	border-radius:8px;
+}
+#mod span{
+	font-size: 23px;
+    display: block;
+    margin-bottom: 30px;
+}
+#closePhone {
+	position:absolute;
+	top:5px;
+	right:5px;
+	cursor:pointer;
+}
+
+
+
+#my-tel{color:#000;}
+
+.check{
+    background: #269dda;
+    font-family: 'OpenSans-Semibold';
+    color: #fff;
+    font-size: 16px;
+    display: block;
+    position: absolute;
+    padding: 7px 18px 8px;
+    text-decoration: none;
+    left: 270px;
+    top: 68px;
+}
 body {
 
 }
@@ -2578,8 +2618,7 @@ height:300px;
 
 .large_page_img {
    width: 259px;
-   height: 158px;
-}
+ }
 
 .small_page_img {
    width: 79px;
@@ -2587,15 +2626,27 @@ height:300px;
 }
 
 
-jgkj
-jgkj
-rth
-rth
 0
 0
 0
 0
-123
+
+undefined
 0
 0
-rth
+0
+0
+0
+0
+0
+0
+0
+
+0
+
+0
+0
+0
+0
+0
+0

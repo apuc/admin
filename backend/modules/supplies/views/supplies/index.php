@@ -118,25 +118,31 @@ $this->params['breadcrumbs'][] = $this->title;
                     foreach($pageItem as $p){
                         $arr[] = $p->id_blind;
                     }
-                    $arr = array_unique($arr);
-                    $html = '';
-                    $html .= '<div class="blindToSupliesOne">';
-                    $k = 0;
+                    if(!empty($arr)){
+                        $arr = array_unique($arr);
+                        $html = '';
+                        $html .= '<div class="blindToSupliesOne">';
+                        $k = 0;
 
-                    foreach($arr as $p){
-                        if($p){
-                            $title = \backend\modules\blind\models\Blind::find()->where(['id'=>$p])->one();
-                            if($k == 2){
-                                $html .= '</div><div class="blindToSuplies">';
+                        foreach($arr as $p){
+                            if($p){
+                                $title = \backend\modules\blind\models\Blind::find()->where(['id'=>$p])->one();
+                                if($k == 2){
+                                    $html .= '</div><div class="blindToSuplies">';
+                                }
+
+                                $html .= '<li>' . $title->name . '<a href="#" class="undock" id-mat="' . $model->id . '" id-page="' . $p . '"> -</a></li>';
+                                $k++;
                             }
-
-                            $html .= '<li>' . $title->name . '<a href="#" class="undock" id-mat="' . $model->id . '" id-page="' . $p . '"> -</a></li>';
-                            $k++;
                         }
+                        $html .= '</div>';
+                        if($k > 2){$html .= '<a href="#" class="allBlindToSuplies">Показать все</a>';}
+                        return $html;
                     }
-                   $html .= '</div>';
-                    if($k > 2){$html .= '<a href="#" class="allBlindToSuplies">Показать все</a>';}
-                    return $html;
+                    else {
+                      return '';
+                    }
+
                 }
             ],
             // 'status',
