@@ -177,4 +177,29 @@ class BlockController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionCreate_block_form(){
+        //Debag::prn($_POST);
+        $block_id = $_POST['blockId'];
+        //$block_id = 26;
+
+        $modelBlock = Block::find()->where(['id' => $block_id])->one();
+
+        $form = $this->renderAjax('ajax_block_form',['model' => $modelBlock]);
+
+        echo $form;
+    }
+
+    public function actionSave_block_form(){
+        $blockId = $_POST['blockId'];
+        $blockStyle = $_POST['blockStyle'];
+        $blockCode = $_POST['blockCode'];
+
+        $modelBlock = Block::find()->where(['id' => $blockId])->one();
+
+        $modelBlock->code = $blockCode;
+        $modelBlock->style = $blockStyle;
+
+        $modelBlock->save();
+    }
 }

@@ -90,6 +90,8 @@ return [
                 '' => 'pages/pages',
                 'request' => 'request/default',
                 'change_sup' => 'supplies/supplies/change_sup',
+                'create_block_form' => 'block/block/create_block_form',
+                'save_block_form' => 'block/block/save_block_form',
             ],
         ],
         'urlManagerFrontEnd' => [
