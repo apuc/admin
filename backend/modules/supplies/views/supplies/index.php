@@ -46,6 +46,9 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute'=>'type_mat',
                 'format' => 'raw',
+                'filter' => function(){
+                    return '1223';
+                },
                 'value' => function($model){
                     $mat = \backend\modules\material\models\Material::find()->all();
                     foreach($mat as $m){
