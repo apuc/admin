@@ -15,7 +15,8 @@ class m150828_062130_create_page_item_table extends Migration
             'id'       => Schema::TYPE_PK,
             'id_page'     => Schema::TYPE_INTEGER . ' NOT NULL',
             'id_item'   => Schema::TYPE_INTEGER . ' NOT NULL',
-            'item_type'   => Schema::TYPE_STRING . ' NOT NULL'
+            'item_type'   => Schema::TYPE_STRING . ' NOT NULL',
+            'id_blind'   => Schema::TYPE_INTEGER . ' NOT NULL'
         ], $tableOptions);
     }
 

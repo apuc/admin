@@ -6,6 +6,7 @@ use common\classes\Debag;
 use common\models\Color;
 use common\models\Material;
 use common\models\Media;
+use common\models\PageItem;
 use Yii;
 use backend\modules\supplies\models\Supplies;
 use backend\modules\supplies\models\SuppliesSearch;
@@ -228,6 +229,10 @@ class SuppliesController extends Controller
             $sup = Supplies::find()->where(['id' => $_GET['id']])->one();
             $sup->images = $_GET['img_val'];
             $sup->save();
+        }
+        if(isset($_GET['id_mat'])){
+            $pageItem = PageItem::find()->where(['id_item'=>$_GET['id_mat'],'id_blind'=>$_GET['id_page']])->one();
+            $pageItem = PageItem::deleteAll(['id'=>$pageItem->id]);
         }
     }
 }

@@ -102,6 +102,7 @@ class BlindController extends Controller
         $addMaterials = \common\classes\Supplies::getAddSupplies();
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            Debag::prn($_POST['infoPage']);
             $blind->name = $model->name;
             $blind->status = $model->status;
             $blind->description = $model->description;
@@ -110,8 +111,9 @@ class BlindController extends Controller
             if(isset($_POST['infoPage'])){
                 foreach($_POST['infoPage'] as $v){
                     $input = explode('*',$v);
+                    $s = str_replace('_',' ',$input[0]);
                     $pb = new PageBlinds();
-                    $pb->name = $input[0];
+                    $pb->name = $s;
                     $pb->save();
                     unset($input[0]);
                     $ptb = new PageToBlind();
@@ -134,6 +136,7 @@ class BlindController extends Controller
                             $pageItem->id_item = $pageTitle->id;
                             $pageItem->item_type = 'zagolovok';
                         }
+                        $pageItem->id_blind = $blind->id;
                         $pageItem->save();
                     }
                 }
@@ -280,12 +283,13 @@ class BlindController extends Controller
             }
 
 
-
+//Debag::prn($_POST['infoPage']);
             if(isset($_POST['infoPage'])){
                 foreach($_POST['infoPage'] as $v){
                     $input = explode('*',$v);
 
                     $pb = PageBlinds::find()->where(['name'=>$input[0]])->one();
+
                     if(empty($pb->id)){
                         $pb = new PageBlinds();
                         $pb->name = $input[0];
@@ -323,9 +327,14 @@ class BlindController extends Controller
                             $pageItem->id_item = $pageTitle->id;
                             $pageItem->item_type = 'zagolovok';
                         }
+                        $pageItem->id_blind = $blind->id;
                         $pageItem->save();
                     }
                 }
+            }
+
+            else{
+
             }
             return $this->redirect(['update', 'id' => $blind->id]);
         } else {
