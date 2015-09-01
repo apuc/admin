@@ -253,7 +253,7 @@ $(document).ready(function () {
 
            // $('#myTab1').append('<li class="active"><a href="#panel' + linkName + '">' + val + '</a><span page-id="' + linkName + '" class="delPages">x</span></li>');
             $('#myTab1').append('<li class="active"><a href="#panel' + linkName + '"><input id-page="' + linkName + '" type="text" class="insetName" value="' + val + '" /></a><span page-id="' + linkName + '" class="delPages">x</span></li>');
-            $('#divTabContent').append('<div id="panel' + linkName + '" class="tabPanel activeMy"><h3>' + val + '</h3><table class="table table-bordered" id="t_' + linkName + '"></table><a page-id="' + linkName + '"data-toggle="modal" data-target="#myModal3" href="#" class="attachMaterial">Прикрепить материал</a> | <a class="attachZag" data-toggle="modal" data-target="#myModal2" href = "#" page-id="' + linkName + '">Добавить заголовок</a><div id="publishMaterials' + linkName + '"></div><input id="input_' + linkName + '" type="hidden" name="infoPage[]" value="' + linkName + '"></div>');
+            $('#divTabContent').append('<div id="panel' + linkName + '" class="tabPanel activeMy"><h3>' + val + '</h3><table class="table table-bordered" id="t_' + linkName + '"></table><a page-id="' + linkName + '"data-toggle="modal" data-target="#myModal4" href="#" class="attachMaterialList">Прикрепить материалы списком</a> | <a page-id="' + linkName + '"data-toggle="modal" data-target="#myModal3" href="#" class="attachMaterial">Прикрепить материал</a> | <a class="attachZag" data-toggle="modal" data-target="#myModal2" href = "#" page-id="' + linkName + '">Добавить заголовок</a><div id="publishMaterials' + linkName + '"></div><input id="input_' + linkName + '" type="hidden" name="infoPage[]" value="' + linkName + '"></div>');
             $('#blindform-pagename').val('');
         }
         return false;
@@ -674,6 +674,39 @@ $(document).ready(function () {
         return false;;
     });
 
+
+    $(document).on('click','.attachMaterialList',function(){
+        var id = $('.attachMaterialList').attr('page-id');
+        $('#curentPageIdListMat').attr('page-id',id);
+    });
+
+    $(document).on('click','#addArticleMaterials',function(){
+        var val = $('.articleMaterials').val().replace(/\n/g, ",");
+
+        var pageId = $('#curentPageIdListMat').attr('page-id');
+
+        $.ajax({
+            type: "GET",
+            url: 'publ_materials',
+            data: "val=" + val + "&id_page=" + pageId,
+            success: function (msg) {
+                $('#t_' + pageId).append(msg);
+                $('#input_' + pageId).val(pageId);
+                $('.itemPage').each(function () {
+                    var pId = $(this).attr('page-id');
+                    if (pageId == pId) {
+                        var mId = $(this).attr('materials-id');
+                        var iTp = $(this).attr('item-type');
+                        var valInp = $('#input_' + pageId).val();
+                        $('#input_' + pageId).val(valInp + '*' + mId + '_' + iTp);
+                    }
+                });
+            }
+        });
+        $('.articleMaterials').val('');
+        $('#myModal4').modal('hide');
+        return false;
+    });
 
 });
 

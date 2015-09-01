@@ -393,4 +393,18 @@ class BlindController extends Controller
         $id = PageBlinds::find()->where(['name'=>$_GET[id]])->one();
         $del = PageToBlind::deleteAll(['id_pages'=>$id->id]);
     }
+
+    public function actionPubl_materials(){
+        $arr = explode(",", $_GET['val']);
+        $html = '';
+        foreach($arr as $a){
+            if(!empty($a)) {
+                $sup = \backend\modules\supplies\models\Supplies::find()->where(['code' => $a])->one();
+                if(isset($sup->id)) {
+                    $html .= \common\classes\Supplies::getOneAddSupplies($sup->id, $_GET['id_page']);
+                }
+            }
+        }
+        return $html;
+    }
 }
