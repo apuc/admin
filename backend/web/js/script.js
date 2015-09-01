@@ -195,7 +195,7 @@ $(document).ready(function () {
         $('#titleB').val('');
         var idPag = $('#curentPageIdTitle').attr('page-id');
         // $('#t_'+idPag).append('<tr class="itemPage" page-id="'+idPag+'" materials-id="'+title+'" item-type="zagolovok"><td colspan="7">'+title+'</td><td><a class="delSuplies" href="#">Удалить</a></td></tr>');
-        $('#t_' + idPag).prepend('<tr class="itemPage" page-id="' + idPag + '" materials-id="' + title + '" item-type="zagolovok"><td colspan="7">' + title + '</td><td><a class="delSuplies" href="#">Удалить</a></td></tr>');
+        $('#t_' + idPag).append('<tr class="itemPage" page-id="' + idPag + '" materials-id="' + title + '" item-type="zagolovok"><td colspan="7">' + title + '</td><td><a class="delSuplies" href="#">Удалить</a></td></tr>');
         var pageId = idPag;
         $('#input_' + pageId).val(pageId);
         $('.itemPage').each(function () {
@@ -309,7 +309,7 @@ $(document).ready(function () {
         $(this).parent().parent().attr('page-id', pageId);
         $(this).parent().parent().attr('materials-id', idMat);
         $(this).parent().parent().attr('item-type', 'materials');
-        $(this).parent().parent().clone().prependTo('#t_' + pageId);
+        $(this).parent().parent().clone().appendTo('#t_' + pageId);
         $(this).parent().parent().removeClass('itemPage');
         $(this).removeClass('delSuplies');
         $(this).addClass('addSuplies');
