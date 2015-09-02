@@ -324,3 +324,14 @@ a.osn {
 .blindToSuplies{
     display: none;
 }
+
+.pagenameInp{
+    width: 300px;
+    display: inline-block;
+    margin-right: 15px;
+}
+a#addPage {
+    position: relative;
+    left: 463px;
+    top: -49px;
+}
