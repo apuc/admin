@@ -45,7 +45,7 @@ class Blind extends \yii\db\ActiveRecord
             'name' => 'Название',
             'status' => 'Активность товара',
             'description' => 'Описание',
-
+            'pagename' => 'Название страницы',
         ];
     }
 }

@@ -2562,19 +2562,6 @@ footer .contacts img {
     -ms-transform: scale(1.1, 1.1);
     transform: scale(1.1, 1.1);
 }
-
-.content .readmoreMy {
-    font-size: 14px;
-    color: #269dda;
-    float: right;
-    margin-top: 13px;
-}
-
-.containerMy {
-    width: 1100px;
-    margin: 0 auto;
-    position: relative;
-}
 #mod{
 	display: none;
 	position:absolute;
@@ -2631,35 +2618,12 @@ height:300px;
 
 .large_page_img {
    width: 259px;
- }
-
-.small_page_img {
-   width: 79px;
-   height: 50px;
+   heigth: 158px;
 }
 
+.small_page_img {
+   width: 80px;
+   heigth: 50px;
+}
 
-0
-0
-0
-0
-
-undefined
-0
-0
-0
-0
-0
-0
-0
-0
-0
-
-0
-
-0
-0
-0
-0
-0
 0

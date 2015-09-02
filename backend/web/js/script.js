@@ -681,7 +681,7 @@ $(document).ready(function () {
 
 
     $(document).on('click','.attachMaterialList',function(){
-        var id = $('.attachMaterialList').attr('page-id');
+        var id = $(this).attr('page-id');
         $('#curentPageIdListMat').attr('page-id',id);
     });
 

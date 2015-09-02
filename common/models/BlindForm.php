@@ -37,6 +37,7 @@ class BlindForm extends Model
             'description' => 'Описание',
             'categories' => 'Категории',
             'materials' => 'Материалы',
+            'pagename' => 'Название страницы',
         ];
     }
 }

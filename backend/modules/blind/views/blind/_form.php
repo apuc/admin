@@ -62,7 +62,7 @@ use mihaildev\ckeditor\CKEditor;
         <div id="panel2" class="tab-pane fade">
             <h3>Материалы</h3>
 
-            <?=$form->field($model,'pagename')->textInput(['maxlength' => true])?><a href="#" id="addPage">Добавить страницу</a>
+            <?=$form->field($model,'pagename')->textInput(['maxlength' => true,'class'=>'form-control pagenameInp'])?><a class="btn btn-success" href="#" id="addPage">Добавить страницу</a>
 
            <?php
                 $pages = \common\models\PageToBlind::find()->where(['id_blind'=>$blind->id])->all();
