@@ -19,6 +19,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Создать материал', ['add'], ['class' => 'btn btn-success']) ?>
     </p>
+    <?php
+    $allColor = \common\models\Color::find()->all();
+    $color = '<div class="selectColor" style = "width:100px;height:32px;border: 1px solid grey;font-size: 13px;text-align: center;padding-top: 7px">Выберите цвет</div>';
+    $color .= "<div class='allColor'>";
+    foreach($allColor as $c){
+        $color .= "<div class='selectOnecolorAlt' color-v='$c->value' color='$c->id' data-sup-id='$model->id' data-id='$c->id' style='background-color:$c->value;width: 100px;height: 20px;margin: 5px'></div>";
+    }
+    $color .= "</div>";
+    ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -77,7 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::dropDownList('blind_' . $model->id, $model->type_blind, $arr, ['id' => 'blind_' . $model->id, 'class' => 'blindSelect']);
 
                 },
-                'filter' => Html::dropDownList('SuppliesSearch[type_blind]',$_GET['SuppliesSearch']['type_blind'],[''=>'Выберите','1' => 'Горизантальные', '2' => 'рулонные', '3' => 'вертикальные'], ['id'=>'suppliessearch-type_blind']),
+                'filter' => Html::dropDownList('SuppliesSearch[type_blind]',$_GET['SuppliesSearch']['type_blind'],[''=>'Выберите','1' => 'Горизантальные', '2' => 'рулонные', '3' => 'вертикальные'], ['id'=>'suppliessearch-type_blind', 'class'=>'form-control']),
             ],
 
             [
@@ -103,7 +112,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     $html .= "</div>";
                     return $html;
                 },
-                'filter' => Html::activeDropDownList(new \backend\modules\supplies\models\SuppliesSearch(), 'color', \yii\helpers\ArrayHelper::map(\backend\modules\color\models\Color::find()->asArray()->all(), 'id', 'value'),['class'=>'form-control','prompt' => 'Выберите цвет','options' => [$_GET['SuppliesSearch']['color'] => ['selected '=>'selected']]]),
+                //'filter' => Html::activeDropDownList(new \backend\modules\supplies\models\SuppliesSearch(), 'color', \yii\helpers\ArrayHelper::map(\backend\modules\color\models\Color::find()->asArray()->all(), 'id', 'value'),['class'=>'form-control','prompt' => 'Выберите цвет','options' => [$_GET['SuppliesSearch']['color'] => ['selected '=>'selected']]]),
+                'filter' => "<input id='colorId' type='hidden' name='SuppliesSearch[color]' value='".$_GET['SuppliesSearch']['color']."'>".$color
 
             ],
             [

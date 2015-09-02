@@ -714,5 +714,18 @@ $(document).ready(function () {
         return false;
     });
 
+    $('.selectOnecolorAlt').on('click', function(){
+        var idColor = $(this).attr('color');
+        var vColor = $(this).attr('color-v');
+        $('#colorId').val(idColor);
+        $(this).parent().slideToggle();
+        $(this).parent().prev().css({'background':vColor});
+        $(this).parent().prev().text('');
+        //$('.form-control').focus();
+        var e = jQuery.Event("keydown", { keyCode: 13 });    //enter
+        jQuery(".form-control").trigger(e);
+
+    });
+
 });
 
