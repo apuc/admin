@@ -19,7 +19,7 @@
                 echo '<td>'.$v->blind.'</td>';
                 echo '<td>'.$v->materials.'</td>';
                 echo '<td>'.$v->telephone.'</td>';
-                echo '<td>'.date('Y.m.d',$v->dt_add).'</td>';
+                echo '<td>'.date('Y.m.d G:i:s',$v->dt_add).'</td>';
             echo '</tr>';
 
         }
