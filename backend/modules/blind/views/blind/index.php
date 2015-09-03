@@ -3,6 +3,9 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\grid\DataColumn;
+use common\models\PageToBlind;
+use common\models\PageItem;
+use backend\modules\supplies\models\Supplies;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\modules\blind\models\BlindSearch */
@@ -26,31 +29,75 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'name',
+            /*'id',*/
             [
-                'attribute'=>'status',
-                'format' => 'text',
-                'value' => function($model){
-                    if($model->status == 1){
-                        return 'Опубликовано';
+
+                'attribute' => 'name',
+                'format' => 'html',
+                'value' => function ($model) {
+                    return "<div style='width: 300px'>$model->name</div>";
+                }
+
+            ],
+            [
+                'class' => DataColumn::className(),
+                'header' => 'Раздел',
+                'format' => 'html',
+                'value' => function ($model) {
+                    $cat = \common\models\BlindCatid::find()->where(['id_blind' => $model->id])->all();
+                    $title = '<ul style="width: 400px">';
+                    foreach ($cat as $c) {
+                        $catObj = \backend\modules\category\models\Category::find()->where(['id' => $c->id_cat])->one();
+                        $title .= "<li>" . $catObj->name . "</li>";
                     }
-                    else{
+                    $title .= "</ul>";
+                    return $title;
+                }
+            ],
+            [
+                'attribute' => 'status',
+                'format' => 'text',
+                'value' => function ($model) {
+                    if ($model->status == 1) {
+                        return 'Опубликовано';
+                    } else {
                         return 'Не опубликовано';
                     }
                 }
             ],
 
-            'description:ntext',
+            [
+                'class' => DataColumn::className(),
+                'header' => 'Цена',
+                'format' => 'html',
+                'value' => function ($model) {
+                    $page2BlindID = PageToBlind::find()->where(['id_blind' => $model->id])->all();
+                    $supIds = [];
+                    foreach ($page2BlindID as $page) {
+                        $s = PageItem::find()->where(['id_page' => $page->id_pages, 'item_type' => 'materials'])->all();
+                        $supIds = array_merge($supIds, $s);
+                    }
+                    foreach ($supIds as $s) {
+                        $sup = Supplies::find()->where(['id' => $s->id_item])->one();
+                        $prices[] = $sup->price;
+                    }
+                    if (isset($prices) && !empty($prices)) {
+                        $pricesMin = min($prices);
+                        $pricesMax = max($prices);
+                    }
+                    return $pricesMin . " - " . $pricesMax;
+                }
+            ],
+            /*'description:ntext',*/
 
             [
-                'class'  => DataColumn::className(),
+                'class' => DataColumn::className(),
                 'header' => 'Действия',
                 'format' => 'html',
-                'value' => function($model){
-                    $view = Html::a("<img src='".\yii\helpers\Url::base()."crud_img/view.png' width='20px' title='Просмотр'></a>", ['/blind/blind/view','id'=>$model->id]);
-                    $view .= Html::a("<img src='".\yii\helpers\Url::base()."crud_img/edit.png' width='20px' title='Редактировать'></a>", ['/blind/blind/update','id'=>$model->id]);
-                    $view .= Html::a("<img src='".\yii\helpers\Url::base()."crud_img/del.png' width='20px' title='Удалить'></a>", ['/blind/blind/delete','id'=>$model->id]);
+                'value' => function ($model) {
+                    /*$view = Html::a("<img src='".\yii\helpers\Url::base()."crud_img/view.png' width='20px' title='Просмотр'></a>", ['/blind/blind/view','id'=>$model->id]);*/
+                    $view = Html::a("<img src='" . \yii\helpers\Url::base() . "crud_img/edit.png' width='20px' title='Редактировать'></a>", ['/blind/blind/update', 'id' => $model->id]);
+                    $view .= Html::a("<img src='" . \yii\helpers\Url::base() . "crud_img/del.png' width='20px' title='Удалить'></a>", ['/blind/blind/delete', 'id' => $model->id]);
                     return $view;
                 }
             ],
