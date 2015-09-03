@@ -258,7 +258,7 @@ $(document).ready(function () {
             url: 'get_callme',
             data: "&tel=" + tel,
             success: function (msg) {
-                alert('Ваша заявка принята. Ожидайте звонка');
+                alert('Ваша заявка с номером ' + tel + ' принята. Ожидайте звонка');
             }
         });
          $('#telephone').val('');
