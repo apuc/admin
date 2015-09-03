@@ -335,3 +335,13 @@ a#addPage {
     left: 463px;
     top: -49px;
 }
+
+.edit_menu {
+    width: 90%;
+    min-height: 30px;
+    padding: 5px;
+}
+
+.edit_menu input, .edit_menu textarea {
+    margin-bottom: 10px;
+}

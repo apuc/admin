@@ -2,10 +2,12 @@
 
 namespace backend\modules\menu\controllers;
 
+use common\classes\Debag;
 use common\models\Media;
 use Yii;
 use backend\modules\menu\models\Menu;
 use backend\modules\menu\models\MenuSearch;
+use yii\helpers\Html;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -146,5 +148,15 @@ class MenuController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionEdit_menu(){
+        $menu = Menu::find()->where(['id' => $_GET['id']])->one();
+        echo "<div class='edit_menu'>";
+        echo Html::textInput('name',$menu->name,['id'=>'menu_name', 'class' => 'form-control']);
+        echo Html::textInput('url',$menu->url,['id'=>'menu_url', 'class' => 'form-control']);
+        echo Html::textarea('descr', $menu->descr, ['id' => 'menu_descr', 'class' => 'form-control', 'rows' => '5']);
+        echo Html::button('Сохранить', ['class' => 'btn btn-success']);
+        echo "</div>";
     }
 }

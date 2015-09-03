@@ -85,7 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         $pricesMin = min($prices);
                         $pricesMax = max($prices);
                     }
-                    return $pricesMin . " - " . $pricesMax;
+                    return "<div style='width: 100px'>".$pricesMin . " - " . $pricesMax."</div>";
                 }
             ],
             /*'description:ntext',*/

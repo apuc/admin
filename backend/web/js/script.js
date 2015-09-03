@@ -16,7 +16,7 @@ $(document).ready(function () {
 
     $(function () {
         $("#sortable").sortable({
-            cancel: '.empty',
+            cancel: '.empty, .edit_menu',
             cursor: 'move',
             stop: function (event, ui) {
                 var el = ui.item.context;
@@ -746,6 +746,22 @@ $(document).ready(function () {
                 console.log(msg);
             }
         });
+    });
+
+    $('.editMenu').on('click', function(){
+        $('.edit_menu').remove();
+        var id = $(this).attr('data-menu-id');
+        var parent = $(this).parent();
+        $.ajax({
+            type: "GET",
+            url: 'edit_menu',
+            data: "id=" + id,
+            success: function (msg) {
+                //console.log(msg);
+                parent.append(msg);
+            }
+        });
+        return false;
     });
 
 });

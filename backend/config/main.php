@@ -78,6 +78,7 @@ return [
                 'media' => 'media/media',
                 'media/delete' => 'media/media/delete',
                 'menu' => 'menu/menu',
+                'edit_menu' => 'menu/menu/edit_menu',
                 'update_el' => 'menu/menu/update_el',
                 'category' => 'category/category',
                 'pages' => 'pages/pages',
