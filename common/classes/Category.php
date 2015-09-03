@@ -26,13 +26,14 @@ class Category {
                          <div class="list_wrapper">
                          <div class="list">
                             <div class="title">'.$c->name.'<span></span></div>';
-            $html .= self::getBlind($c->id);
+            $html .= self::getParentCategories($c->id);
              $html .=    '</div>';
             $html .= '<a href="#" class="showall">показать все</a>
                         <a href="#" class="more">подробнее</a>
                     </div>
                     </div>';
         }
+        Debag::prn('123');
         $html .= '</div>';
         return $html;
     }
@@ -45,7 +46,7 @@ class Category {
         foreach($blinds as $bl){
             $product = Blind::find()->where(['id'=>$bl->id_blind])->one();
             //Debag::prn($product);
-            $html .='<div class="product">
+            $html .= '<div class="product">
                     <a href="#">'.$product->name.'</a>
                     <div class="info">
                         <span></span>
@@ -58,6 +59,25 @@ class Category {
         /*$html .= '</div>';*/
         return $html;
     }
+
+    public static function getParentCategories($id){
+        $cat = Categories::find()->where(['parent_id'=>$id])->all();
+        $html = '';
+        foreach($cat as $c){
+            $html .= '<div class="product">
+                    <a href="#">'.$c->name.'</a>
+                    <div class="info">
+                        <span></span>
+                        <div class="hint">
+                           '.$c->description.'
+                        </div>
+                    </div>
+                </div>';
+            //Debag::prn('123');
+        }
+        return $html;
+    }
+
 }
 
 ?>
