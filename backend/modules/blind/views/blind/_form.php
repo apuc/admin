@@ -9,14 +9,31 @@ use mihaildev\ckeditor\CKEditor;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 <?php $form = ActiveForm::begin(); ?>
+
+<?= $form->field($model, 'tab')->textInput(['maxlength' => true])->hiddenInput()->label(false); ?>
+<?php
+$tabMenu1 = '';
+$tabMenu2 = '';
+$tabContent1 = '';
+$tabContent2 = '';
+if($model->tab == '#panel1' or $model->tab == ''){
+    $tabMenu1 = 'class="active"';
+    $tabContent1 = 'in active';
+}
+if($model->tab == '#panel2'){
+    $tabMenu2 = 'class="active"';
+    $tabContent2 = 'in active';
+}
+?>
+
 <div class="blind-form">
     <ul id="myTab" class="nav nav-tabs">
-        <li class="active"><a href="#panel1">Общее</a></li>
-        <li><a href="#panel2">Материалы</a></li>
+        <li <?=$tabMenu1;?>><a href="#panel1">Общее</a></li>
+        <li <?=$tabMenu2;?>><a href="#panel2">Материалы</a></li>
     </ul>
 
     <div class="tab-content">
-        <div id="panel1" class="tab-pane fade in active">
+        <div id="panel1" class="tab-pane fade <?=$tabContent1;?>">
             <h3>Общее</h3>
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -60,7 +77,7 @@ use mihaildev\ckeditor\CKEditor;
                 ]),
             ]) ?>
         </div>
-        <div id="panel2" class="tab-pane fade">
+        <div id="panel2" class="tab-pane fade <?=$tabContent2?>">
             <h3>Материалы</h3>
 
             <?=$form->field($model,'pagename')->textInput(['maxlength' => true,'class'=>'form-control pagenameInp'])?><a class="btn btn-success" href="#" id="addPage">Добавить страницу</a>

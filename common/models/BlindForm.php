@@ -16,6 +16,8 @@ class BlindForm extends Model
     public $blind_image;
     public $materials;
     public $pagename;
+    public $tab;
+
     /**
      * @inheritdoc
      */
@@ -24,7 +26,7 @@ class BlindForm extends Model
         return [
 
             [['name', 'status','categories','description'], 'required'],
-            [['blind_image','materials'], 'safe']
+            [['blind_image','materials','tab'], 'safe']
         ];
     }
 
