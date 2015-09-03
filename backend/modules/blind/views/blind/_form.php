@@ -20,7 +20,6 @@ use mihaildev\ckeditor\CKEditor;
             <h3>Общее</h3>
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-            <a data-toggle='modal' data-target='#myModal' href='#'>Добавить изображение</a>
             <div id="imgPreview"></div>
             <div class="blind_images">
 
@@ -30,13 +29,13 @@ use mihaildev\ckeditor\CKEditor;
                         echo '<div class="imgadd">';
                         echo Html::img($v->images, ['width' => '150px']);
                         echo Html::hiddenInput('blind_image[]',$v->images.'*'.$v->main);
-                        echo Html::a('Удалить', ['#'], ['class' => 'del_img']);
+                        echo Html::a('Удалить', ['#'], ['class' => 'del_img btn btn-warning']);
 
                         if($v->main==0){
-                            echo Html::a('Сделать основным', ['#'], ['class' => 'osn']);
+                            echo Html::a('Основное', ['#'], ['class' => 'osn btn btn-warning']);
 
                         }else{
-                            echo Html::a('Основное', ['#'], ['class' => 'osn']);
+                            echo Html::a('Основное', ['#'], ['class' => 'osn btn btn-default','disabled'=>'disabled']);
                         }
                         echo '</div>';
                     }
@@ -45,6 +44,8 @@ use mihaildev\ckeditor\CKEditor;
 
             </div>
 
+            <a data-toggle='modal' data-target='#myModal' href='#' class="btn btn-warning">Добавить изображение</a>
+            <div class="cleared"></div>
             <?= $form->field($model, 'status')->checkbox(); ?>
 
             <?=$form->field($model, 'categories')->dropDownList($categories, ['multiple'=>true, 'options' => $catselect]) ?>

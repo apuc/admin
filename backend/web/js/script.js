@@ -157,7 +157,7 @@ $(document).ready(function () {
         var val = $(this).next().val();
         $('#supplies-images').val(val);
         $('#myModal').modal('hide');
-        $("#imgPreview").append('<div class="imgadd"><img class="PrevImg" src="' + val + '" width="150px" alt="" /><input type="hidden" id="#valimg"  name="blind_image[]" value="' + val + '*0"><a class="del_img" href = "#">Удалить</a><a href = "#" class = "osn">Сделать основным</a></div');
+        $("#imgPreview").append('<div class="imgadd"><img class="PrevImg" src="' + val + '" width="150px" alt="" /><input type="hidden" id="#valimg"  name="blind_image[]" value="' + val + '*0"><a class="del_img btn btn-warning" href = "#">Удалить</a><a href = "#" class = "osn btn btn-warning">Основное</a></div');
         //$(this).clone().prependTo("#imgPreview");
     });
 
@@ -172,8 +172,17 @@ $(document).ready(function () {
         value = value.slice(0, -2);
         value = value + "*1";
         $(this).prev().prev().val(value);
-        $('.osn').html('Сделать основным');
+        $('.osn').html('Основное');
+        $('.osn').removeAttr('disabled');
+        $('.osn').removeClass('btn-default');
+        $('.osn').addClass('btn-warning');
+
+
+
         $(this).html('Основное');
+        $(this).removeClass('btn-warning');
+        $(this).addClass('btn-default');
+        $(this).attr('disabled','disabled');
 
         return false;
     });
