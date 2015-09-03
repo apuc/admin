@@ -2566,7 +2566,23 @@ footer .contacts img {
 .long {
 display: none;
 }
-#mod{
+
+.empty {
+  display: inline-block;
+    width: 90px;
+}
+}
+
+.empty:after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: -30px;
+    top: 3px;
+}
+
+#mod,#modZamershik{
 	display: none;
 	position:absolute;
 	top:0;
@@ -2579,12 +2595,12 @@ display: none;
 	border:1px solid black;
 	border-radius:8px;
 }
-#mod span{
+#mod span,#modZamershik span{
 	font-size: 23px;
     display: block;
     margin-bottom: 30px;
 }
-#closePhone {
+#closePhone,#closeZamerhik {
 	position:absolute;
 	top:5px;
 	right:5px;
@@ -2593,7 +2609,7 @@ display: none;
 
 
 
-#my-tel{color:#000;}
+#my-tel,#my-tel-zam{color:#000;}
 
 .check{
     background: #269dda;
