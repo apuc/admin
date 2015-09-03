@@ -735,5 +735,18 @@ $(document).ready(function () {
 
     });
 
+    $('.option_item').bind('focusout', function () {
+        var key = $(this).attr('data-key');
+        var value = $(this).val();
+        $.ajax({
+            type: "GET",
+            url: 'change_option',
+            data: "val=" + value + "&key=" + key,
+            success: function (msg) {
+                console.log(msg);
+            }
+        });
+    });
+
 });
 

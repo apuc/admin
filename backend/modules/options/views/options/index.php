@@ -28,9 +28,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'name',
             /*'key',*/
-            'value',
-
             [
+                'attribute' => 'value',
+                'format' => 'raw',
+                'value' => function($model){
+                    return Html::textInput('option_' . $model->key, $model->value, ['data-key' => $model->key, 'class' => 'option_item']);
+                }
+            ],
+
+            /*[
                 'class'  => DataColumn::className(),
                 'header' => 'Действия',
                 'format' => 'html',
@@ -40,8 +46,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     $view .= Html::a("<img src='".\yii\helpers\Url::base()."crud_img/del.png' width='20px' title='Удалить'></a>", ['/options/options/delete','id'=>$model->id]);
                     return $view;
                 }
-            ],
+            ],*/
         ],
     ]); ?>
-
+    <?= Html::button('Сохранить', ['onclick' => 'location.reload()', 'class' => 'btn btn-success']); ?>
 </div>
