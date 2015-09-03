@@ -1,6 +1,6 @@
 $(function () {
     $('.content').insertBefore('.hfooter');
-    $('.content p:gt(0)').hide();
+    //$('.content p:gt(0)').hide();
     $('.content .readmore').click(function () {
         if ($(this).hasClass('active')) {
             $('.content p:gt(0)').slideUp('fast');
@@ -280,6 +280,20 @@ $(document).ready(function () {
         /*$('.popup').css('top', $(window).scrollTop());
         $('.popup,.background').fadeIn('fast');*/
 
+        return false;
+    });
+
+    $('.readmoreMy').on('click', function(){
+        var long = $(this).prev();
+        long.slideToggle();
+        if($(this).hasClass('opened')){
+            $(this).removeClass('opened');
+            $(this).text('Читать полностью');
+        }
+        else {
+            $(this).addClass('opened');
+            $(this).text('Скрыть');
+        }
         return false;
     });
 

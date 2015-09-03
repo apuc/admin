@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\grid\DataColumn;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\modules\color\models\ColorSearch */
@@ -35,7 +36,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class'  => DataColumn::className(),
+                'header' => 'Действия',
+                'format' => 'html',
+                'value' => function($model){
+                    /*$view = Html::a("<img src='".\yii\helpers\Url::base()."crud_img/view.png' width='20px' title='Просмотр'></a>", ['/color/color/view','id'=>$model->id]);*/
+                    $view = Html::a("<img src='".\yii\helpers\Url::base()."crud_img/edit.png' width='20px' title='Редактировать'></a>", ['/color/color/update','id'=>$model->id]);
+                    $view .= Html::a("<img src='".\yii\helpers\Url::base()."crud_img/del.png' width='20px' title='Удалить'></a>", ['/color/color/delete','id'=>$model->id]);
+                    return $view;
+                }
+            ],
         ],
     ]); ?>
 

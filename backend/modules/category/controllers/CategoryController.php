@@ -77,7 +77,7 @@ class CategoryController extends Controller
         $model = new Category();
         $parent = Categories::find()->all();
         $media = Media::find()->all();
-        $block = Block::find()->all();
+        $block = Block::find()->where(['type'=>''])->all();
 
         $arr = CategoryTree::getTreeSelect(0);
 
@@ -114,7 +114,7 @@ class CategoryController extends Controller
         $model = $this->findModel($id);
         $parent = Categories::find()->all();
         $media = Media::find()->all();
-        $block = Block::find()->all();
+        $block = Block::find()->where(['type'=>''])->all();
 
         $arr = CategoryTree::getTreeSelect(0);
 

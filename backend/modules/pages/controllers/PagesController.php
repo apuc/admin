@@ -74,7 +74,7 @@ class PagesController extends Controller
     {
         $model = new Pages();
         $media = Media::find()->all();
-        $block = Block::find()->all();
+        $block = Block::find()->where(['type'=>''])->all();
 
         $arr[0] = 'Нет';
         foreach($block as $b){
@@ -102,7 +102,7 @@ class PagesController extends Controller
     {
         $model = $this->findModel($id);
         $media = Media::find()->all();
-        $block = Block::find()->all();
+        $block = Block::find()->where(['type'=>''])->all();
 
         $arr[0] = 'Нет';
         foreach($block as $b){

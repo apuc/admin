@@ -6,6 +6,12 @@ $(document).ready(function () {
     $("#myTab a").click(function (e) {
         e.preventDefault();
         $(this).tab('show');
+        if($('#pages-tab').length > 0){
+            $('#pages-tab').val($(this).attr('href'));
+        }
+        if($('#category-tab').length > 0){
+            $('#category-tab').val($(this).attr('href'));
+        }
     });
 
     $(function () {
@@ -439,20 +445,22 @@ $(document).ready(function () {
      });*/
 
     $(document).on('click', '.delCustBlock', function () {
-        $(this).parent().remove();
-        var bloks = '';
-        $('.published').each(function () {
-            bloks = bloks + ',' + $(this).attr('data-type');
-        });
-        bloks = bloks.substring(1);
-        $('.sortBlock').val(bloks);
+        if(confirm('Удалить блок?')){
+            $(this).parent().remove();
+            var bloks = '';
+            $('.published').each(function () {
+                bloks = bloks + ',' + $(this).attr('data-type');
+            });
+            bloks = bloks.substring(1);
+            $('.sortBlock').val(bloks);
 
-        var bloksAll = '';
-        $('.sortAll').each(function () {
-            bloksAll = bloksAll + ',' + $(this).attr('data-type');
-        });
-        bloksAll = bloksAll.substring(1);
-        $('.sortBlockAll').val(bloksAll);
+            var bloksAll = '';
+            $('.sortAll').each(function () {
+                bloksAll = bloksAll + ',' + $(this).attr('data-type');
+            });
+            bloksAll = bloksAll.substring(1);
+            $('.sortBlockAll').val(bloksAll);
+        }
         return false;
     });
 

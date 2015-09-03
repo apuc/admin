@@ -29,7 +29,7 @@ class Category {
             $html .= self::getBlind($c->id);
              $html .=    '</div>';
             $html .= '<a href="#" class="showall">показать все</a>
-                        <a href="#" class="more">подробнее</a>
+                        <a href="/category?c='.$c->id.'" class="more">подробнее</a>
                     </div>
                     </div>';
         }

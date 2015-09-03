@@ -7,8 +7,8 @@ use yii\helpers\Html;
 
 $this->title = 'Обновление категории: ' . ' ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Категории', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Редактирование';
+$this->params['breadcrumbs'][] = $model->name;
+/*$this->params['breadcrumbs'][] = 'Редактирование';*/
 ?>
 <div class="category-update">
 
@@ -18,7 +18,8 @@ $this->params['breadcrumbs'][] = 'Редактирование';
         'model' => $model,
         'parent' => $parent,
         'media'  => $media,
-        'block' => $block
+        'block' => $block,
+        'update' => 1
     ]) ?>
 
 </div>

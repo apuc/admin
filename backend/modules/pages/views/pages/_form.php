@@ -9,16 +9,37 @@ use mihaildev\ckeditor\CKEditor;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 <?php $form = ActiveForm::begin(); ?>
+<?= $form->field($model, 'tab')->textInput(['maxlength' => true])->hiddenInput()->label(false); ?>
+<?php
+$tabMenu1 = '';
+$tabMenu2 = '';
+$tabMenu3 = '';
+$tabContent1 = '';
+$tabContent2 = '';
+$tabContent3 = '';
+if($model->tab == '#panel1' or $model->tab == ''){
+    $tabMenu1 = 'class="active"';
+    $tabContent1 = 'in active';
+}
+if($model->tab == '#panel2'){
+    $tabMenu2 = 'class="active"';
+    $tabContent2 = 'in active';
+}
+if($model->tab == '#panel3'){
+    $tabMenu3 = 'class="active"';
+    $tabContent3 = 'in active';
+}
+?>
 <div class="pages-form">
     <div id="validMsg" style="margin: 10px"></div>
     <ul id="myTab" class="nav nav-tabs">
-        <li class="active"><a href="#panel1">Общее</a></li>
-        <li><a href="#panel2">Вид</a></li>
-        <li><a href="#panel3">SEO</a></li>
+        <li <?= $tabMenu1; ?>><a href="#panel1">Общее</a></li>
+        <li <?= $tabMenu2; ?>><a href="#panel2">Вид</a></li>
+        <li <?= $tabMenu3; ?>><a href="#panel3">SEO</a></li>
 
     </ul>
     <div class="tab-content">
-        <div id="panel1" class="tab-pane fade in active">
+        <div id="panel1" class="tab-pane fade <?= $tabContent1 ?>">
             <h3>Общее</h3>
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -53,7 +74,7 @@ use mihaildev\ckeditor\CKEditor;
                 ]),
             ]) ?>
         </div>
-        <div id="panel2" class="tab-pane fade">
+        <div id="panel2" class="tab-pane fade <?= $tabContent2 ?>">
             <h3>Вид</h3>
             <?= $form->field($model, 'blokc_id')->dropDownList($block) ?>
             <?= Html::button('Добавить блок', ['class' => 'btn btn-success', 'id' => 'addCustBlock']) ?>
@@ -89,14 +110,14 @@ use mihaildev\ckeditor\CKEditor;
                                 $blockId = $blockId[1];
                                 $block = \common\models\Block::find()->where(['id'=>$blockId])->one();
                                 $name = $block->name;
-                                echo '<li class="published sortAll" data-type="'.$s.'">'.$name.' | <a class="toPublick" href="#">Скрыть</a> | <a class="delCustBlock" href="#">Удалить</a></li>';
+                                echo '<li class="published sortAll" data-type="'.$s.'">'.$name.' | <a class="toPublick" href="#">Скрыть</a> | <a  class="delCustBlock" href="#">Удалить</a></li>';
                             }
                             elseif($s[0] == 'i'){
                                 $blockId = explode('_', $s);
                                 $blockId = $blockId[1];
                                 $block = \common\models\Block::find()->where(['id'=>$blockId])->one();
                                 $name = $block->name;
-                                echo '<li class="published sortAll" data-type="'.$s.'">Индивидуальный блок ('.$name.') | <a class="toPublick" href="#">Скрыть</a> | <a class="editIndBlock" data-block-id="'.$blockId.'" href="#">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>';
+                                echo '<li class="published sortAll" data-type="'.$s.'">Индивидуальный блок ('.$name.') | <a class="toPublick" href="#">Скрыть</a> | <a class="editIndBlock" data-block-id="'.$blockId.'" href="#">Редактировать</a> | <a  class="delCustBlock" href="#">Удалить</a></li>';
                             }
                             else {
                                 $name = \common\classes\Template::getBlockName($s);
@@ -123,7 +144,7 @@ use mihaildev\ckeditor\CKEditor;
                             $blockId = $blockId[1];
                             $block = \common\models\Block::find()->where(['id'=>$blockId])->one();
                             $name = $block->name;
-                            echo '<li class="noPublick sortAll" data-type="'.$sd.'">Индивидуальный блок ('.$name.') | <a class="toPublick" href="#">Опубликовать</a> | <a class="editIndBlock" href="#" data-block-id="'.$blockId.'">Редактировать</a> | <a class="delCustBlock" href="#">Удалить</a></li>';
+                            echo '<li class="noPublick sortAll" data-type="'.$sd.'">Индивидуальный блок ('.$name.') | <a class="toPublick" href="#">Опубликовать</a> | <a href="#" data-block-id="'.$blockId.'">Редактировать</a> | <a data-confirm="Удалить блок?" class="delCustBlock" href="#">Удалить</a></li>';
                         }
                         else {
                             $name = \common\classes\Template::getBlockName($sd);
@@ -134,7 +155,7 @@ use mihaildev\ckeditor\CKEditor;
                 </ul>
             </div>
         </div>
-        <div id="panel3" class="tab-pane fade">
+        <div id="panel3" class="tab-pane fade <?= $tabContent3 ?>">
             <h3>SEO</h3>
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'h1')->textInput(['maxlength' => true]) ?>
