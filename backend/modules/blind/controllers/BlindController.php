@@ -203,6 +203,7 @@ class BlindController extends Controller
         $model->name = $blind->name;
         $model->status = $blind->status;
         $model->description = $blind->description;
+        $model->tab = $blind->tab;
 
         $cat = BlindCatid::find()->where(['id_blind' => $id])->all();
 
@@ -234,6 +235,7 @@ class BlindController extends Controller
             $blind->name = $model->name;
             $blind->status = $model->status;
             $blind->description = $model->description;
+            $blind->tab = $model->tab;
             $blind->save();
 
 

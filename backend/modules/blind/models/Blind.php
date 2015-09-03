@@ -11,6 +11,7 @@ use Yii;
  * @property string $name
  * @property integer $status
  * @property string $description
+ * @property string $tab
  */
 class Blind extends \yii\db\ActiveRecord
 {
@@ -31,7 +32,8 @@ class Blind extends \yii\db\ActiveRecord
             [['name', 'status', 'description'], 'required'],
             [['status'], 'integer'],
             [['description'], 'string'],
-            [['name'], 'string', 'max' => 255]
+            [['name'], 'string', 'max' => 255],
+            [['tab'], 'safe'],
         ];
     }
 

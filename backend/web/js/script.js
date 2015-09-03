@@ -12,6 +12,9 @@ $(document).ready(function () {
         if($('#category-tab').length > 0){
             $('#category-tab').val($(this).attr('href'));
         }
+        if($('#blindform-tab').length > 0){
+            $('#blindform-tab').val($(this).attr('href'));
+        }
     });
 
     $(function () {
