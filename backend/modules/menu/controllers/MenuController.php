@@ -48,10 +48,12 @@ class MenuController extends Controller
     {
         $searchModel = new MenuSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $media = Media::find()->all();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'media' => $media,
         ]);
     }
 
@@ -124,10 +126,9 @@ class MenuController extends Controller
     public function actionUpdate_el()
     {
         $menu = Menu::findOne(['id' => $_GET['id']]);
-        if($_GET['parent_id'] == 'undefined'){
+        if ($_GET['parent_id'] == 'undefined') {
             $menu->parent_id = 0;
-        }
-        else {
+        } else {
             $menu->parent_id = $_GET['parent_id'];
         }
 
@@ -150,13 +151,51 @@ class MenuController extends Controller
         }
     }
 
-    public function actionEdit_menu(){
+    public function actionEdit_menu()
+    {
         $menu = Menu::find()->where(['id' => $_GET['id']])->one();
         echo "<div class='edit_menu'>";
-        echo Html::textInput('name',$menu->name,['id'=>'menu_name', 'class' => 'form-control']);
-        echo Html::textInput('url',$menu->url,['id'=>'menu_url', 'class' => 'form-control']);
+        echo Html::textInput('name', $menu->name, ['id' => 'menu_name', 'class' => 'form-control']);
+        echo Html::textInput('url', $menu->url, ['id' => 'menu_url', 'class' => 'form-control']);
+        ?>
+        <div id="imgLoad">
+            <div id="imgPreview">
+                <?php
+                if (!empty($menu->icon)) {
+                    echo '<div class="imgadd">';
+                    echo Html::img($menu->icon, ['width' => '100px', 'id' => 'menu_icon']);
+                    /*echo Html::hiddenInput('pages-images',$model->images);*/
+                    //echo $form->field($model, 'images')->hiddenInput()->label("<a data-toggle='modal' data-target='#myModal' href='#'>Обзор</a><a class = 'del_img' href = '#'>Удалить</a>");
+                    echo '</div>';
+
+                } else {
+                    echo "<div class='imgEmpty'>Изображение</div>";
+                }
+                ?>
+            </div>
+            <a data-toggle='modal' class="btn btn-warning" data-target='#myModal' href='#'>Обзор</a> |
+            <a class='del_img_pages btn btn-warning'  href='#'>Удалить</a>
+        </div>
+        <div class="cleared"></div>
+        <br>
+        <?php
         echo Html::textarea('descr', $menu->descr, ['id' => 'menu_descr', 'class' => 'form-control', 'rows' => '5']);
-        echo Html::button('Сохранить', ['class' => 'btn btn-success']);
+        echo Html::button('Сохранить', ['class' => 'btn btn-success', 'id' => 'saveMenu', 'data-id' => $menu->id]);
+        echo Html::button('Отмена', ['class' => 'btn btn-success', 'id' => 'closeMenu', 'style' => 'margin-left:5px']);
         echo "</div>";
+    }
+
+    public function actionSave_menu()
+    {
+        $menu = Menu::find()->where(['id' => $_GET['id']])->one();
+        $menu->name = $_GET['name'];
+        $menu->url = $_GET['url'];
+        $menu->descr = $_GET['descr'];
+        if ($_GET['icon'] == 'undefined') {
+            $menu->icon = '';
+        } else {
+            $menu->icon = $_GET['icon'];
+        }
+        $menu->save();
     }
 }

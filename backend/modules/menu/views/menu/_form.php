@@ -37,6 +37,7 @@ use yii\widgets\ActiveForm;
         <a data-toggle='modal' data-target='#myModal' href='#'>Обзор</a> |
         <a class = 'del_img_pages' href = '#'>Удалить</a>
     </div>
+    <div class="cleared"></div>
     <?= $form->field($model, 'icon')->textInput(['maxlength' => true])->hiddenInput()->label(false); ?>
     <?= $form->field($model, 'descr')->textarea(['rows' => 6]) ?>
 

@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'name',
                 'format' => 'html',
                 'value' => function ($model) {
-                    return "<div style='width: 300px'>$model->name</div>";
+                    return "<div>$model->name</div>";
                 }
 
             ],
@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'html',
                 'value' => function ($model) {
                     $cat = \common\models\BlindCatid::find()->where(['id_blind' => $model->id])->all();
-                    $title = '<ul style="width: 400px">';
+                    $title = '<ul>';
                     foreach ($cat as $c) {
                         $catObj = \backend\modules\category\models\Category::find()->where(['id' => $c->id_cat])->one();
                         $title .= "<li>" . $catObj->name . "</li>";
