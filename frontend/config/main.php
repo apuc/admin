@@ -38,6 +38,7 @@ return [
                 'get_page' => 'category/category/get_page',
                 'get_count_items' => 'category/category/get_count_items',
                 'get_callme' => 'page/page/get_callme',
+                'get_order_zam' => 'category/category/get_order_zam',
             ],
         ],
         'user' => [

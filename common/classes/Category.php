@@ -20,6 +20,7 @@ class Category {
         $cat_title = Categories::find()->where(['id'=>$id])->one();
         $html = '<div class="title">'.$cat_title->name.'</div>';
         $html .= '<div class="catalog_blocks">';
+
         foreach($cat as $c){
 
             $html .= '<div class="category">
@@ -28,8 +29,8 @@ class Category {
                          <div class="list">
                             <div class="title">'.$c->name.'<span></span></div>';
             $html .= self::getParentCategories($c->id);
-             $html .=    '</div>';
-            $html .= '<a href="#" class="showall">показать все</a>
+             //$html .=    '</div>';
+            $html .= '
                         <a href="/category?c='.$c->id.'" class="more">подробнее</a>
                     </div>
                     </div>';
@@ -75,6 +76,11 @@ class Category {
                     </div>
                 </div>';
             //Debag::prn('123');
+        }
+        if(count($cat) > 4) {
+            $html .= '</div><a href="#" class="showall">показать все</a>';
+        }else{
+            $html .= '</div><div class="empty"></div>';
         }
         return $html;
     }

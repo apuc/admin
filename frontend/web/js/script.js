@@ -190,8 +190,21 @@ $(document).ready(function () {
         return false;
     });
 
+
+    $(document).on('click','.cause',function () {
+
+        document.getElementById('modZamershik').style.display='block';
+        $('#modZamershik').css('top', $(window).scrollTop() + 50);
+        return false;
+    });
+   // сheckZamershik
+
+
     $(document).on('click','#closePhone',function(){
         $('#mod').css('display','none');
+    });
+    $(document).on('click','#closeZamerhik',function(){
+        $('#modZamershik').css('display','none');
     });
 
     $(document).on('click','#сheck',function () {
@@ -207,6 +220,21 @@ $(document).ready(function () {
             }
         });
         $('#mod').css('display','none');
+    });
+
+    $(document).on('click','#сheckZamershik',function () {
+
+        var tel = $('#my-tel-zam').val();
+        //alert(tel);
+        $.ajax({
+            type: "get",
+            url: 'get_order_zam',
+            data: "tel=" + tel,
+            success: function (msg) {
+                alert('Вызов замерщика сделан. В ближайшее время с Вами свяжуться по толефону ' + tel);
+            }
+        });
+        $('#modZamershik').css('display','none');
     });
 
     $(document).on('click','.small', function(){

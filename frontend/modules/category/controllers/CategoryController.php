@@ -106,6 +106,13 @@ class CategoryController extends Controller
         mail($email->value, "Заказ с вашего сайта", "С вашего сайта заказали:<br>Номер заказа: $blind->id<br>Название жалюзи: $blind->name<br>Код материала: $materials->code<br>Телефон для связ: $telephone","Content-type: text/html; charset=UTF-8\r\n");
     }
 
+    public function actionGet_order_zam(){
+        $tel = $_GET['tel'];
+        $email = Options::find()->where(['key'=>'email_to_prod'])->one();
+        mail($email->value, "Заказ с вашего сайта", "С вашего сайта заказали выезд замерщика:<br>Телефон для связ: $tel","Content-type: text/html; charset=UTF-8\r\n");
+
+    }
+
     //аякс страницы
     public function actionGet_page(){
         echo PrintBlind::getPage($_GET['id'],$_GET['num']);
