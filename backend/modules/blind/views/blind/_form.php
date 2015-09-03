@@ -63,7 +63,7 @@ use mihaildev\ckeditor\CKEditor;
             <h3>Материалы</h3>
 
             <?=$form->field($model,'pagename')->textInput(['maxlength' => true,'class'=>'form-control pagenameInp'])?><a class="btn btn-success" href="#" id="addPage">Добавить страницу</a>
-
+            <hr>
            <?php
                 $pages = \common\models\PageToBlind::find()->where(['id_blind'=>$blind->id])->all();
 

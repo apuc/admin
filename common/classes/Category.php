@@ -12,6 +12,7 @@ namespace common\classes;
 use backend\modules\blind\models\Blind;
 use common\models\BlindCatid;
 use common\models\Categories;
+use yii\helpers\Html;
 
 class Category {
     public static function getCategories($id){
@@ -29,11 +30,11 @@ class Category {
             $html .= self::getParentCategories($c->id);
              $html .=    '</div>';
             $html .= '<a href="#" class="showall">показать все</a>
-                        <a href="#" class="more">подробнее</a>
+                        <a href="/category?c='.$c->id.'" class="more">подробнее</a>
                     </div>
                     </div>';
         }
-        Debag::prn('123');
+       // Debag::prn('123');
         $html .= '</div>';
         return $html;
     }
@@ -65,7 +66,7 @@ class Category {
         $html = '';
         foreach($cat as $c){
             $html .= '<div class="product">
-                    <a href="#">'.$c->name.'</a>
+                    '.Html::a($c->name,['/category', 'c' => $c->id]).'
                     <div class="info">
                         <span></span>
                         <div class="hint">

@@ -93,6 +93,7 @@ return [
                 'create_block_form' => 'block/block/create_block_form',
                 'save_block_form' => 'block/block/save_block_form',
                 'publ_materials' => 'supplies/supplies/publ_materials',
+                'change_option' => 'options/options/change_option',
             ],
         ],
         'urlManagerFrontEnd' => [

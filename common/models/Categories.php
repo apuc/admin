@@ -21,6 +21,7 @@ use Yii;
  * @property string $style
  * @property string $sort
  * @property string $sort_all
+ * @property string $tab
  * @property integer $blokc_id
  */
 class Categories extends \yii\db\ActiveRecord
@@ -42,7 +43,7 @@ class Categories extends \yii\db\ActiveRecord
             [['parent_id', 'name', 'count_product', 'hint', 'description', 'title', 'h1', 'keywords', 'blokc_id'], 'required'],
             [['parent_id', 'count_product', 'blokc_id'], 'integer'],
             [['description'], 'string'],
-            [['code', 'style', 'sort', 'sort_all'], 'safe'],
+            [['code', 'style', 'sort', 'sort_all', 'tab'], 'safe'],
             [['name', 'images', 'hint', 'title', 'h1', 'keywords'], 'string', 'max' => 255]
         ];
     }

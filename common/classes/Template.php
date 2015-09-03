@@ -79,8 +79,17 @@ class Template
             if($a == 'des'){
                 $test = explode('<div style="page-break-after: always"><span style="display:none">&nbsp;</span></div>', $model->description);
                 //Debag::prn($test);
-                //$text = "<p>".$test[0]."</p><p>".$test[1]."</p>";
-                $t =  preg_replace("/{descr}/", "<div class='content article'><div class='container'><h1>$model->h1</h1>$model->description<a href='#' class='readmore'>Читать полностью</a></div></div>" , $file);
+                $count = count($test);
+                if($count > 1){
+                    $text = "<div class='short'>".$test[0]."</div><div class='long'>".$test[1]."</div><a href='#' class='readmoreMy'>Читать полностью</a></div></div>";
+                }
+                else {
+                    $text = "<div class='short'>".$test[0]."</div><div class='long'>".$test[1]."</div></div></div>";
+                }
+
+                //$text = "<div class='short'>".$test[0]."</div><div class='long'>".$test[1]."</div><a href='#' class='readmoreMy'>Читать полностью</a></div></div>";
+
+                $t =  preg_replace("/{descr}/", "<div class='content article'><div class='container'><h1>$model->h1</h1>$text" , $file);
             }
         }
         if($t == ''){

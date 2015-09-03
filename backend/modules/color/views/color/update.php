@@ -7,8 +7,8 @@ use yii\helpers\Html;
 
 $this->title = 'Редактировать цвет';
 $this->params['breadcrumbs'][] = ['label' => 'Цвет', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Редактировать';
+$this->params['breadcrumbs'][] = $model->value;
+/*$this->params['breadcrumbs'][] = 'Редактировать';*/
 ?>
 <div class="color-update">
 

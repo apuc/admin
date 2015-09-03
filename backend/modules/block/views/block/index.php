@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             /*'id',*/
-            'key',
+            /*'key',*/
             'name',
             /*'code',*/
             /*'style',*/
@@ -47,11 +47,11 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class'  => DataColumn::className(),
                 'header' => 'Действия',
-                'format' => 'html',
+                'format' => 'raw',
                 'value' => function($model){
                     /*$view = Html::a("<img src='".\yii\helpers\Url::base()."crud_img/view.png' width='20px' title='Просмотр'></a>", ['/block/block/view','id'=>$model->id]);*/
                     $view = Html::a("<img src='".\yii\helpers\Url::base()."crud_img/edit.png' width='20px' title='Редактировать'></a>", ['/block/block/update','id'=>$model->id]);
-                    $view .= Html::a("<img src='".\yii\helpers\Url::base()."crud_img/del.png' width='20px' title='Удалить'></a>", ['/block/block/delete','id'=>$model->id]);
+                    $view .= Html::a("<img src='".\yii\helpers\Url::base()."crud_img/del.png' width='20px' title='Удалить'></a>", ['/block/block/delete','id'=>$model->id], ['data'=> ['confirm' => 'Удалить блок?']]);
                     return $view;
                 }
             ],

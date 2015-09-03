@@ -6,9 +6,9 @@ use yii\helpers\Html;
 /* @var $model backend\modules\menu\models\Menu */
 
 $this->title = 'Update Menu: ' . ' ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Menus', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = ['label' => 'Меню', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $model->name;
+/*$this->params['breadcrumbs'][] = 'Update';*/
 ?>
 <div class="menu-update">
 

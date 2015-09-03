@@ -21,7 +21,13 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     <?php
     $allColor = \common\models\Color::find()->all();
-    $color = '<div class="selectColor" style = "width:100px;height:32px;border: 1px solid grey;font-size: 13px;text-align: center;padding-top: 7px">Выберите цвет</div>';
+    if(isset($_GET['SuppliesSearch']['color'])){
+        $defaultColor = \common\models\Color::find()->where(['id'=>$_GET['SuppliesSearch']['color']])->one();
+        $color = '<div class="selectColor" style = "width:100px;height:32px;border: 1px solid lightgrey;border-radius:4px;font-size: 13px;text-align: center;padding-top: 7px;background-color:'.$defaultColor->value.'"></div>';
+    }
+    else {
+        $color = '<div class="selectColor" style = "width:100px;height:32px;border: 1px solid lightgrey;border-radius:4px;font-size: 13px;text-align: center;padding-top: 7px">Выберите цвет</div>';
+    }
     $color .= "<div class='allColor'>";
     foreach($allColor as $c){
         $color .= "<div class='selectOnecolorAlt' color-v='$c->value' color='$c->id' data-sup-id='$model->id' data-id='$c->id' style='background-color:$c->value;width: 100px;height: 20px;margin: 5px'></div>";

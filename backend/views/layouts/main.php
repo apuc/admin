@@ -28,7 +28,7 @@ AppAsset::register($this);
 <div class="wrap">
     <nav role='navigation'>
         <ul>
-            <li><?= Html::a('Главная', ['/pages/pages/update?id=1']) ?></li>
+            <!--<li><?/*= Html::a('Главная', ['/pages/pages/update?id=1']) */?></li>-->
             <li><a href="#">Внешний вид</a>
                 <ul>
                     <li><?= Html::a('Меню', ['/menu']) ?></li>
@@ -39,7 +39,7 @@ AppAsset::register($this);
                 </ul>
             </li><li><a href="#">Контент</a>
                 <ul>
-                    <li><?= Html::a('Главная', ['/pages/pages/update?id=1']) ?></li>
+                    <!--<li><?/*= Html::a('Главная', ['/pages/pages/update?id=1']) */?></li>-->
                     <li><?= Html::a('Разделы', ['/category']) ?></li>
                     <li><?= Html::a('Страницы', ['/pages']) ?></li>
                     <li><?= Html::a('Матерниалы', ['/supplies']) ?></li>
@@ -50,7 +50,7 @@ AppAsset::register($this);
                 <ul>
                     <li><?= Html::a('Виды материалов', ['/material']) ?></li>
                     <li><?= Html::a('Цвет', ['/color']) ?></li>
-                    <li><?= Html::a('Email для заказов', ['/options/options/update?id=2']) ?></li>
+                    <!--<li><?/*= Html::a('Email для заказов', ['/options/options/update?id=2']) */?></li>-->
                     <li><?= Html::a('Опции', ['/options']) ?></li>
                     <li><?= Html::a('Профиль', ['/user/user/update?id=2']) ?></li>
                 </ul>

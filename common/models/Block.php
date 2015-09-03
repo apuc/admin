@@ -31,8 +31,8 @@ class Block extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['key', 'name', 'code'], 'required'],
-            [['style', 'img', 'type'], 'safe'],
+            [['name', 'code'], 'required'],
+            [['key', 'style', 'img', 'type'], 'safe'],
             [['key', 'name', 'img'], 'string', 'max' => 255]
         ];
     }

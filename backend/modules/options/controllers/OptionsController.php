@@ -2,6 +2,7 @@
 
 namespace backend\modules\options\controllers;
 
+use common\classes\Debag;
 use Yii;
 use backend\modules\options\models\Options;
 use backend\modules\options\models\OptionsSearch;
@@ -126,5 +127,11 @@ class OptionsController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionChange_option(){
+        $option = Options::find()->where(['key' => $_GET['key']])->one();
+        $option->value = $_GET['val'];
+        $option->save();
     }
 }
