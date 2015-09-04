@@ -198,4 +198,15 @@ class MenuController extends Controller
         }
         $menu->save();
     }
+
+    public function actionSave_sort(){
+        $arr = explode(',', $_GET['sort']);
+        $i=1;
+        foreach($arr as $a){
+            $menu = Menu::find()->where(['id' => $a])->one();
+            $menu->sort = $i;
+            $menu->save();
+            $i++;
+        }
+    }
 }

@@ -325,6 +325,8 @@ $(document).ready(function () {
         return false;
     });
 
+    $('.tel').mask("+7 (999) 999-9999");
+
 });
 
 //анимация загрузки

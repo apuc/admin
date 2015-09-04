@@ -79,6 +79,7 @@ return [
                 'media/delete' => 'media/media/delete',
                 'menu' => 'menu/menu',
                 'edit_menu' => 'menu/menu/edit_menu',
+                'save_sort' => 'menu/menu/save_sort',
                 'save_menu' => 'menu/menu/save_menu',
                 'update_el' => 'menu/menu/update_el',
                 'category' => 'category/category',

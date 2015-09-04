@@ -42,7 +42,7 @@ AppAsset::register($this);
                     <!--<li><?/*= Html::a('Главная', ['/pages/pages/update?id=1']) */?></li>-->
                     <li><?= Html::a('Разделы', ['/category']) ?></li>
                     <li><?= Html::a('Страницы', ['/pages']) ?></li>
-                    <li><?= Html::a('Матерниалы', ['/supplies']) ?></li>
+                    <li><?= Html::a('Материалы', ['/supplies']) ?></li>
                     <li><?= Html::a('Жалюзи', ['/blind']) ?></li>
                 </ul>
             </li>

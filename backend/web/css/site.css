@@ -387,3 +387,7 @@ a#addPage {
 .editMenu {
     color: white;
 }
+
+#sortable {
+    min-height: 30px;
+}

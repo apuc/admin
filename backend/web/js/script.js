@@ -37,11 +37,19 @@ $(document).ready(function () {
                     }
                 });
 
+                var str = '';
+                $('.sortitem').each(function(){
+                    str = str + "," +$(this).attr('data-id')
 
-                var all = $(el).parent('#sortable');
-                console.log(all.context);
-                $(all).each(function () {
-                    console.log('123');
+                });
+                str = str.substring(1);
+                $.ajax({
+                    type: "GET",
+                    url: 'save_sort',
+                    data: "sort=" + str ,
+                    success: function (msg) {
+                        console.log(msg);
+                    }
                 });
             }
         });
