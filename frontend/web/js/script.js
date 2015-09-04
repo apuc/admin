@@ -345,7 +345,7 @@ function stopLoadingAnimation() // - функция останавливающа
 
 $(window).scroll(function() {
 
-    var x = $(location).attr('search');
+    //var x = $(location).attr('search');
     //alert(x);
     var block = $(".mainmenu");
     var block2 = $(".2ndmenu");
@@ -354,7 +354,7 @@ $(window).scroll(function() {
 
     //console.log(top);
 
-    if(x.indexOf('?c=') + 1 || x.indexOf('?p=') + 1) {
+    //if(x.indexOf('?c=') + 1 || x.indexOf('?p=') + 1) {
         if (attr == 1) {
             if (top < 96) {
                 block
@@ -383,6 +383,6 @@ $(window).scroll(function() {
             }
 
         }
-    }
+    //}
 });
 
