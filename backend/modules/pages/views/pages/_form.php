@@ -66,6 +66,7 @@ if($model->tab == '#panel3'){
 
             <?/*= $form->field($model, 'count_product')->textInput() */?><!--
             --><?/*= $form->field($model, 'hint')->textInput(['maxlength' => true]) */?>
+            <?= $form->field($model, 'fix_menu')->dropDownList(['0' => 'Не прикреплять', '1' => 'Меню 1-го уровня', '2' => 'Меню 2-го уровня']) ?>
 
             <?= $form->field($model, 'description')->widget(CKEditor::className(), [
                 'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('elfinder', [

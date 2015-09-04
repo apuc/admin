@@ -342,3 +342,46 @@ function stopLoadingAnimation() // - функция останавливающа
 
 }
 
+
+$(window).scroll(function() {
+
+    var x = $(location).attr('search');
+    //alert(x);
+    var block = $(".mainmenu");
+    var block2 = $(".2ndmenu");
+    var attr = $("#fix-menu").attr('data-fix-menu');
+    var top = $(this).scrollTop();
+
+    //console.log(top);
+
+    if(x.indexOf('?c=') + 1 || x.indexOf('?p=') + 1) {
+        if (attr == 1) {
+            if (top < 96) {
+                block
+                    .css('top', (96))
+                    .css('position', 'absolute');
+                //.css('display', 'block')
+                block2
+                //.css('display', 'block');
+            } else {
+                block
+                    .css('top', 0)
+                    .css('display', 'block')
+                    .css('position', 'fixed');
+            }
+        } else if (attr == 2) {
+            if (top < 144) {
+                block2
+                    .css('top', (48))
+                    .css('position', 'absolute');
+            } else {
+                block2
+                    .css('top', 0)
+                    .css('display', 'block')
+                    .css('position', 'fixed');
+            }
+
+        }
+    }
+});
+

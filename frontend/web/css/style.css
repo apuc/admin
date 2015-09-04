@@ -2566,12 +2566,11 @@ footer .contacts img {
 .long {
 display: none;
 }
-
 .empty {
   display: inline-block;
     width: 90px;
 }
-}
+
 
 .empty:after {
     content: '';
@@ -2681,3 +2680,4 @@ sdfgdf
 
 
 0
+
