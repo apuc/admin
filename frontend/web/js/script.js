@@ -359,10 +359,10 @@ $(window).scroll(function() {
             if (top < 96) {
                 block
                     .css('top', (96))
-                    .css('position', 'absolute');
+                    .css('position', 'absolute')
+                    .css('display','');
                 //.css('display', 'block')
-                block2
-                //.css('display', 'block');
+                block2.css('display','');
             } else {
                 block
                     .css('top', 0)
@@ -373,7 +373,8 @@ $(window).scroll(function() {
             if (top < 144) {
                 block2
                     .css('top', (48))
-                    .css('position', 'absolute');
+                    .css('position', 'absolute')
+                    .css('display','');
             } else {
                 block2
                     .css('top', 0)
