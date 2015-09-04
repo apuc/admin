@@ -243,13 +243,18 @@ ul{
 }
 
 a.del_img {
-    display: block;
-
+    display: inline-block;
+    padding: 2px;
+    margin-top: 6px;
+    margin-right: 5px;
 }
 
 a.osn {
     display: block;
     float: left;
+    padding: 2px;
+    margin-top: 6px;
+    margin-right: 19px;
 }
 
 #createdByPages{
@@ -334,4 +339,51 @@ a#addPage {
     position: relative;
     left: 463px;
     top: -49px;
+}
+
+
+.edit_menu {
+    width: 90%;
+    min-height: 30px;
+    padding: 5px;
+}
+
+.edit_menu input, .edit_menu textarea {
+    margin-bottom: 10px;
+}
+.cleared {
+    display: block;
+    clear: both;
+    float: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-size: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.blind_images{
+    float:left;
+}
+
+#imgPreview{
+    float: left;
+}
+
+.imgPreview img,.imgadd img{
+    height:100px;
+}
+
+.btn-default[disabled]{
+    background: #808080!important;
+    color: #fff;
+}
+
+.btn-default[disabled]:hover{
+    color: #fff;
+}
+
+.editMenu {
+    color: white;
 }

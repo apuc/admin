@@ -9,18 +9,34 @@ use mihaildev\ckeditor\CKEditor;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 <?php $form = ActiveForm::begin(); ?>
+
+<?= $form->field($model, 'tab')->textInput(['maxlength' => true])->hiddenInput()->label(false); ?>
+<?php
+$tabMenu1 = '';
+$tabMenu2 = '';
+$tabContent1 = '';
+$tabContent2 = '';
+if($model->tab == '#panel1' or $model->tab == ''){
+    $tabMenu1 = 'class="active"';
+    $tabContent1 = 'in active';
+}
+if($model->tab == '#panel2'){
+    $tabMenu2 = 'class="active"';
+    $tabContent2 = 'in active';
+}
+?>
+
 <div class="blind-form">
     <ul id="myTab" class="nav nav-tabs">
-        <li class="active"><a href="#panel1">Общее</a></li>
-        <li><a href="#panel2">Материалы</a></li>
+        <li <?=$tabMenu1;?>><a href="#panel1">Общее</a></li>
+        <li <?=$tabMenu2;?>><a href="#panel2">Материалы</a></li>
     </ul>
 
     <div class="tab-content">
-        <div id="panel1" class="tab-pane fade in active">
+        <div id="panel1" class="tab-pane fade <?=$tabContent1;?>">
             <h3>Общее</h3>
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-            <a data-toggle='modal' data-target='#myModal' href='#'>Добавить изображение</a>
             <div id="imgPreview"></div>
             <div class="blind_images">
 
@@ -30,13 +46,13 @@ use mihaildev\ckeditor\CKEditor;
                         echo '<div class="imgadd">';
                         echo Html::img($v->images, ['width' => '150px']);
                         echo Html::hiddenInput('blind_image[]',$v->images.'*'.$v->main);
-                        echo Html::a('Удалить', ['#'], ['class' => 'del_img']);
+                        echo Html::a('Удалить', ['#'], ['class' => 'del_img btn btn-warning']);
 
                         if($v->main==0){
-                            echo Html::a('Сделать основным', ['#'], ['class' => 'osn']);
+                            echo Html::a('Основное', ['#'], ['class' => 'osn btn btn-warning']);
 
                         }else{
-                            echo Html::a('Основное', ['#'], ['class' => 'osn']);
+                            echo Html::a('Основное', ['#'], ['class' => 'osn btn btn-default','disabled'=>'disabled']);
                         }
                         echo '</div>';
                     }
@@ -45,6 +61,8 @@ use mihaildev\ckeditor\CKEditor;
 
             </div>
 
+            <a data-toggle='modal' data-target='#myModal' href='#' class="btn btn-warning">Добавить изображение</a>
+            <div class="cleared"></div>
             <?= $form->field($model, 'status')->checkbox(); ?>
 
             <?=$form->field($model, 'categories')->dropDownList($categories, ['multiple'=>true, 'options' => $catselect]) ?>
@@ -59,7 +77,7 @@ use mihaildev\ckeditor\CKEditor;
                 ]),
             ]) ?>
         </div>
-        <div id="panel2" class="tab-pane fade">
+        <div id="panel2" class="tab-pane fade <?=$tabContent2?>">
             <h3>Материалы</h3>
 
             <?=$form->field($model,'pagename')->textInput(['maxlength' => true,'class'=>'form-control pagenameInp'])?><a class="btn btn-success" href="#" id="addPage">Добавить страницу</a>
@@ -71,7 +89,7 @@ use mihaildev\ckeditor\CKEditor;
                 $k = 0;
                 foreach($pages as $p){
                     if($k == 0){
-                        $title = \common\models\PageBlinds::getNameTitle($p->id_pages);
+                        $title = \common\models\PageBlinds::getNameTitleAdmin($p->id_pages);
                         $inp = $title;
                         $title = str_replace(' ','_',$title);
                         //$ul .= '<li class="active"><a href="#panel'.$title.'">'.$title.'</a><span page-id="'.$title.'" class="delPages">x</span></li>';
@@ -99,7 +117,7 @@ use mihaildev\ckeditor\CKEditor;
 
                     }
                     else{
-                        $title = \common\models\PageBlinds::getNameTitle($p->id_pages);
+                        $title = \common\models\PageBlinds::getNameTitleAdmin($p->id_pages);
                         $inp = $title;
                         $title = str_replace(' ','_',$title);
                         $ul .= '<li><a href="#panel'.$title.'"><input id-page="'.$title.'" type="text" class="insetName" value="'.$inp.'"/></a><span page-id="'.$title.'" class="delPages">x</span></li>';

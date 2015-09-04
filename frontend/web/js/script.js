@@ -280,7 +280,7 @@ $(document).ready(function () {
 
 
     $(document).on('click','#mesage',function () {
-        var tel = $('#telephone').val();
+        var tel = $(this).prev().val();
         $.ajax({
             type: "get",
             url: 'get_callme',
@@ -289,7 +289,7 @@ $(document).ready(function () {
                 alert('Ваша заявка с номером ' + tel + ' принята. Ожидайте звонка');
             }
         });
-         $('#telephone').val('');
+        $(this).prev().val('');
         return false;
     });
 

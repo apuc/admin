@@ -45,6 +45,11 @@ class PageBlinds extends \yii\db\ActiveRecord
 
     public static function getNameTitle($id){
         $title = PageBlinds::find()->where(['id'=>$id])->one();
+        return str_replace("№", "/", $title->name);
+    }
+
+    public static function getNameTitleAdmin($id){
+        $title = PageBlinds::find()->where(['id'=>$id])->one();
         return $title->name;
     }
 }
