@@ -89,7 +89,7 @@ if($model->tab == '#panel2'){
                 $k = 0;
                 foreach($pages as $p){
                     if($k == 0){
-                        $title = \common\models\PageBlinds::getNameTitle($p->id_pages);
+                        $title = \common\models\PageBlinds::getNameTitleAdmin($p->id_pages);
                         $inp = $title;
                         $title = str_replace(' ','_',$title);
                         //$ul .= '<li class="active"><a href="#panel'.$title.'">'.$title.'</a><span page-id="'.$title.'" class="delPages">x</span></li>';
@@ -117,7 +117,7 @@ if($model->tab == '#panel2'){
 
                     }
                     else{
-                        $title = \common\models\PageBlinds::getNameTitle($p->id_pages);
+                        $title = \common\models\PageBlinds::getNameTitleAdmin($p->id_pages);
                         $inp = $title;
                         $title = str_replace(' ','_',$title);
                         $ul .= '<li><a href="#panel'.$title.'"><input id-page="'.$title.'" type="text" class="insetName" value="'.$inp.'"/></a><span page-id="'.$title.'" class="delPages">x</span></li>';

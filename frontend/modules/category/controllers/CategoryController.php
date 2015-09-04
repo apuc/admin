@@ -16,6 +16,7 @@ use common\classes\Debag;
 use common\classes\PrintBlind;
 use common\classes\Supplies;
 use common\models\Orders;
+use common\models\Request;
 use yii\web\Controller;
 use backend\modules\block\models\Block;
 use common\classes\Template;
@@ -108,6 +109,11 @@ class CategoryController extends Controller
 
     public function actionGet_order_zam(){
         $tel = $_GET['tel'];
+        $request = new Request();
+        $request->telephone = (string)$tel;
+        $request->dt_add = (string)time();
+
+        $request->save();
         $email = Options::find()->where(['key'=>'email_to_prod'])->one();
         mail($email->value, "Заказ с вашего сайта", "С вашего сайта заказали выезд замерщика:<br>Телефон для связ: $tel","Content-type: text/html; charset=UTF-8\r\n");
 
