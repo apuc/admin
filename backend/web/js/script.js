@@ -809,5 +809,21 @@ $(document).ready(function () {
         return false;
     });
 
+    $('.insetName').keypress(function(key) {
+        if((key.charCode == 92) ||(key.charCode == 47) || (key.charCode == 33) || (key.charCode == 64) || (key.charCode == 34) || (key.charCode == 35) || (key.charCode == 60) || (key.charCode == 62) || (key.charCode == 94) || (key.charCode == 42) || (key.charCode == 40) || (key.charCode == 41) || (key.charCode == 59) || (key.charCode == 58) || (key.charCode == 38)|| (key.charCode == 96) || (key.charCode == 126)|| (key.charCode == 63)|| (key.charCode == 124)|| (key.charCode == 44) || (key.charCode == 46) ||(key.charCode == 36) ||(key.charCode == 37)){
+            alert('Символ запрещен к вводу.Символы /|,.!@#$%^&*():;~`\'\\ запрещены для ввода. Используйте знак №');
+            return false;
+        }
+    });
+    $('#blindform-pagename').keypress(function(key) {
+        var array = [92,47,33,64];
+        var k = key.charCode;
+        if((key.charCode == 92) ||(key.charCode == 47) || (key.charCode == 33) || (key.charCode == 64) || (key.charCode == 34) || (key.charCode == 35) || (key.charCode == 60) || (key.charCode == 62) || (key.charCode == 94) || (key.charCode == 42) || (key.charCode == 40) || (key.charCode == 41) || (key.charCode == 59) || (key.charCode == 58) || (key.charCode == 38)|| (key.charCode == 96) || (key.charCode == 126)|| (key.charCode == 63)|| (key.charCode == 124)|| (key.charCode == 44) || (key.charCode == 46) ||(key.charCode == 36) ||(key.charCode == 37)){
+            alert('Символ запрещен к вводу.Символы /|,.!@#$%^&*():;~`\'\\ запрещены для ввода. Используйте знак №');
+            return false;
+        }
+
+    });
+
 });
 
