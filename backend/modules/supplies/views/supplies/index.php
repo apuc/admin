@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => DataColumn::className(),
                 'format' => 'raw',
                 'value' => function($model){
-                    return Html::textInput('code_' . $model->id, $model->code, ['id' => 'code_' . $model->id, 'class' => 'codeInput']);
+                    return Html::textInput('code_' . $model->id, $model->code, ['id' => 'code_' . $model->id, 'class' => 'codeInput', 'style' => 'width:90px;']);
                     //return "<input type='text' value='$model->code' name='code'>";
                 }
             ],
@@ -99,7 +99,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'type_width',
                 'format' => 'raw',
                 'value' => function($model){
-                    return Html::textInput('width_' . $model->id, $model->type_width, ['id' => 'width_' . $model->id, 'class' => 'widthInput']);
+                    return Html::textInput('width_' . $model->id, $model->type_width, ['id' => 'width_' . $model->id, 'class' => 'widthInput', 'style' => 'width:60px;']);
                     //return "<input type='text' value='$model->code' name='code'>";
                 }
             ],
@@ -126,7 +126,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'price',
                 'format' => 'raw',
                 'value' => function($model){
-                    return Html::textInput('price_' . $model->id, $model->price, ['id' => 'price_' . $model->id, 'class' => 'priceInput']);
+                    return Html::textInput('price_' . $model->id, $model->price, ['id' => 'price_' . $model->id, 'class' => 'priceInput', 'style' => 'width:120px;']);
                     //return "<input type='text' value='$model->code' name='code'>";
                 }
             ],
@@ -143,7 +143,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     if(!empty($arr)){
                         $arr = array_unique($arr);
                         $html = '';
-                        $html .= '<div class="blindToSupliesOne">';
+                        $html .= '<div class="blindToSupliesOne" style="width: 200px">';
                         $k = 0;
 
                         foreach($arr as $p){
@@ -171,7 +171,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class'  => DataColumn::className(),
-                'header' => 'Действия',
+                'header' => '',
                 'format' => 'raw',
                 'value' => function($model){
                    /* $view = Html::a("<img src='".\yii\helpers\Url::base()."crud_img/view.png' width='20px' title='Просмотр'></a>", ['/supplies/supplies/view','id'=>$model->id]);

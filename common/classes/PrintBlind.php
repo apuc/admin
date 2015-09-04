@@ -80,16 +80,20 @@ class PrintBlind
     public static function getItem($obj,$img){
         //Debag::prn($obj->id);
         $count = self::getCount($obj->id);
-
+        $text = explode('<div style="page-break-after: always"><span style="display:none">&nbsp;</span></div>', $obj->description);
+        $read = '';
+        if(isset($text[1])){
+            $read = '<a href="#" class="readmore">Читать полностью</a>';
+        }
         $html = '<div class="item">';
         $html .= self::getImg($img);
         $html .= '<div class="text">
                                 <div class="title">'.$obj->name.'</div>
-                                <p>'.$obj->description.'</p>
+                                <p>'.$text[0].'</p>
                                 <div class="fulltext" style="display: none;">
-                                    <p>'.$obj->description.'</p>
+                                    <p>'.$text[1].'</p>
                                 </div>
-                                <a href="#" class="readmore">Читать полностью</a>
+                                '.$read.'
                             </div>
                             <div class="right">
                                 <div class="price">

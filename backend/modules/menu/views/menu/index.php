@@ -21,7 +21,7 @@ function printMenuTree($parent_id){
         echo "<li class='sortitem' data-id='$m->id' data-parent-id='$m->parent_id'><span class='sortMenuLink'>$m->name</span>";
         echo "<ul id='sortable' class='ui-sortable'>";
         printMenuTree($m->id);
-        echo "<li class='empty'><a class='sortMenuLink' href='/secure/menu/menu/update?id=$m->id'>Редактировать</a> | <a class='sortMenuLink' href='/secure/menu/menu/delete?id=$m->id'>Удалить</a></li></ul>";
+        echo "<li class='empty'><a class='editMenu' data-menu-id='$m->id' class='sortMenuLink' href='#'>Редактировать</a> | <a class='sortMenuLink' href='/secure/menu/menu/delete?id=$m->id'>Удалить</a></li></ul>";
         echo "</li>";
     }
 }
@@ -59,3 +59,37 @@ echo "</ul>";
     ]); */?>
 
 </div>-->
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Название модали</h4>
+            </div>
+            <div class="modal-body">
+                <form id="htmlForm" action="/secure/media/media/ajax" method="post">
+                    Message: <input type="file" name="file"/>
+                    <input type="submit" value="Загрузить" />
+                </form>
+
+                <div class="mediaWrap">
+                    <h3>Существующие файлы:</h3>
+                    <?php
+                    foreach ($media as $m) {
+                        echo "
+                    <div class='mediaBox'>
+                        ".Html::img(\yii\helpers\Url::base()."/".$m->link, ['width'=>'150px', 'class' => 'imgPrev'])."
+
+                        <input id='img_$m->id' type='hidden' value='".\yii\helpers\Url::base(true)."/".$m->link."'>
+                    </div>";
+                    }
+                    ?>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!--<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>-->
+            </div>
+        </div>
+    </div>
+</div>

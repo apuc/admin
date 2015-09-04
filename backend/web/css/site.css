@@ -341,6 +341,16 @@ a#addPage {
     top: -49px;
 }
 
+
+.edit_menu {
+    width: 90%;
+    min-height: 30px;
+    padding: 5px;
+}
+
+.edit_menu input, .edit_menu textarea {
+    margin-bottom: 10px;
+}
 .cleared {
     display: block;
     clear: both;
@@ -372,4 +382,8 @@ a#addPage {
 
 .btn-default[disabled]:hover{
     color: #fff;
+}
+
+.editMenu {
+    color: white;
 }
