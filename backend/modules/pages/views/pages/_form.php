@@ -63,7 +63,8 @@ if($model->tab == '#panel3'){
                 <a class = 'del_img_pages' href = '#'>Удалить</a>
             </div>
             <?= $form->field($model, 'images')->textInput(['maxlength' => true])->hiddenInput()->label(false); ?>
-
+            <div class="cleared"></div>
+            <br>
             <?/*= $form->field($model, 'count_product')->textInput() */?><!--
             --><?/*= $form->field($model, 'hint')->textInput(['maxlength' => true]) */?>
             <?= $form->field($model, 'fix_menu')->dropDownList(['0' => 'Не прикреплять', '1' => 'Меню 1-го уровня', '2' => 'Меню 2-го уровня']) ?>
