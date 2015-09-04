@@ -48,6 +48,7 @@ class Template
         $head = self::get_keywords($model, $head);
         $head = self::get_description($model, $head);
         $head = self::get_descr($model, $head);
+        $head = self::get_fix_menu($model, $head);
         //echo "<textarea>$head</textarea>";
         eval('?>' . $head . '<?php;');
     }
@@ -124,6 +125,10 @@ class Template
         if($key == 'yes'){
             return "Готовый блок";
         }
+    }
+
+    public  static  function get_fix_menu($model,$file){
+        return preg_replace("/{fix_menu}/", "<div id='fix-menu' data-fix-menu='".$model->fix_menu."'></div>" , $file);
     }
 
 }

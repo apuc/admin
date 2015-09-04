@@ -2563,23 +2563,25 @@ footer .contacts img {
     transform: scale(1.1, 1.1);
 }
 
-.content .readmoreMy {
-    font-size: 14px;
-    color: #269dda;
-    float: right;
-    margin-top: 13px;
-}
-
-.containerMy {
-    width: 1100px;
-    margin: 0 auto;
-    position: relative;
-}
-
 .long {
 display: none;
 }
-#mod{
+.empty {
+  display: inline-block;
+    width: 90px;
+}
+
+
+.empty:after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: -30px;
+    top: 3px;
+}
+
+#mod,#modZamershik{
 	display: none;
 	position:absolute;
 	top:0;
@@ -2592,12 +2594,12 @@ display: none;
 	border:1px solid black;
 	border-radius:8px;
 }
-#mod span{
+#mod span,#modZamershik span{
 	font-size: 23px;
     display: block;
     margin-bottom: 30px;
 }
-#closePhone {
+#closePhone,#closeZamerhik {
 	position:absolute;
 	top:5px;
 	right:5px;
@@ -2606,7 +2608,7 @@ display: none;
 
 
 
-#my-tel{color:#000;}
+#my-tel,#my-tel-zam{color:#000;}
 
 .check{
     background: #269dda;
@@ -2619,6 +2621,9 @@ display: none;
     text-decoration: none;
     left: 270px;
     top: 68px;
+}
+body {
+
 }
 body {
 
@@ -2638,7 +2643,6 @@ height:300px;
    width: 79px;
    height: 50px;
 }
-
 
 0
 0
@@ -2664,8 +2668,16 @@ undefined
 0
 0
 0
-гноиго
-ктнр
-gfhg
-eghts
 0
+sdfgdf
+0
+0
+0
+0
+0
+0
+
+
+
+0
+

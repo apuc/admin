@@ -48,7 +48,7 @@ class PrintMenu
                 //style="margin-left:'. $level*25 .'px;"
 
                 if ($level == 1) {
-                    $this->html .= '<a href="'.$value["url"].'">'.$value["name"].'</a><nav><ul>';
+                    $this->html .= '<a href="'.$value["url"].'">'.$value["name"].'</a><nav class="2ndmenu"><ul>';
                 } elseif ($level == 2) {
                     $this->html .= '<a href="'.$value["url"].'">'.$value["name"].'</a><ul>';
                 } elseif($level == 3){

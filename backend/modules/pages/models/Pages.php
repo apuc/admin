@@ -22,6 +22,7 @@ use Yii;
  * @property string $sort_all
  * @property string $tab
  * @property integer $blokc_id
+ * @property integer $fix_menu
  */
 class Pages extends \yii\db\ActiveRecord
 {
@@ -42,7 +43,7 @@ class Pages extends \yii\db\ActiveRecord
             [['name', 'description', 'title', 'h1', 'keywords', 'blokc_id'], 'required'],
             [['count_product', 'blokc_id'], 'integer'],
             [['description'], 'string'],
-            [['code', 'style', 'sort', 'count_product', 'hint', 'sort_all', 'tab'], 'safe'],
+            [['code', 'style', 'sort', 'count_product', 'hint', 'sort_all', 'tab','fix_menu'], 'safe'],
             [['name', 'images', 'hint', 'title', 'h1', 'keywords'], 'string', 'max' => 255]
         ];
     }
@@ -66,6 +67,7 @@ class Pages extends \yii\db\ActiveRecord
             'code' => 'Код',
             'style' => 'Стиль',
             'sort' => 'sort',
+            'fix_menu' => 'Прикрепить меню',
         ];
     }
 }
