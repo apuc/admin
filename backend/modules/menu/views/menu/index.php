@@ -19,9 +19,9 @@ function printMenuTree($parent_id){
     $menu = Menu::find()->where(['parent_id' => $parent_id])->orderBy('sort')->all();
     foreach($menu as $m){
         echo "<li class='sortitem' data-id='$m->id' data-parent-id='$m->parent_id'><span class='sortMenuLink'>$m->name</span> | <a class='editMenu' data-menu-id='$m->id' class='sortMenuLink' href='#'>Редактировать</a> | <a data-confirm='Удалить пункт меню?' class='sortMenuLink' href='/secure/menu/menu/delete?id=$m->id'>Удалить</a>";
-        echo "<ul id='sortable' class='ui-sortable'>";
+        echo "<ul id='sortable' class='ui-sortable'><li class='empty first'></li>";
         printMenuTree($m->id);
-        echo "<li class='empty'></li></ul>";
+        echo "<li class='empty end'></li></ul>";
         echo "</li>";
     }
 }

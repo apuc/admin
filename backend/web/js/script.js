@@ -48,10 +48,18 @@ $(document).ready(function () {
                     url: 'save_sort',
                     data: "sort=" + str ,
                     success: function (msg) {
-                        console.log(msg);
+                        //console.log(msg);
                     }
                 });
-            }
+                //$('.first, .end').css({'display':'none'});
+            },
+            /*start: function (event, ui) {
+                //var next = ui.next();
+                console.log(event);
+            },
+            change: function(event, ui){
+                console.log(event.target);
+            }*/
         });
         $("#sortable").disableSelection();
 
@@ -78,6 +86,12 @@ $(document).ready(function () {
         /*$(".sortable").sortable();
          $(".sortable").disableSelection();*/
     });
+
+    /*$('#sortable').bind('DOMNodeInserted DOMNodeRemoved', function(event) {
+        //var blockId = $(this).attr('data-id');
+        $(this).children().css({'border-top':'1px solid black'});
+        console.log($(this).children());
+    });*/
 
     $('.imgPrev').on('click', function () {
         var val = $(this).next().val();

@@ -188,13 +188,24 @@ nav ul ul ul {
     padding: 5px;
     border-radius: 5px;
     list-style-type: none;
+    min-height: 60px;
 }
 .empty {
     list-style-type: none;
-    min-height: 20px;
-    border: 1px dashed black;
+    min-height: 5px;
+    /*border: 1px dashed black;*/
     border-radius: 5px;
-    margin-top: 5px;
+    margin-top: 8px;
+}
+
+.first {
+    /*border-top: 1px solid black;*/
+    /*display: none;*/
+}
+
+.end{
+    /*border-bottom: 1px solid black;*/
+    /*display: none;*/
 }
 
 .sortMenuLink {
@@ -389,5 +400,5 @@ a#addPage {
 }
 
 #sortable {
-    min-height: 30px;
+    /*min-height: 50px;*/
 }
