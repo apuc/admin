@@ -42,17 +42,22 @@ class PrintMenu
                 //$this->html .= '<li style="margin-left:'. $level*25 .'px;"><a href="'.$value["url"].'">'.$value["name"].'</a>';
 
                 $level = $level + 1; //����������� ������� ����������
-                $this->html .= '<li >';
+               // $this->html .= '<li>';
 
                 //���������� �������� ��� �� �������, �� � ����� $parent_id � $level
                 //style="margin-left:'. $level*25 .'px;"
 
                 if ($level == 1) {
-                    $this->html .= '<a href="'.$value["url"].'">'.$value["name"].'</a><nav class="2ndmenu"><ul>';
+                    $this->html .= '<li><a href="'.$value["url"].'">'.$value["name"].'</a><nav class="2ndmenu"><ul>';
                 } elseif ($level == 2) {
-                    $this->html .= '<a href="'.$value["url"].'">'.$value["name"].'</a><ul>';
+                    $this->html .= '<li><a href="'.$value["url"].'">'.$value["name"].'</a>';
                 } elseif($level == 3){
-                    $this->html .= '<a href="'.$value["url"].'"><img src="'.$value["icon"].'" alt=""></a>
+                    if($this->i == 0){
+                        $this->html .= '<ul class="3rdmenu">';
+                        $this->i = 1;
+                    }
+
+                    $this->html .= '<li><a href="'.$value["url"].'"><img src="'.$value["icon"].'" alt=""></a>
                     <a href="'.$value["url"].'" class="title">'.$value["name"].'</a>
                     <p>'.$value["descr"].'</p>';
                 }
@@ -65,7 +70,10 @@ class PrintMenu
                     $this->html .= '</ul></nav>';
                     //$this->i = 1;
                 } elseif ($level == 1) {
-                    $this->html .= '</ul>';
+                    if($this->i == 1){
+                        $this->html .= '</ul>';
+                        $this->i = 0;
+                    }
                     //$this->j = 1;
                 }
 
