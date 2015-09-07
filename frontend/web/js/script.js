@@ -198,7 +198,10 @@ $(document).ready(function () {
         return false;
     });
    // сheckZamershik
-
+    //убрать перескок верх по клику на картирку
+    $(document).on('click','.large_page_img', function(){
+        return false;
+    })
 
     $(document).on('click','#closePhone',function(){
         $('#mod').css('display','none');
