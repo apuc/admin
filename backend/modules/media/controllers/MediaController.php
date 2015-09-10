@@ -51,7 +51,7 @@ class MediaController extends Controller
             }
         }
         else {
-            $media = Media::find()->all();
+            $media = Media::find()->orderBy('id DESC')->all();
             return $this->render('index', ['model' => $model, 'media' => $media]);
         }
     }

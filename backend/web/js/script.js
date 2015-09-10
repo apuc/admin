@@ -93,7 +93,7 @@ $(document).ready(function () {
         console.log($(this).children());
     });*/
 
-    $('.imgPrev').on('click', function () {
+    $(document).on('click','.imgPrev', function () {
         var val = $(this).next().val();
         $('#menu-icon').val(val);
         $('#myModal').modal('hide');
@@ -101,21 +101,37 @@ $(document).ready(function () {
         $(this).clone().prependTo("#imgPreview");
     });
 
-    $(document).on('click', '.imgPrev', function () {
+    $('.imgPrevPage').on('click', function () {
         var val = $(this).next().val();
         $('#pages-images').val(val);
         $('#myModal').modal('hide');
         $("#imgPreview").html('');
+        //console.log($(this).clone());
         $(this).clone().prependTo("#imgPreview");
     });
-    $(document).on('click', '.imgPrev', function () {
+    $('.imgPrevCat').on('click', function () {
         var val = $(this).next().val();
         $('#category-images').val(val);
         $('#myModal').modal('hide');
         $("#imgPreview").html('');
         $(this).clone().prependTo("#imgPreview");
     });
-    $('.imgPrev').on('click', function () {
+
+    $('.imgPrevMenu').on('click', function () {
+        var val = $(this).next().val();
+        $('#category-images').val(val);
+        $('#myModal').modal('hide');
+        $("#imgPreview").html('');
+        $(this).clone().prependTo("#imgPreview");
+    });
+    $('.imgPrevMenuC').on('click', function () {
+        var val = $(this).next().val();
+        $('#category-images').val(val);
+        $('#myModal').modal('hide');
+        $("#imgPreview").html('');
+        $(this).clone().prependTo("#imgPreview");
+    });
+    $(document).on('click','.imgPrev', function () {
         var val = $(this).next().val();
         $('#supplies-images').val(val);
         $('#myModal').modal('hide');
@@ -588,7 +604,7 @@ $(document).ready(function () {
         $('#selectImgId').attr('data-id', id);
     });
 
-    $('.imgPrev').on('click', function () {
+    $(document).on('click','.imgPrev', function () {
         var val = $(this).next().val();
         var id = $('#selectImgId').attr('data-id');
         $('#supImg_' + id).attr('src',val);
@@ -803,7 +819,7 @@ $(document).ready(function () {
         var name = $('#menu_name').val();
         var url = $('#menu_url').val();
         var descr = $('#menu_descr').val();
-        var icon = $('.imgPrev').attr('src');
+        var icon = $('.imgPrevMenu').attr('src');
         $.ajax({
             type: "GET",
             url: 'save_menu',

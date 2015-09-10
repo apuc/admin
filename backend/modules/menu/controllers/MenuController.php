@@ -48,7 +48,7 @@ class MenuController extends Controller
     {
         $searchModel = new MenuSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $media = Media::find()->all();
+        $media = Media::find()->orderBy('id DESC')->all();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -77,7 +77,7 @@ class MenuController extends Controller
     public function actionCreate()
     {
         $model = new Menu();
-        $media = Media::find()->all();
+        $media = Media::find()->orderBy('id DESC')->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
@@ -98,7 +98,7 @@ class MenuController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $media = Media::find()->all();
+        $media = Media::find()->orderBy('id DESC')->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['update', 'id' => $model->id]);

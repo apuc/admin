@@ -89,7 +89,7 @@ class BlindController extends Controller
     {
         $blind = new Blind();
         $model = new BlindForm();
-        $media = Media::find()->all();
+        $media = Media::find()->orderBy('id DESC')->all();
 
         $materials = \backend\modules\supplies\models\Supplies::find()->all();
         foreach($materials as $v){
@@ -213,7 +213,7 @@ class BlindController extends Controller
             $arr_catid[$c->id_cat] = ['selected ' => 'selected'];
         }
 
-        $media = Media::find()->all();
+        $media = Media::find()->orderBy('id DESC')->all();
 
         $supples = BlindIdmaterials::find()->where(['id_blind'=>$id])->all();
         foreach($supples as $supl){

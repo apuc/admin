@@ -73,7 +73,7 @@ class PagesController extends Controller
     public function actionCreate()
     {
         $model = new Pages();
-        $media = Media::find()->all();
+        $media = Media::find()->orderBy('id DESC')->all();
         $block = Block::find()->where(['type'=>''])->all();
 
         $arr[0] = 'Нет';
@@ -101,7 +101,7 @@ class PagesController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $media = Media::find()->all();
+        $media = Media::find()->orderBy('id DESC')->all();
         $block = Block::find()->where(['type'=>''])->all();
 
         $arr[0] = 'Нет';

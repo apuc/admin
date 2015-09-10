@@ -50,7 +50,7 @@ class SuppliesController extends Controller
     {
         $searchModel = new SuppliesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $media = Media::find()->all();
+        $media = Media::find()->orderBy('id DESC')->all();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -79,7 +79,7 @@ class SuppliesController extends Controller
     public function actionCreate()
     {
         $model = new Supplies();
-        $media = Media::find()->all();
+        $media = Media::find()->orderBy('id DESC')->all();
         $type_blind = array(0=>'Выберите тип жалюзей',1=>'горизонтальные',2=>'рулонные',3=>'вертикальные');
         $type_mat = Material::find()->all();
 
@@ -119,7 +119,7 @@ class SuppliesController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $media = Media::find()->all();
+        $media = Media::find()->orderBy('id DESC')->all();
         $type_mat = Material::find()->all();
         $type_blind = array(0=>'Выберите тип жалюзеу',1=>'горизонтальные',2=>'рулонные',3=>'вертикальные');
         $arr_tmat[0] = 'Выберите тип материала';

@@ -188,7 +188,7 @@ nav ul ul ul {
     padding: 5px;
     border-radius: 5px;
     list-style-type: none;
-    min-height: 60px;
+    min-height: 25px;
 }
 .empty {
     list-style-type: none;

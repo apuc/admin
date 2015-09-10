@@ -196,6 +196,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="myModalLabel">Название модали</h4>
                 </div>
+                <div data-id="0" id="selectImgId"></div>
                 <div class="modal-body">
                     <form id="htmlForm" action="/secure/media/media/ajax" method="post">
                         Message: <input type="file" name="file"/>
@@ -203,7 +204,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </form>
 
                     <div class="mediaWrap">
-                        <div data-id="0" id="selectImgId"></div>
+
                         <h3>Существующие файлы:</h3>
                         <?php
                         foreach ($media as $m) {

@@ -76,7 +76,7 @@ class CategoryController extends Controller
     {
         $model = new Category();
         $parent = Categories::find()->all();
-        $media = Media::find()->all();
+        $media = Media::find()->orderBy('id DESC')->all();
         $block = Block::find()->where(['type'=>''])->all();
 
         $arr = CategoryTree::getTreeSelect(0);
@@ -113,7 +113,7 @@ class CategoryController extends Controller
     {
         $model = $this->findModel($id);
         $parent = Categories::find()->all();
-        $media = Media::find()->all();
+        $media = Media::find()->orderBy('id DESC')->all();
         $block = Block::find()->where(['type'=>''])->all();
 
         $arr = CategoryTree::getTreeSelect(0);

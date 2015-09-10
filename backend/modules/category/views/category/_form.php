@@ -198,7 +198,7 @@ if($model->tab == '#panel3'){
                     foreach ($media as $m) {
                         echo "
                     <div class='mediaBox'>
-                        ".Html::img(\yii\helpers\Url::base()."/".$m->link, ['width'=>'150px', 'class' => 'imgPrev'])."
+                        ".Html::img(\yii\helpers\Url::base()."/".$m->link, ['width'=>'150px', 'class' => 'imgPrevCat'])."
 
                         <input id='img_$m->id' type='hidden' value='".\yii\helpers\Url::base(true)."/".$m->link."'>
                     </div>";
